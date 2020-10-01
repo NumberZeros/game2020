@@ -1,0 +1,3 @@
+C:\Users\Administrator\Desktop\game2020\Debug\CastleVania.vcxprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\game2020\Debug\CastleVania.exe
+C:\Users\Administrator\Desktop\game2020\Debug\CastleVania.pdb
