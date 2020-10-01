@@ -34,8 +34,8 @@ int         AutoFit = 0;
 int			G_MaxSize;
 int			G_MinSize;
 RECT		G_WindowSize;
-int			G_ScreenWidth = 512;
-							//640;
+int			G_ScreenWidth = 640;
+							//512;
 							//640
 							//1024
 							//1366;

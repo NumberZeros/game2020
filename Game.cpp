@@ -7,6 +7,14 @@ CGame::CGame(int _nnCmdShow)
 	nCmdShow = _nnCmdShow;
 }
 
+void CGame::InitGame()
+{
+	InitWindow(nCmdShow);
+	InitDirectX();
+	InitKeyboard();
+	LoadResources(G_Device);
+}
+
 int CGame::InitWindow(int nCmdShow) 
 {
 	WNDCLASSEX wc;
@@ -144,13 +152,7 @@ void CGame::InitKeyboard()
 		return;
 }
 
-void CGame::InitGame()
-{
-	InitWindow(nCmdShow);
-	InitDirectX();
-	InitKeyboard();
-	LoadResources(G_Device);
-}
+
 
 void CGame::ProcessKeyBoard()
 {
