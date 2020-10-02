@@ -96,28 +96,21 @@ void CMario::Render()
 	int ani;
 	if (state == MARIO_STATE_DIE)
 		ani = MARIO_ANI_DIE;
-	else
-	if (level == MARIO_LEVEL_BIG)
-	{
+	else {
 		if (vx == 0)
 		{
-			if (nx>0) ani = MARIO_ANI_BIG_IDLE_RIGHT;
-			else ani = MARIO_ANI_BIG_IDLE_LEFT;
-		}
-		else if (vx > 0) 
-			ani = MARIO_ANI_BIG_WALKING_RIGHT; 
-		else ani = MARIO_ANI_BIG_WALKING_LEFT;
-	}
-	else if (level == MARIO_LEVEL_SMALL)
-	{
-		if (vx == 0)
-		{
-			if (nx>0) ani = MARIO_ANI_SMALL_IDLE_RIGHT;
-			else ani = MARIO_ANI_SMALL_IDLE_LEFT;
+			if (nx > 0) {
+				if (isSit == 1) ani = MARIO_ANI_SIT_DOWN_RIGHT;
+				else ani = MARIO_ANI_BIG_IDLE_RIGHT;
+			} 
+			else {
+				if (isSit == 1) ani = MARIO_ANI_SIT_DOWN_LEFT;
+				else ani = MARIO_ANI_BIG_IDLE_LEFT;
+			} 
 		}
 		else if (vx > 0)
-			ani = MARIO_ANI_SMALL_WALKING_RIGHT;
-		else ani = MARIO_ANI_SMALL_WALKING_LEFT;
+			ani = MARIO_ANI_BIG_WALKING_RIGHT;
+		else ani = MARIO_ANI_BIG_WALKING_LEFT;
 	}
 
 	int alpha = 255;
@@ -145,6 +138,9 @@ void CMario::SetState(int state)
 		vy = -MARIO_JUMP_SPEED_Y;
 	case MARIO_STATE_IDLE: 
 		vx = 0;
+		break;
+	case MARIO_STATE_SIT_DOWN:
+		isSit = 1;
 		break;
 	case MARIO_STATE_DIE:
 		vy = -MARIO_DIE_DEFLECT_SPEED;

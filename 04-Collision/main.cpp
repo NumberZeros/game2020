@@ -90,6 +90,10 @@ void CSampleKeyHander::KeyState(BYTE *states)
 		mario->SetState(MARIO_STATE_WALKING_RIGHT);
 	else if (game->IsKeyDown(DIK_LEFT))
 		mario->SetState(MARIO_STATE_WALKING_LEFT);
+	else if (game->IsKeyDown(DIK_DOWN))
+		mario->SetState(MARIO_STATE_SIT_DOWN);
+	/*else if (game->IsKeyUp(DIK_DOWN))
+		mario->SetState(MARIO_STATE_SIT_DOWN);*/
 	else
 		mario->SetState(MARIO_STATE_IDLE);
 }
@@ -134,12 +138,14 @@ void LoadResources()
 	sprites->Add(10001, 163, 39, 180, 71, texMario);		// idle right
 	sprites->Add(10002, 205, 39, 218, 71, texMario);		// walk
 	sprites->Add(10003, 244, 39, 259, 71, texMario);
+	sprites->Add(10004, 283, 43, 300, 68, texMario);		//sit
 
 	sprites->Add(10011, 124, 39, 139, 71, texMario);		// idle left
-	sprites->Add(10012, 85, 39, 98, 71, texMario);		// walk
+	sprites->Add(10012, 85, 39, 98, 71, texMario);			// walk
 	sprites->Add(10013, 44, 39, 59, 71, texMario);
+	sprites->Add(10014, 3, 43, 20, 68, texMario);			//sit
 
-	sprites->Add(10099, 235, 7, 268, 23, texMario);		// die 
+	sprites->Add(10099, 235, 7, 268, 23, texMario);			// die 
 
 	LPDIRECT3DTEXTURE9 texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(20001, 408, 225, 424, 241, texMisc);
@@ -151,6 +157,18 @@ void LoadResources()
 	sprites->Add(30003, 45, 21, 61, 29, texEnemy); // die sprite
 
 	LPANIMATION ani;
+
+	ani = new CAnimation(100);		// Mario sit right
+	ani->Add(10004);
+	animations->Add(1101, ani);
+
+	ani = new CAnimation(100);		// Mario sit right
+	ani->Add(10014);
+	animations->Add(1102, ani);
+
+	ani = new CAnimation(100);		// Mario die
+	ani->Add(10099);
+	animations->Add(1999, ani);
 
 	ani = new CAnimation(100);	// idle big right
 	ani->Add(10001);
@@ -194,7 +212,10 @@ void LoadResources()
 	mario->AddAnimation(502);		// walk right small
 	mario->AddAnimation(503);		// walk left big
 
+	mario->AddAnimation(1101);
+	mario->AddAnimation(1102);
 	mario->AddAnimation(599);		// die
+	
 
 	mario->SetPosition(50.0f, 0);
 	objects.push_back(mario);

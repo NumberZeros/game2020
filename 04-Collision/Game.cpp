@@ -71,6 +71,11 @@ int CGame::IsKeyDown(int KeyCode)
 	return (keyStates[KeyCode] & 0x80) > 0;
 }
 
+int CGame::IsKeyUp(int KeyCode)
+{
+	return (keyStates[KeyCode] & 0x80) > 0;
+}
+
 void CGame::InitKeyboard(LPKEYEVENTHANDLER handler)
 {
 	HRESULT
