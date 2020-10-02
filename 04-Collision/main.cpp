@@ -74,6 +74,12 @@ void CSampleKeyHander::OnKeyDown(int KeyCode)
 		mario->SetPosition(50.0f,0.0f);
 		mario->SetSpeed(0, 0);
 		break;
+	case DIK_DOWN:
+		mario->SetState(MARIO_STATE_SIT_DOWN);
+		break;
+	case DIK_X:
+		mario->SetState(STATE_ATTACK);
+		break;
 	}
 }
 
@@ -90,8 +96,6 @@ void CSampleKeyHander::KeyState(BYTE *states)
 		mario->SetState(MARIO_STATE_WALKING_RIGHT);
 	else if (game->IsKeyDown(DIK_LEFT))
 		mario->SetState(MARIO_STATE_WALKING_LEFT);
-	else if (game->IsKeyDown(DIK_DOWN))
-		mario->SetState(MARIO_STATE_SIT_DOWN);
 	else
 		mario->SetState(MARIO_STATE_IDLE);
 }
@@ -120,11 +124,11 @@ void LoadResources()
 	CTextures * textures = CTextures::GetInstance();
 
 	textures->Add(ID_TEX_MARIO, L"textures\\simon.png",D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
+	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(3, 26, 110));
 
 
-	textures->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
+	//textures->Add(ID_TEX_BBOX, L"textures\\background.png", D3DCOLOR_XRGB(255, 255, 255));
 
 
 	CSprites * sprites = CSprites::GetInstance();
@@ -138,21 +142,34 @@ void LoadResources()
 	sprites->Add(10003, 244, 39, 259, 71, texMario);
 	sprites->Add(10004, 283, 43, 300, 68, texMario);		//sit
 
+	sprites->Add(10005, 155, 239, 188, 270, texMario);		//attact
+	sprites->Add(10006, 195, 239, 228, 270, texMario);
+	sprites->Add(10007, 249, 239, 294, 270, texMario);
+
+
 	sprites->Add(10011, 124, 39, 139, 71, texMario);		// idle left
 	sprites->Add(10012, 85, 39, 98, 71, texMario);			// walk
 	sprites->Add(10013, 44, 39, 59, 71, texMario);
 	sprites->Add(10014, 3, 43, 20, 68, texMario);			//sit
 
+	sprites->Add(10015, 115, 239, 148, 270, texMario);		//attact
+	sprites->Add(10016, 75, 239, 108, 270, texMario);
+	sprites->Add(10017, 9, 239, 54, 270, texMario);
+
 	sprites->Add(10099, 235, 7, 268, 23, texMario);			// die 
 
 	LPDIRECT3DTEXTURE9 texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(20001, 408, 225, 424, 241, texMisc);
+	sprites->Add(20001, 0, 0, 32, 32, texMisc);
 
 	LPDIRECT3DTEXTURE9 texEnemy = textures->Get(ID_TEX_ENEMY);
 	sprites->Add(30001, 5, 14, 21, 29, texEnemy);
 	sprites->Add(30002, 25, 14, 41, 29, texEnemy);
 
 	sprites->Add(30003, 45, 21, 61, 29, texEnemy); // die sprite
+
+	/// background
+	//LPDIRECT3DTEXTURE9 map = textures->Get(ID_TEX_BBOX);
+	//sprites->Add(9999, 0, 0, 770, 180, map);
 
 	LPANIMATION ani;
 
@@ -188,6 +205,18 @@ void LoadResources()
 	ani->Add(10013);
 	animations->Add(501, ani);
 
+	ani = new CAnimation(100);	// attact right
+	ani->Add(10005);
+	ani->Add(10006);
+	ani->Add(10007);
+	animations->Add(1103, ani);
+
+	ani = new CAnimation(100);	// attact left
+	ani->Add(10015);
+	ani->Add(10016);
+	ani->Add(10017);
+	animations->Add(1104, ani);
+
 
 	ani = new CAnimation(100);		// Mario die
 	ani->Add(10099);
@@ -198,6 +227,10 @@ void LoadResources()
 	ani = new CAnimation(100);		// brick
 	ani->Add(20001);
 	animations->Add(601, ani);
+
+	//ani = new CAnimation(100);		// map
+	//ani->Add(9999);
+	//animations->Add(9999, ani);
 
 	mario = new CMario();
 	mario->AddAnimation(400);		// idle right big
@@ -210,20 +243,27 @@ void LoadResources()
 	mario->AddAnimation(502);		// walk right small
 	mario->AddAnimation(503);		// walk left big
 
-	mario->AddAnimation(1101);
-	mario->AddAnimation(1102);
+	mario->AddAnimation(1101);		// sit right
+	mario->AddAnimation(1102);		//	sit left
+
+	mario->AddAnimation(1103);		// attact right
+	mario->AddAnimation(1104);		//	attact left
 	mario->AddAnimation(599);		// die
 	
 
 	mario->SetPosition(50.0f, 0);
 	objects.push_back(mario);
 
+	/*CBrick* back = new CBrick();
+	back->AddAnimation(9999);
+	back->SetPosition(0, 0);
+	objects.push_back(back);*/
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 9999; i++)
 	{
 		CBrick *brick = new CBrick();
 		brick->AddAnimation(601);
-		brick->SetPosition(0 + i*16.0f, 150);
+		brick->SetPosition(0 + i*32.0f, 160);
 		objects.push_back(brick);
 	}
 }
@@ -253,7 +293,8 @@ void Update(DWORD dt)
 	float cx, cy;
 	mario->GetPosition(cx, cy);
 
-	cx -= SCREEN_WIDTH / 2;
+	
+	cx -= SCREEN_WIDTH / 2 ;
 	cy -= SCREEN_HEIGHT / 2;
 
 	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);

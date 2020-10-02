@@ -14,7 +14,10 @@
 #define MARIO_STATE_JUMP			300
 #define MARIO_STATE_DIE				400
 #define MARIO_STATE_SIT_DOWN		500
-#define MARIO_STATE_STAND_UP		600
+#define STATE_ATTACK				600
+#define STATE_ATTACK_RIGHT			601
+#define STATE_ATTACK_LEFT			602
+
 
 #define MARIO_ANI_BIG_IDLE_RIGHT		0
 #define MARIO_ANI_BIG_IDLE_LEFT			1
@@ -30,11 +33,16 @@
 #define MARIO_ANI_SIT_DOWN_RIGHT			8
 #define MARIO_ANI_SIT_DOWN_LEFT				9
 
+#define MARIO_ANI_ATTACK_RIGHT				10
+#define MARIO_ANI_ATTACK_LEFT				11
+
 #define MARIO_HEGHT				32
 #define MARIO_WIDTH				17
 
 #define MARIO_HEGHT_IS_SIT				25
-#define MARIO_HEGHT_RESET_SIT			7
+#define MARIO_HEGHT_RESET_SIT			8
+
+#define MARIO_WIDTH_RESET_ATTACK		7
 
 #define MARIO_ANI_DIE				8
 
@@ -48,10 +56,14 @@ class CMario : public CGameObject
 {
 	int level;
 	int untouchable;
-	bool isSit = false;
 	int height = 32;
 	int width = 17;
+	bool isSit = false;
+	bool isAttack = false;
+	int actionAttack = 0;	// 0 right 1 left
+	
 	DWORD untouchable_start;
+	DWORD action_time;
 public: 
 	CMario() : CGameObject()
 	{
@@ -60,6 +72,8 @@ public:
 	}
 	virtual void SitDown();
 	virtual void ResetSitDown();
+	virtual void attack();
+	virtual void resetAttack();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	void SetState(int state);

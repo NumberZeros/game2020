@@ -98,9 +98,29 @@ void CMario::SitDown() {
 
 void CMario::ResetSitDown() {
 	isSit = false;
-	//y = MARIO_HEGHT + MARIO_HEGHT_RESET_SIT;
 	height = MARIO_HEGHT;
+	y -= MARIO_HEGHT_RESET_SIT;
 }
+
+void CMario::attack() {
+	
+	if (!isAttack) {
+		if (nx > 0) x += MARIO_WIDTH_RESET_ATTACK;
+		else x -= MARIO_WIDTH_RESET_ATTACK;
+		isAttack = true;
+	}
+	action_time = GetTickCount();
+}
+
+void CMario::resetAttack()
+{
+	if (GetTickCount() - action_time > 300) {
+		if (nx < 0) x += MARIO_WIDTH_RESET_ATTACK;
+		else x -= MARIO_WIDTH_RESET_ATTACK;
+		isAttack = false;
+	}
+}
+
 
 void CMario::Render()
 {
@@ -113,10 +133,18 @@ void CMario::Render()
 			if (nx > 0) {
 				if (isSit) ani = MARIO_ANI_SIT_DOWN_RIGHT;
 				else ani = MARIO_ANI_BIG_IDLE_RIGHT;
+				if (isAttack) {
+					ani = MARIO_ANI_ATTACK_RIGHT;
+					resetAttack();
+				}
 			} 
 			else {
 				if (isSit) ani = MARIO_ANI_SIT_DOWN_LEFT;
 				else ani = MARIO_ANI_BIG_IDLE_LEFT;
+				if (isAttack) {
+					ani = MARIO_ANI_ATTACK_LEFT;
+					resetAttack();
+				}
 			} 
 		}
 		else if (vx > 0)
@@ -155,6 +183,9 @@ void CMario::SetState(int state)
 	case MARIO_STATE_SIT_DOWN:
 		SitDown();
 		break;
+	case STATE_ATTACK:
+		attack();
+		break;
 	case MARIO_STATE_DIE:
 		vy = -MARIO_DIE_DEFLECT_SPEED;
 		break;
@@ -165,7 +196,7 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 {
 	left = x;
 	top = y; 
-	right = x + MARIO_WIDTH;
-	bottom = y + MARIO_HEGHT;
+	right = x + width;
+	bottom = y + height;
 }
 
