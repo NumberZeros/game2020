@@ -91,6 +91,17 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
 
+void CMario::SitDown() {
+	isSit = true;
+	height = MARIO_HEGHT_IS_SIT;
+}
+
+void CMario::ResetSitDown() {
+	isSit = false;
+	//y = MARIO_HEGHT + MARIO_HEGHT_RESET_SIT;
+	height = MARIO_HEGHT;
+}
+
 void CMario::Render()
 {
 	int ani;
@@ -100,11 +111,11 @@ void CMario::Render()
 		if (vx == 0)
 		{
 			if (nx > 0) {
-				if (isSit == 1) ani = MARIO_ANI_SIT_DOWN_RIGHT;
+				if (isSit) ani = MARIO_ANI_SIT_DOWN_RIGHT;
 				else ani = MARIO_ANI_BIG_IDLE_RIGHT;
 			} 
 			else {
-				if (isSit == 1) ani = MARIO_ANI_SIT_DOWN_LEFT;
+				if (isSit) ani = MARIO_ANI_SIT_DOWN_LEFT;
 				else ani = MARIO_ANI_BIG_IDLE_LEFT;
 			} 
 		}
@@ -127,20 +138,22 @@ void CMario::SetState(int state)
 	switch (state)
 	{
 	case MARIO_STATE_WALKING_RIGHT:
+		if(isSit) ResetSitDown();
 		vx = MARIO_WALKING_SPEED;
 		nx = 1;
 		break;
-	case MARIO_STATE_WALKING_LEFT: 
+	case MARIO_STATE_WALKING_LEFT:
+		if (isSit) ResetSitDown();
 		vx = -MARIO_WALKING_SPEED;
 		nx = -1;
 		break;
-	case MARIO_STATE_JUMP: 
+	case MARIO_STATE_JUMP:
 		vy = -MARIO_JUMP_SPEED_Y;
 	case MARIO_STATE_IDLE: 
 		vx = 0;
 		break;
 	case MARIO_STATE_SIT_DOWN:
-		isSit = 1;
+		SitDown();
 		break;
 	case MARIO_STATE_DIE:
 		vy = -MARIO_DIE_DEFLECT_SPEED;
@@ -152,16 +165,7 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 {
 	left = x;
 	top = y; 
-
-	if (level==MARIO_LEVEL_BIG)
-	{
-		right = x + MARIO_BIG_BBOX_WIDTH;
-		bottom = y + MARIO_BIG_BBOX_HEIGHT;
-	}
-	else
-	{
-		right = x + MARIO_SMALL_BBOX_WIDTH;
-		bottom = y + MARIO_SMALL_BBOX_HEIGHT;
-	}
+	right = x + MARIO_WIDTH;
+	bottom = y + MARIO_HEGHT;
 }
 
