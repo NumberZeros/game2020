@@ -40,7 +40,7 @@ class CGame
 	LPKEYEVENTHANDLER keyHandler;
 
 	float cam_x = 0.0f;
-	float cam_y = 0.0f; 
+	float cam_y = 0.0f;
 
 public:
 	void InitKeyboard(LPKEYEVENTHANDLER handler);
@@ -70,8 +70,6 @@ public:
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 
 	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
-	float getCamPos_x() { return cam_x; }
-	float getCamPos_y() { return cam_y; }
 
 	static CGame * GetInstance();
 

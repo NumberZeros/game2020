@@ -7,8 +7,6 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Sprites.h"
-#include "Effect.h"
-#include "Map.h"
 
 CGameObject::CGameObject()
 {
@@ -19,21 +17,9 @@ CGameObject::CGameObject()
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
-	if (!isStop)
-	{
-		this->dt = dt;
-		dx = vx * dt;
-		dy = vy * dt;
-
-		stop_time = GetTickCount();
-	}
-	else
-	{
-		dx = 0;
-		dy = 0;
-		if (GetTickCount() - stop_time >= 3000)
-			isStop = false;
-	}
+	this->dt = dt;
+	dx = vx*dt;
+	dy = vy*dt;
 }
 
 /*
@@ -76,7 +62,7 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	coObjects: the list of colliable objects
 	coEvents: list of potential collisions
 */
-void CGameObject::CalcPotentialCollisions( 
+void CGameObject::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT> *coObjects, 
 	vector<LPCOLLISIONEVENT> &coEvents)
 {
@@ -142,7 +128,7 @@ void CGameObject::RenderBoundingBox()
 	rect.right = (int)r - (int)l;
 	rect.bottom = (int)b - (int)t;
 
-	CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 128); // 32
+	CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
 }
 
 void CGameObject::AddAnimation(int aniId)
@@ -151,44 +137,8 @@ void CGameObject::AddAnimation(int aniId)
 	animations.push_back(ani);
 }
 
-int XetDau(float pos)
-{
-	if (pos >= 0)
-		return 1;
-	else
-		return -1;
-}
-
-bool CGameObject::isOverlapping(CGameObject* other)
-{
-	float l, t, r, b;
-	float l2, t2, r2, b2;
-	other->GetBoundingBox(l2, t2, r2, b2);
-
-	
-	this->GetBoundingBox(l, t, r ,b);
-	
-	if (XetDau(l2 - r) != XetDau(r2-l) && XetDau(t2 - b) != XetDau(b2 - t))
-		return true;
-	else
-		return false;
-}
 
 CGameObject::~CGameObject()
 {
 
-}
-
-void CGameObject::basicCollision(float &min_tx, float &min_ty, float& nx,float& ny)
-{
-	x += min_tx * dx + nx * 0.4f;
-	y += min_ty * dy + ny * 0.4f;
-}
-
-void CGameObject::BeDestroy()
-{
-	CMap* map = CMap::GetInstance();
-	map->PushEffect(x,y);
-
-	isHidden = true;
 }

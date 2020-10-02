@@ -64,15 +64,9 @@ void CAnimation::Render(float x, float y, int alpha)
 		{
 			currentFrame++;
 			lastFrameTime = now;
-			if (currentFrame == frames.size())
-			{
-				currentFrame = 0;
-			}
-			else if (currentFrame == frames.size() - 1)
-			{
-				countAni++;
-			}
+			if (currentFrame == frames.size()) currentFrame = 0;
 		}
+		
 	}
 
 	frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
