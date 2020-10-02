@@ -1,6 +1,0 @@
-﻿  SceneMain.cpp
-  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\Administrator\Desktop\game2020\Sweet_AABB.h(20,2): warning C4091: 'extern ': ignored on left of 'Box' when no variable is declared
-C:\Users\Administrator\Desktop\game2020\Object.h(48,35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Administrator\Desktop\game2020\ISHeart.h(10,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  CastleVania.vcxproj -> C:\Users\Administrator\Desktop\game2020\Debug\CastleVania.exe
