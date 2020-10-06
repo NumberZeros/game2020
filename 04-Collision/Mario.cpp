@@ -105,8 +105,8 @@ void CMario::ResetSitDown() {
 void CMario::attack() {
 	
 	if (!isAttack) {
-		if (nx > 0) x += MARIO_WIDTH_RESET_ATTACK;
-		else x -= MARIO_WIDTH_RESET_ATTACK;
+		/*if (nx > 0) x += MARIO_WIDTH_RESET_ATTACK;
+		else x -= MARIO_WIDTH_RESET_ATTACK;*/
 		isAttack = true;
 	}
 	action_time = GetTickCount();
@@ -115,8 +115,8 @@ void CMario::attack() {
 void CMario::resetAttack()
 {
 	if (GetTickCount() - action_time > 300) {
-		if (nx < 0) x += MARIO_WIDTH_RESET_ATTACK;
-		else x -= MARIO_WIDTH_RESET_ATTACK;
+		/*if (nx < 0) x += MARIO_WIDTH_RESET_ATTACK;
+		else x -= MARIO_WIDTH_RESET_ATTACK;*/
 		isAttack = false;
 	}
 }
@@ -134,7 +134,8 @@ void CMario::Render()
 				if (isSit) ani = MARIO_ANI_SIT_DOWN_RIGHT;
 				else ani = MARIO_ANI_BIG_IDLE_RIGHT;
 				if (isAttack) {
-					ani = MARIO_ANI_ATTACK_RIGHT;
+					if(isSit) ani = MARIO_ANI_ATTACK_SIT_RIGHT;
+					else ani = MARIO_ANI_ATTACK_RIGHT;
 					resetAttack();
 				}
 			} 
@@ -142,7 +143,8 @@ void CMario::Render()
 				if (isSit) ani = MARIO_ANI_SIT_DOWN_LEFT;
 				else ani = MARIO_ANI_BIG_IDLE_LEFT;
 				if (isAttack) {
-					ani = MARIO_ANI_ATTACK_LEFT;
+					if (isSit) ani = MARIO_ANI_ATTACK_SIT_LEFT;
+					else ani = MARIO_ANI_ATTACK_LEFT;
 					resetAttack();
 				}
 			} 

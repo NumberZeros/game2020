@@ -36,6 +36,9 @@
 #define MARIO_ANI_ATTACK_RIGHT				10
 #define MARIO_ANI_ATTACK_LEFT				11
 
+#define MARIO_ANI_ATTACK_SIT_RIGHT				12
+#define MARIO_ANI_ATTACK_SIT_LEFT				13
+
 #define MARIO_HEGHT				32
 #define MARIO_WIDTH				17
 

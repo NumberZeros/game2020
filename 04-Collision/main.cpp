@@ -146,6 +146,10 @@ void LoadResources()
 	sprites->Add(10006, 195, 239, 228, 270, texMario);
 	sprites->Add(10007, 249, 239, 294, 270, texMario);
 
+	sprites->Add(10008, 156, 280, 188, 311, texMario);		//attact sit
+	sprites->Add(10009, 196, 284, 228, 307, texMario);
+	sprites->Add(10010, 250, 285, 294, 307, texMario);
+
 
 	sprites->Add(10011, 124, 39, 139, 71, texMario);		// idle left
 	sprites->Add(10012, 85, 39, 98, 71, texMario);			// walk
@@ -156,10 +160,14 @@ void LoadResources()
 	sprites->Add(10016, 75, 239, 108, 270, texMario);
 	sprites->Add(10017, 9, 239, 54, 270, texMario);
 
+	sprites->Add(10018, 116, 280, 148, 311, texMario);		//attact sit
+	sprites->Add(10019, 76, 284, 108, 307, texMario);
+	sprites->Add(10020, 10, 285, 54, 307, texMario);
+
 	sprites->Add(10099, 235, 7, 268, 23, texMario);			// die 
 
 	LPDIRECT3DTEXTURE9 texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(20001, 0, 0, 32, 32, texMisc);
+	sprites->Add(20001, 354, 171, 370, 187, texMisc);
 
 	LPDIRECT3DTEXTURE9 texEnemy = textures->Get(ID_TEX_ENEMY);
 	sprites->Add(30001, 5, 14, 21, 29, texEnemy);
@@ -217,6 +225,18 @@ void LoadResources()
 	ani->Add(10017);
 	animations->Add(1104, ani);
 
+	ani = new CAnimation(100);	// attact sit right
+	ani->Add(10008);
+	ani->Add(10009);
+	ani->Add(10010);
+	animations->Add(1105, ani);
+
+	ani = new CAnimation(100);	// attact sit left
+	ani->Add(10018);
+	ani->Add(10019);
+	ani->Add(10020);
+	animations->Add(1106, ani);
+
 
 	ani = new CAnimation(100);		// Mario die
 	ani->Add(10099);
@@ -248,6 +268,9 @@ void LoadResources()
 
 	mario->AddAnimation(1103);		// attact right
 	mario->AddAnimation(1104);		//	attact left
+
+	mario->AddAnimation(1105);		// attact sit right
+	mario->AddAnimation(1106);		//	attact sit left
 	mario->AddAnimation(599);		// die
 	
 
@@ -259,11 +282,11 @@ void LoadResources()
 	back->SetPosition(0, 0);
 	objects.push_back(back);*/
 
-	for (int i = 0; i < 9999; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		CBrick *brick = new CBrick();
 		brick->AddAnimation(601);
-		brick->SetPosition(0 + i*32.0f, 160);
+		brick->SetPosition(0 + i*16.0f, 170);
 		objects.push_back(brick);
 	}
 }
