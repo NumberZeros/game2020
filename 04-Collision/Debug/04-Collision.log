@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(306,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(311,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(344,21): warning C4018: '<': signed/unsigned mismatch
+  04-Collision.vcxproj -> C:\Users\Administrator\Desktop\game2020\Debug\04-Collision.exe
