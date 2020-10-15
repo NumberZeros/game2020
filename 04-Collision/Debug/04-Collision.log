@@ -1,5 +1,20 @@
-﻿  main.cpp
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(306,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(311,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(344,21): warning C4018: '<': signed/unsigned mismatch
-  04-Collision.vcxproj -> C:\Users\Administrator\Desktop\game2020\Debug\04-Collision.exe
+﻿  Brick.cpp
+  debug.cpp
+  Game.cpp
+D:\game2020\04-Collision\Game.cpp(60,39): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
+D:\game2020\04-Collision\Game.cpp(60,21): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
+D:\game2020\04-Collision\Game.cpp(264,26): warning C4305: '=': truncation from '__int64' to 'float'
+D:\game2020\04-Collision\Game.cpp(265,24): warning C4305: '=': truncation from '__int64' to 'float'
+D:\game2020\04-Collision\Game.cpp(275,26): warning C4305: '=': truncation from '__int64' to 'float'
+D:\game2020\04-Collision\Game.cpp(276,24): warning C4305: '=': truncation from '__int64' to 'float'
+  GameObject.cpp
+  Goomba.cpp
+  main.cpp
+D:\game2020\04-Collision\main.cpp(304,20): warning C4018: '<': signed/unsigned mismatch
+D:\game2020\04-Collision\main.cpp(309,20): warning C4018: '<': signed/unsigned mismatch
+D:\game2020\04-Collision\main.cpp(342,21): warning C4018: '<': signed/unsigned mismatch
+  Mario.cpp
+  Sprites.cpp
+  Textures.cpp
+  Generating Code...
+  04-Collision.vcxproj -> D:\game2020\Debug\04-Collision.exe

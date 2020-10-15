@@ -46,8 +46,12 @@ public:
 	int nx;	 
 
 	int state;
+	int nextItemId;
+	int score;
+	int id;
 
 	DWORD dt; 
+	DWORD stopWatchStart;
 
 	vector<LPANIMATION> animations;
 

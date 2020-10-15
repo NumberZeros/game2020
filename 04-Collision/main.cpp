@@ -30,9 +30,10 @@
 #include "Mario.h"
 #include "Brick.h"
 #include "Goomba.h"
+#include "Ghost.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"04 - Collision"
+#define MAIN_WINDOW_TITLE L"Castle Vania"
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 200)
 #define SCREEN_WIDTH 320
