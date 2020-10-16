@@ -11,9 +11,10 @@
 #include "Mario.h"
 #include "Brick.h"
 #include "Goomba.h"
+#include "CGhost.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"04 - Collision"
+#define MAIN_WINDOW_TITLE L"Castle-Vania"
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 200)
 #define SCREEN_WIDTH 320
@@ -24,13 +25,14 @@
 #define ID_TEX_MARIO 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
-#define ID_WEAPON_RIGHT 30
+#define ID_WEAPON_LEFT 30
 #define ID_WEAPON_RIGHT 35
 
 CGame *game;
 
 CMario *mario;
 CGoomba *goomba;
+CGhost *ghost;
 
 vector<LPGAMEOBJECT> objects;
 LPANIMATION ani;
@@ -100,7 +102,42 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
+void InitGhost()
+{
+	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(96, 68, 106));
 
+	//sprite for ghost
+	LPDIRECT3DTEXTURE9 texGhost = textures->Get(ID_TEX_ENEMY);
+	sprites->Add(201, 502, 7, 518, 39, texGhost);		// walk right
+	sprites->Add(202, 477, 7, 493, 39, texGhost);
+
+	sprites->Add(203, 12, 7, 38, 39, texGhost);		// walk left
+	sprites->Add(204, 37, 7, 53, 39, texGhost);
+
+	//animation for ghost
+	ani = new CAnimation(100);	//right
+	ani->Add(201);
+	animations->Add(500, ani);
+
+	ani = new CAnimation(100);	
+	ani->Add(202);
+	animations->Add(501, ani);
+
+	ani = new CAnimation(100);	//left
+	ani->Add(203);
+	animations->Add(502, ani);
+
+	ani = new CAnimation(100);	
+	ani->Add(204);
+	animations->Add(503, ani);
+
+	ghost = new CGhost();
+	ghost->AddAnimation(500);		// idle right big
+	ghost->AddAnimation(502);		// idle left big
+
+	ghost->SetPosition(0.0f, 137.5);
+	objects.push_back(ghost);
+}
 void InitSimon() {
 
 	textures->Add(ID_TEX_MARIO, L"textures\\simon.png", D3DCOLOR_XRGB(255, 255, 255));
@@ -257,6 +294,7 @@ void LoadResources()
 {
 	InitSimon();
 	InitBrick();
+	InitGhost();
 }
 
 /*
@@ -283,6 +321,7 @@ void Update(DWORD dt)
 	// Update camera to follow mario
 	float cx, cy;
 	mario->GetPosition(cx, cy);
+	ghost->GetPosition(cx, cy);
 
 	
 	cx -= SCREEN_WIDTH / 2 ;

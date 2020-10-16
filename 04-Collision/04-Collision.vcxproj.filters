@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Simon">
       <UniqueIdentifier>{607d049a-574f-4af9-87ba-5442099c8dc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Ghost">
+      <UniqueIdentifier>{4d3574b0-b77b-4a34-ae42-f4d68c085b14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="debug.h">
@@ -50,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="Mario.h">
       <Filter>Header Files\Simon</Filter>
+    </ClInclude>
+    <ClInclude Include="CGhost.h">
+      <Filter>Header Files\Ghost</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="Mario.cpp">
       <Filter>Header Files\Simon</Filter>
+    </ClCompile>
+    <ClCompile Include="CGhost.cpp">
+      <Filter>Header Files\Ghost</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -48,6 +48,8 @@ public:
 	int state;
 	bool isHidden;
 
+	int id;
+
 	DWORD dt; 
 
 	vector<LPANIMATION> animations;
