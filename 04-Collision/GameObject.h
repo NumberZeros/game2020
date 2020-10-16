@@ -47,8 +47,12 @@ public:
 
 	int state;
 	bool isHidden;
+	int nextItemId;
+	int score;
+	int id;
 
 	DWORD dt; 
+	DWORD stopWatchStart;
 
 	vector<LPANIMATION> animations;
 

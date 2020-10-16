@@ -68,12 +68,13 @@ public:
 	void Add(int spriteId, DWORD time = 0);
 	void Render(float x, float y, int alpha=255);
 
-	//quan lý animation
+	//quan lï¿½ animation
 	int get_countAni() { return countAni; }
 	void set_countAni(int count) { countAni = count; }
-	//quan lý frame
+	//quan lï¿½ frame
 	int GetCurrentFrame() { return currentFrame; }
 	void SetCurrentFrame(int Frame) { currentFrame = Frame; }
+	void RenderFrame(float x, float y, int alpha = 255);
 	void ResetFrame() { currentFrame = -1; }
 };
 
