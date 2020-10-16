@@ -1,22 +1,3 @@
-/* =============================================================
-	INTRODUCTION TO GAME PROGRAMMING SE102
-	
-	SAMPLE 04 - COLLISION
-
-	This sample illustrates how to:
-
-		1/ Implement SweptAABB algorithm between moving objects
-		2/ Implement a simple (yet effective) collision frame work
-
-	Key functions: 
-		CGame::SweptAABB
-		CGameObject::SweptAABBEx
-		CGameObject::CalcPotentialCollisions
-		CGameObject::FilterCollision
-
-		CGameObject::GetBoundingBox
-		
-================================================================ */
 
 #include <windows.h>
 #include <d3d9.h>
@@ -43,6 +24,8 @@
 #define ID_TEX_MARIO 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
+#define ID_WEAPON_RIGHT 30
+#define ID_WEAPON_RIGHT 35
 
 CGame *game;
 
@@ -124,116 +107,109 @@ void InitSimon() {
 
 	// sprite for simmon
 	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
-	sprites->Add(10001, 163, 39, 180, 71, texMario);		// idle right
-	sprites->Add(10002, 205, 39, 218, 71, texMario);		// walk
-	sprites->Add(10003, 244, 39, 259, 71, texMario);
-	sprites->Add(10004, 283, 43, 300, 68, texMario);		//sit
+	sprites->Add(101, 163, 39, 180, 71, texMario);		// idle right
+	sprites->Add(102, 205, 39, 218, 71, texMario);		// walk
+	sprites->Add(103, 244, 39, 259, 71, texMario);
+	sprites->Add(104, 283, 43, 300, 68, texMario);		//sit
 
-	sprites->Add(10005, 160, 201, 184, 231, texMario);		//attact
-	sprites->Add(10006, 204, 201, 220, 231, texMario);
-	sprites->Add(10007, 241, 201, 263, 231, texMario);
+	sprites->Add(105, 160, 201, 184, 231, texMario);		//attact
+	sprites->Add(106, 204, 201, 220, 231, texMario);
+	sprites->Add(107, 241, 201, 263, 231, texMario);
 
-	sprites->Add(10008, 120, 201, 188, 231, texMario);		//attact sit
-	sprites->Add(10009, 84, 201, 100, 231, texMario);
-	sprites->Add(10010, 41, 201, 63, 231, texMario);
+	sprites->Add(108, 120, 201, 188, 231, texMario);		//attact sit
+	sprites->Add(109, 84, 201, 100, 231, texMario);
+	sprites->Add(110, 41, 201, 63, 231, texMario);
 
 
-	sprites->Add(10011, 124, 39, 139, 71, texMario);		// idle left
-	sprites->Add(10012, 85, 39, 98, 71, texMario);			// walk
-	sprites->Add(10013, 44, 39, 59, 71, texMario);
-	sprites->Add(10014, 3, 43, 20, 68, texMario);			//sit
+	sprites->Add(111, 124, 39, 139, 71, texMario);		// idle left
+	sprites->Add(112, 85, 39, 98, 71, texMario);			// walk
+	sprites->Add(113, 44, 39, 59, 71, texMario);
+	sprites->Add(114, 3, 43, 20, 68, texMario);			//sit
 
-	sprites->Add(10015, 115, 239, 148, 270, texMario);		//attact
-	sprites->Add(10016, 75, 239, 108, 270, texMario);
-	sprites->Add(10017, 9, 239, 54, 270, texMario);
+	sprites->Add(115, 115, 239, 148, 270, texMario);		//attact
+	sprites->Add(116, 75, 239, 108, 270, texMario);
+	sprites->Add(117, 9, 239, 54, 270, texMario);
 
-	sprites->Add(10018, 116, 280, 148, 311, texMario);		//attact sit
-	sprites->Add(10019, 76, 284, 108, 307, texMario);
-	sprites->Add(10020, 10, 285, 54, 307, texMario);
+	sprites->Add(118, 116, 280, 148, 311, texMario);		//attact sit
+	sprites->Add(119, 76, 284, 108, 307, texMario);
+	sprites->Add(120, 10, 285, 54, 307, texMario);
 
-	sprites->Add(10099, 235, 7, 268, 23, texMario);			// die 
+	sprites->Add(121, 235, 7, 268, 23, texMario);			// die 
 
 	// animation for simon
-	ani = new CAnimation(100);		// Mario sit right
-	ani->Add(10004);
-	animations->Add(1101, ani);
-
-	ani = new CAnimation(100);		// Mario sit right
-	ani->Add(10014);
-	animations->Add(1102, ani);
-
-	ani = new CAnimation(100);		// Mario die
-	ani->Add(10099);
-	animations->Add(1999, ani);
 
 	ani = new CAnimation(100);	// idle big right
-	ani->Add(10001);
+	ani->Add(101);
 	animations->Add(400, ani);
 
 	ani = new CAnimation(100);	// idle big left
-	ani->Add(10011);
+	ani->Add(111);
 	animations->Add(401, ani);
 
 	ani = new CAnimation(100);	// walk right big
-	ani->Add(10001);
-	ani->Add(10002);
-	ani->Add(10003);
-	animations->Add(500, ani);
+	ani->Add(101);
+	ani->Add(102);
+	ani->Add(103);
+	animations->Add(402, ani);
 
 	ani = new CAnimation(100);	// // walk left big
-	ani->Add(10011);
-	ani->Add(10012);
-	ani->Add(10013);
-	animations->Add(501, ani);
+	ani->Add(111);
+	ani->Add(112);
+	ani->Add(113);
+	animations->Add(403, ani);
+
+	ani = new CAnimation(100);		// Mario sit right
+	ani->Add(104);
+	animations->Add(406, ani);
+
+	ani = new CAnimation(100);		// Mario sit right
+	ani->Add(114);
+	animations->Add(407, ani);
 
 	ani = new CAnimation(100);	// attact right
-	ani->Add(10005);
-	ani->Add(10006);
-	ani->Add(10007);
-	animations->Add(1103, ani);
+	ani->Add(105);
+	ani->Add(106);
+	ani->Add(107);
+	animations->Add(408, ani);
 
 	ani = new CAnimation(100);	// attact left
-	ani->Add(10015);
-	ani->Add(10016);
-	ani->Add(10017);
-	animations->Add(1104, ani);
+	ani->Add(115);
+	ani->Add(116);
+	ani->Add(117);
+	animations->Add(409, ani);
 
 	ani = new CAnimation(100);	// attact sit right
-	ani->Add(10008);
-	ani->Add(10009);
-	ani->Add(10010);
-	animations->Add(1105, ani);
+	ani->Add(108);
+	ani->Add(109);
+	ani->Add(110);
+	animations->Add(410, ani);
 
 	ani = new CAnimation(100);	// attact sit left
-	ani->Add(10018);
-	ani->Add(10019);
-	ani->Add(10020);
-	animations->Add(1106, ani);
+	ani->Add(118);
+	ani->Add(119);
+	ani->Add(120);
+	animations->Add(411, ani);
 
 	ani = new CAnimation(100);		// Mario die
-	ani->Add(10099);
-	animations->Add(599, ani);
+	ani->Add(121);
+	animations->Add(499, ani);
 
 	mario = new CMario();
 	mario->AddAnimation(400);		// idle right big
 	mario->AddAnimation(401);		// idle left big
-	mario->AddAnimation(402);		// idle right small
-	mario->AddAnimation(403);		// idle left small
 
-	mario->AddAnimation(500);		// walk right big
-	mario->AddAnimation(501);		// walk left big
-	mario->AddAnimation(502);		// walk right small
-	mario->AddAnimation(503);		// walk left big
+	mario->AddAnimation(402);		// walk right big
+	mario->AddAnimation(403);		// walk left big
 
-	mario->AddAnimation(1101);		// sit right
-	mario->AddAnimation(1102);		//	sit left
+	mario->AddAnimation(406);		// sit right
+	mario->AddAnimation(407);		//	sit left
 
-	mario->AddAnimation(1103);		// attact right
-	mario->AddAnimation(1104);		//	attact left
+	mario->AddAnimation(408);		// attact right
+	mario->AddAnimation(409);		//	attact left
 
-	mario->AddAnimation(1105);		// attact sit right
-	mario->AddAnimation(1106);		//	attact sit left
-	mario->AddAnimation(599);		// die
+	mario->AddAnimation(410);		// attact sit right
+	mario->AddAnimation(411);		//	attact sit left
+	mario->AddAnimation(499);		// die
 
 
 	mario->SetPosition(50.0f, 0);
@@ -259,6 +235,22 @@ void InitBrick(){
 		brick->SetPosition(0 + i * 16.0f, 170);
 		objects.push_back(brick);
 	}
+}
+
+void InitWeapon() {
+		textures->Add(ID_WEAPON_RIGHT, L"textures\\weapon.png", D3DCOLOR_XRGB(255, 255, 255));
+	LPDIRECT3DTEXTURE9 texWeapon = textures->Get(ID_WEAPON_RIGHT);
+	sprites->Add(30001, 0, 2, 9, 27, texWeapon);		//level 1
+	sprites->Add(30002, 19, 0, 37, 20, texWeapon);		
+	sprites->Add(30003, 45, 1, 71, 9, texWeapon);
+
+	sprites->Add(30001, 0, 32, 9, 58, texWeapon);		//level 2
+	sprites->Add(30002, 19, 31, 37, 50, texWeapon);
+	sprites->Add(30003, 45, 34, 71, 42, texWeapon);
+
+	sprites->Add(30001, 0, 2, 9, 27, texWeapon);		//level 3
+	sprites->Add(30002, 19, 0, 37, 20, texWeapon);
+	sprites->Add(30003, 45, 1, 71, 9, texWeapon);
 }
  
 void LoadResources()
