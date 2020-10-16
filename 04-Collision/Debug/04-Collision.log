@@ -1,13 +1,7 @@
 ﻿  CGhost.cpp
   main.cpp
-D:\game2020\04-Collision\main.cpp(310,20): warning C4018: '<': signed/unsigned mismatch
-D:\game2020\04-Collision\main.cpp(315,20): warning C4018: '<': signed/unsigned mismatch
-D:\game2020\04-Collision\main.cpp(349,21): warning C4018: '<': signed/unsigned mismatch
-  Mario.cpp
-  Weapon.cpp
-D:\game2020\04-Collision\Mario.h(18,1): warning C4005: 'STATE_ATTACK_RIGHT': macro redefinition
-D:\game2020\04-Collision\Weapon.h(5): message : see previous definition of 'STATE_ATTACK_RIGHT'
-D:\game2020\04-Collision\Mario.h(19,1): warning C4005: 'STATE_ATTACK_LEFT': macro redefinition
-D:\game2020\04-Collision\Weapon.h(6): message : see previous definition of 'STATE_ATTACK_LEFT'
+D:\game2020\04-Collision\main.cpp(304,20): warning C4018: '<': signed/unsigned mismatch
+D:\game2020\04-Collision\main.cpp(309,20): warning C4018: '<': signed/unsigned mismatch
+D:\game2020\04-Collision\main.cpp(342,21): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   04-Collision.vcxproj -> D:\game2020\Debug\04-Collision.exe

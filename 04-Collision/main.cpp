@@ -18,7 +18,7 @@
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 200)
 #define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
+#define SCREEN_HEIGHT 290
 
 #define MAX_FRAME_RATE 120
 
@@ -111,31 +111,25 @@ void InitGhost()
 	sprites->Add(201, 502, 7, 518, 39, texGhost);		// walk right
 	sprites->Add(202, 477, 7, 493, 39, texGhost);
 
-	sprites->Add(203, 12, 7, 38, 39, texGhost);		// walk left
+	sprites->Add(203, 12, 7, 37, 39, texGhost);		// walk left
 	sprites->Add(204, 37, 7, 53, 39, texGhost);
 
-	//animation for ghost
+
 	ani = new CAnimation(100);	//right
 	ani->Add(201);
-	animations->Add(500, ani);
-
-	ani = new CAnimation(100);	
 	ani->Add(202);
-	animations->Add(501, ani);
+	animations->Add(500, ani);
 
 	ani = new CAnimation(100);	//left
 	ani->Add(203);
-	animations->Add(502, ani);
-
-	ani = new CAnimation(100);	
 	ani->Add(204);
-	animations->Add(503, ani);
+	animations->Add(501, ani);
 
 	ghost = new CGhost();
-	ghost->AddAnimation(500);		// idle right big
-	ghost->AddAnimation(502);		// idle left big
-
-	ghost->SetPosition(0.0f, 137.5);
+	ghost->AddAnimation(500); //walk right
+	ghost->AddAnimation(501); //walk left
+	ghost->SetPosition(160.0f, 137.5);
+	ghost->SetState(GHOST_STATE_ACTIVE);
 	objects.push_back(ghost);
 }
 void InitSimon() {
@@ -317,17 +311,16 @@ void Update(DWORD dt)
 		objects[i]->Update(dt,&coObjects);
 	}
 
-
 	// Update camera to follow mario
 	float cx, cy;
 	mario->GetPosition(cx, cy);
-	ghost->GetPosition(cx, cy);
 
 	
 	cx -= SCREEN_WIDTH / 2 ;
 	cy -= SCREEN_HEIGHT / 2;
 
 	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+
 }
 
 /*

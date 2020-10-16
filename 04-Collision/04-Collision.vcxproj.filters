@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Ghost">
       <UniqueIdentifier>{4d3574b0-b77b-4a34-ae42-f4d68c085b14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Enemy">
+      <UniqueIdentifier>{d953f1b0-1007-41bc-a968-97dea08127af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="debug.h">
