@@ -1,18 +1,5 @@
-﻿  Game.cpp
-C:\Users\Administrator\Desktop\game2020\04-Collision\Game.cpp(60,39): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\Game.cpp(60,21): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\Game.cpp(264,26): warning C4305: '=': truncation from '__int64' to 'float'
-C:\Users\Administrator\Desktop\game2020\04-Collision\Game.cpp(265,24): warning C4305: '=': truncation from '__int64' to 'float'
-C:\Users\Administrator\Desktop\game2020\04-Collision\Game.cpp(275,26): warning C4305: '=': truncation from '__int64' to 'float'
-C:\Users\Administrator\Desktop\game2020\04-Collision\Game.cpp(276,24): warning C4305: '=': truncation from '__int64' to 'float'
-  GameObject.cpp
-  Mario.cpp
-  Sprites.cpp
-  Textures.cpp
-  main.cpp
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(304,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(309,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(342,21): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  LINK : C:\Users\Administrator\Desktop\game2020\Debug\04-Collision.exe not found or not built by the last incremental link; performing full link
+﻿  main.cpp
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(280,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(285,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(318,21): warning C4018: '<': signed/unsigned mismatch
   04-Collision.vcxproj -> C:\Users\Administrator\Desktop\game2020\Debug\04-Collision.exe

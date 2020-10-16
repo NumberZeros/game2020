@@ -50,6 +50,11 @@ CMario *mario;
 CGoomba *goomba;
 
 vector<LPGAMEOBJECT> objects;
+LPANIMATION ani;
+
+CTextures* textures = CTextures::GetInstance();
+CSprites* sprites = CSprites::GetInstance();
+CAnimations* animations = CAnimations::GetInstance();
 
 class CSampleKeyHander: public CKeyEventHandler
 {
@@ -113,42 +118,24 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-/*
-	Load all game resources 
-	In this example: load textures, sprites, animations and mario object
+void InitSimon() {
 
-	TO-DO: Improve this function by loading texture,sprite,animation,object from file
-*/
-void LoadResources()
-{
-	CTextures * textures = CTextures::GetInstance();
+	textures->Add(ID_TEX_MARIO, L"textures\\simon.png", D3DCOLOR_XRGB(255, 255, 255));
 
-	textures->Add(ID_TEX_MARIO, L"textures\\simon.png",D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(255, 255, 255));
-	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(3, 26, 110));
-
-
-	//textures->Add(ID_TEX_BBOX, L"textures\\background.png", D3DCOLOR_XRGB(255, 255, 255));
-
-
-	CSprites * sprites = CSprites::GetInstance();
-	CAnimations * animations = CAnimations::GetInstance();
-	
+	// sprite for simmon
 	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
-
-	// big
 	sprites->Add(10001, 163, 39, 180, 71, texMario);		// idle right
 	sprites->Add(10002, 205, 39, 218, 71, texMario);		// walk
 	sprites->Add(10003, 244, 39, 259, 71, texMario);
 	sprites->Add(10004, 283, 43, 300, 68, texMario);		//sit
 
-	sprites->Add(10005, 155, 239, 188, 270, texMario);		//attact
-	sprites->Add(10006, 195, 239, 228, 270, texMario);
-	sprites->Add(10007, 249, 239, 294, 270, texMario);
+	sprites->Add(10005, 160, 201, 184, 231, texMario);		//attact
+	sprites->Add(10006, 204, 201, 220, 231, texMario);
+	sprites->Add(10007, 241, 201, 263, 231, texMario);
 
-	sprites->Add(10008, 156, 280, 188, 311, texMario);		//attact sit
-	sprites->Add(10009, 196, 284, 228, 307, texMario);
-	sprites->Add(10010, 250, 285, 294, 307, texMario);
+	sprites->Add(10008, 120, 201, 188, 231, texMario);		//attact sit
+	sprites->Add(10009, 84, 201, 100, 231, texMario);
+	sprites->Add(10010, 41, 201, 63, 231, texMario);
 
 
 	sprites->Add(10011, 124, 39, 139, 71, texMario);		// idle left
@@ -166,21 +153,7 @@ void LoadResources()
 
 	sprites->Add(10099, 235, 7, 268, 23, texMario);			// die 
 
-	LPDIRECT3DTEXTURE9 texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(20001, 354, 171, 370, 187, texMisc);
-
-	LPDIRECT3DTEXTURE9 texEnemy = textures->Get(ID_TEX_ENEMY);
-	sprites->Add(30001, 5, 14, 21, 29, texEnemy);
-	sprites->Add(30002, 25, 14, 41, 29, texEnemy);
-
-	sprites->Add(30003, 45, 21, 61, 29, texEnemy); // die sprite
-
-	/// background
-	//LPDIRECT3DTEXTURE9 map = textures->Get(ID_TEX_BBOX);
-	//sprites->Add(9999, 0, 0, 770, 180, map);
-
-	LPANIMATION ani;
-
+	// animation for simon
 	ani = new CAnimation(100);		// Mario sit right
 	ani->Add(10004);
 	animations->Add(1101, ani);
@@ -237,20 +210,9 @@ void LoadResources()
 	ani->Add(10020);
 	animations->Add(1106, ani);
 
-
 	ani = new CAnimation(100);		// Mario die
 	ani->Add(10099);
 	animations->Add(599, ani);
-
-	
-
-	ani = new CAnimation(100);		// brick
-	ani->Add(20001);
-	animations->Add(601, ani);
-
-	//ani = new CAnimation(100);		// map
-	//ani->Add(9999);
-	//animations->Add(9999, ani);
 
 	mario = new CMario();
 	mario->AddAnimation(400);		// idle right big
@@ -272,23 +234,37 @@ void LoadResources()
 	mario->AddAnimation(1105);		// attact sit right
 	mario->AddAnimation(1106);		//	attact sit left
 	mario->AddAnimation(599);		// die
-	
+
 
 	mario->SetPosition(50.0f, 0);
 	objects.push_back(mario);
 
-	/*CBrick* back = new CBrick();
-	back->AddAnimation(9999);
-	back->SetPosition(0, 0);
-	objects.push_back(back);*/
+}
+
+void InitBrick(){
+
+	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(255, 255, 255));
+	LPDIRECT3DTEXTURE9 texMisc = textures->Get(ID_TEX_MISC);
+
+	sprites->Add(20001, 354, 171, 370, 187, texMisc);
+
+	ani = new CAnimation(100);
+	ani->Add(20001);
+	animations->Add(601, ani);
 
 	for (int i = 0; i < 20; i++)
 	{
-		CBrick *brick = new CBrick();
+		CBrick* brick = new CBrick();
 		brick->AddAnimation(601);
-		brick->SetPosition(0 + i*16.0f, 170);
+		brick->SetPosition(0 + i * 16.0f, 170);
 		objects.push_back(brick);
 	}
+}
+ 
+void LoadResources()
+{
+	InitSimon();
+	InitBrick();
 }
 
 /*
