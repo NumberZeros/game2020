@@ -1,0 +1,238 @@
+﻿  Animation.cpp
+  Axe.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Axe.cpp(19,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Axe.cpp(263,19): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Axe.cpp(289,14): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Axe.cpp(291,15): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Axe.cpp(292,13): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Axe.cpp(316,20): warning C4018: '<': signed/unsigned mismatch
+  Board.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.h(79,1): warning C4005: 'max_distance': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(16): message : see previous definition of 'max_distance'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(63,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(63,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(72,79): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(72,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(80,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(80,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(82,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(82,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(84,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(84,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(86,75): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(86,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(89,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(89,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(90,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(90,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(91,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(91,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(92,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(92,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(93,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Board.cpp(93,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Bone.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.h(79,1): warning C4005: 'max_distance': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(16): message : see previous definition of 'max_distance'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Bone.cpp(27,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Bone.cpp(48,16): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Bone.cpp(50,17): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Bone.cpp(51,15): warning C4305: '=': truncation from 'double' to 'float'
+  Boomerang.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.h(79,1): warning C4005: 'max_distance': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(16): message : see previous definition of 'max_distance'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boomerang.cpp(22,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boomerang.cpp(255,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boomerang.cpp(286,36): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boomerang.cpp(287,29): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boomerang.cpp(315,26): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boomerang.cpp(316,20): warning C4305: '=': truncation from 'double' to 'float'
+  Clock.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+  Game.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.h(79,1): warning C4005: 'max_distance': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(16): message : see previous definition of 'max_distance'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Game.cpp(302,26): warning C4305: '=': truncation from '__int64' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Game.cpp(303,24): warning C4305: '=': truncation from '__int64' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Game.cpp(313,26): warning C4305: '=': truncation from '__int64' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Game.cpp(314,24): warning C4305: '=': truncation from '__int64' to 'float'
+  GameObject.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Gate.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Grid.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Grid.cpp(36,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Grid.cpp(41,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Grid.cpp(43,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Grid.cpp(70,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Grid.cpp(78,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Grid.cpp(85,22): warning C4018: '<': signed/unsigned mismatch
+  HealthBar.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\HealthBar.cpp(34,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\HealthBar.cpp(43,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\HealthBar.cpp(50,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\HealthBar.cpp(58,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Hit.cpp
+  Holywater.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Holywater.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Holywater.cpp(45,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Holywater.cpp(299,22): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Holywater.cpp(319,21): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Holywater.cpp(320,15): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Holywater.cpp(325,15): warning C4305: '=': truncation from 'double' to 'float'
+  Knife.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knife.cpp(51,16): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knife.cpp(53,17): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knife.cpp(73,20): warning C4018: '<': signed/unsigned mismatch
+  Knight.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knight.cpp(29,24): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knight.cpp(40,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knight.cpp(81,32): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knight.cpp(82,26): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knight.cpp(106,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knight.cpp(124,32): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Knight.cpp(125,26): warning C4305: '=': truncation from 'double' to 'float'
+  main.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.h(79,1): warning C4005: 'max_distance': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(16): message : see previous definition of 'max_distance'
+  Monkey.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.cpp(33,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.cpp(40,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.cpp(108,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.cpp(113,12): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.cpp(115,12): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.cpp(119,20): warning C4018: '<': signed/unsigned mismatch
+  PlayScence.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.h(79,1): warning C4005: 'max_distance': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(16): message : see previous definition of 'max_distance'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(11,1): warning C4005: 'map2': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.h(25): message : see previous definition of 'map2'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(12,1): warning C4005: 'map3': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.h(26): message : see previous definition of 'map3'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(13,1): warning C4005: 'map4': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.h(28): message : see previous definition of 'map4'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(15,1): warning C4005: 'map6': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.h(27): message : see previous definition of 'map6'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(123,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(130,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(137,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(144,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(217,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(219,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(296,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(318,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(341,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(342,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(354,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(355,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(356,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(357,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(358,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(359,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(398,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(422,24): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(441,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1092,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1110,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1123,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1287,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1291,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1405,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1419,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1424,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1428,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1468,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1472,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1476,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1480,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1484,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\PlayScence.cpp(1689,17): warning C4101: 'sty': unreferenced local variable
+  Simon.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.h(79,1): warning C4005: 'max_distance': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(16): message : see previous definition of 'max_distance'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(78,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(218,102): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(283,31): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(284,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(285,20): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(292,31): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(293,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(294,19): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(309,21): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(310,34): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Simon.cpp(311,26): warning C4305: '=': truncation from 'double' to 'float'
+  Skeleton.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Skeleton.cpp(95,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Skeleton.cpp(144,26): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Skeleton.cpp(160,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Skeleton.cpp(165,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Skeleton.cpp(174,20): warning C4305: '=': truncation from 'double' to 'float'
+  Generating Code...
+  Compiling...
+  Sprites.cpp
+  SubWeapon.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\SubWeapon.cpp(31,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\SubWeapon.cpp(38,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\SubWeapon.cpp(72,20): warning C4018: '<': signed/unsigned mismatch
+  Textures.cpp
+  TileMap.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.cpp(42,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.cpp(44,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.cpp(74,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.cpp(76,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.cpp(93,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.cpp(95,29): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\TileMap.cpp(98,12): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+  Utils.cpp
+  Whip.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Boss.h(17,1): warning C4005: 'rand_min': macro redefinition
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Monkey.h(19): message : see previous definition of 'rand_min'
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Whip.cpp(276,20): warning C4018: '<': signed/unsigned mismatch
+  Zombie.cpp
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\GameObject.h(92,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Zombie.cpp(30,24): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Zombie.cpp(36,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Zombie.cpp(46,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\CASTLENEW\DemoDirectX\Zombie.cpp(86,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  DemoDirectX.vcxproj -> C:\Users\Administrator\Desktop\CASTLENEW\Debug\DemoDirectX.exe
