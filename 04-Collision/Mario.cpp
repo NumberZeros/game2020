@@ -5,6 +5,7 @@
 #include "Game.h"
 
 #include "Goomba.h"
+#include "Weapon.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -28,6 +29,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		untouchable_start = 0;
 		untouchable = 0;
+	}
+
+	if (isAttack) {
+		if (GetTickCount() - action_time > MARIO_ATTACK_TIME) {
+			resetAttack();
+		}
 	}
 
 	// No collision occured, proceed normally
@@ -105,19 +112,18 @@ void CMario::ResetSitDown() {
 void CMario::attack() {
 	
 	if (!isAttack) {
-		/*if (nx > 0) x += MARIO_WIDTH_RESET_ATTACK;
-		else x -= MARIO_WIDTH_RESET_ATTACK;*/
+		action_time = GetTickCount();
 		isAttack = true;
 	}
-	action_time = GetTickCount();
 }
 
 void CMario::resetAttack()
 {
-	if (GetTickCount() - action_time > 300) {
-		/*if (nx < 0) x += MARIO_WIDTH_RESET_ATTACK;
-		else x -= MARIO_WIDTH_RESET_ATTACK;*/
-		isAttack = false;
+	action_time = 0;
+	isAttack = false;
+	for (unsigned int i = 0; i < animations.size(); i++)
+	{
+		animations[i]->ResetFrame();
 	}
 }
 
@@ -136,7 +142,6 @@ void CMario::Render()
 				if (isAttack) {
 					if(isSit) ani = MARIO_ANI_ATTACK_SIT_RIGHT;
 					else ani = MARIO_ANI_ATTACK_RIGHT;
-					resetAttack();
 				}
 			} 
 			else {
@@ -145,7 +150,6 @@ void CMario::Render()
 				if (isAttack) {
 					if (isSit) ani = MARIO_ANI_ATTACK_SIT_LEFT;
 					else ani = MARIO_ANI_ATTACK_LEFT;
-					resetAttack();
 				}
 			} 
 		}
@@ -186,6 +190,7 @@ void CMario::SetState(int state)
 		SitDown();
 		break;
 	case STATE_ATTACK:
+		resetAttack();
 		attack();
 		break;
 	case MARIO_STATE_DIE:

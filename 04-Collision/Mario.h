@@ -8,6 +8,8 @@
 #define MARIO_GRAVITY			0.002f
 #define MARIO_DIE_DEFLECT_SPEED	 0.5f
 
+#define MARIO_ATTACK_TIME 500
+
 #define MARIO_STATE_IDLE			0
 #define MARIO_STATE_WALKING_RIGHT	100
 #define MARIO_STATE_WALKING_LEFT	200
@@ -34,7 +36,7 @@
 #define MARIO_ANI_ATTACK_SIT_RIGHT				8
 #define MARIO_ANI_ATTACK_SIT_LEFT				9
 
-#define MARIO_HEGHT				29
+#define MARIO_HEGHT				30
 #define MARIO_WIDTH				24
 
 #define MARIO_HEGHT_IS_SIT				25
@@ -54,7 +56,7 @@ class CMario : public CGameObject
 {
 	int level;
 	int untouchable;
-	int height = 32;
+	int height = 30;
 	int width = 17;
 	bool isSit = false;
 	bool isAttack = false;

@@ -11,6 +11,7 @@
 #include "Mario.h"
 #include "Brick.h"
 #include "Goomba.h"
+#include "Weapon.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
@@ -31,6 +32,7 @@ CGame *game;
 
 CMario *mario;
 CGoomba *goomba;
+CWeapon* weapon;
 
 vector<LPGAMEOBJECT> objects;
 LPANIMATION ani;
@@ -67,6 +69,11 @@ void CSampleKeyHander::OnKeyDown(int KeyCode)
 		break;
 	case DIK_X:
 		mario->SetState(STATE_ATTACK);
+		//DebugOut(L" mario x %d\n", mario->x);
+		//DebugOut(L"mario y %d\n", mario->y);
+		//DebugOut(L"mario y %d\n", mario->nx);
+		weapon->UpdatePosionWithSimon(mario->x, mario->y, mario->nx);
+		weapon->SetState(WEAPON_STATE_ATTACK);
 		break;
 	}
 }
@@ -167,9 +174,9 @@ void InitSimon() {
 	animations->Add(407, ani);
 
 	ani = new CAnimation(100);	// attact right
-	ani->Add(105);
+	ani->Add(105,200);
 	ani->Add(106);
-	ani->Add(107);
+	ani->Add(107,200);
 	animations->Add(408, ani);
 
 	ani = new CAnimation(100);	// attact left
@@ -238,24 +245,35 @@ void InitBrick(){
 }
 
 void InitWeapon() {
-		textures->Add(ID_WEAPON_RIGHT, L"textures\\weapon.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_WEAPON_RIGHT, L"textures\\weapon.png", D3DCOLOR_XRGB(255, 255, 255));
 	LPDIRECT3DTEXTURE9 texWeapon = textures->Get(ID_WEAPON_RIGHT);
-	sprites->Add(30001, 0, 2, 9, 27, texWeapon);		//level 1
-	sprites->Add(30002, 19, 0, 37, 20, texWeapon);		
-	sprites->Add(30003, 45, 1, 71, 9, texWeapon);
+	sprites->Add(701, 0, 2, 9, 27, texWeapon);		//level 1
+	sprites->Add(702, 19, 0, 37, 20, texWeapon);		
+	sprites->Add(703, 45, 1, 71, 9, texWeapon);
 
-	sprites->Add(30001, 0, 32, 9, 58, texWeapon);		//level 2
-	sprites->Add(30002, 19, 31, 37, 50, texWeapon);
-	sprites->Add(30003, 45, 34, 71, 42, texWeapon);
+	sprites->Add(704, 0, 32, 9, 58, texWeapon);		//level 2
+	sprites->Add(705, 19, 31, 37, 50, texWeapon);
+	sprites->Add(706, 45, 34, 71, 42, texWeapon);
 
-	sprites->Add(30001, 0, 2, 9, 27, texWeapon);		//level 3
-	sprites->Add(30002, 19, 0, 37, 20, texWeapon);
-	sprites->Add(30003, 45, 1, 71, 9, texWeapon);
+	sprites->Add(707, 0, 2, 9, 27, texWeapon);		//level 3
+	sprites->Add(708, 19, 0, 37, 20, texWeapon);
+	sprites->Add(709, 45, 1, 71, 9, texWeapon);
+
+	weapon = new CWeapon();
+
+	ani = new CAnimation(100); //time mac dinh neu khong trueyn
+	ani->Add(701,200);
+	ani->Add(702);
+	ani->Add(703,200);
+	animations->Add(710, ani);
+	weapon->AddAnimation(710);
+	objects.push_back(weapon);
 }
  
 void LoadResources()
 {
 	InitSimon();
+	InitWeapon();
 	InitBrick();
 }
 

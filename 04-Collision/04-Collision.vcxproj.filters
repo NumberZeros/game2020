@@ -16,11 +16,11 @@
     <Filter Include="Header Files\GameObjects">
       <UniqueIdentifier>{b7136cf4-3768-48a4-abff-937166b9db6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Weapon">
-      <UniqueIdentifier>{3f60dd69-334d-4f0b-a99f-19c80df78319}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Simon">
       <UniqueIdentifier>{607d049a-574f-4af9-87ba-5442099c8dc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Weapon">
+      <UniqueIdentifier>{9f6e641a-7d6f-4a55-9766-6237d3717c6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,11 +45,11 @@
     <ClInclude Include="Goomba.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Header Files\Weapon</Filter>
-    </ClInclude>
     <ClInclude Include="Mario.h">
       <Filter>Header Files\Simon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +77,11 @@
     <ClCompile Include="Goomba.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Header Files\Weapon</Filter>
-    </ClCompile>
     <ClCompile Include="Mario.cpp">
       <Filter>Header Files\Simon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Header Files\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
