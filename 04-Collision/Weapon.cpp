@@ -20,8 +20,6 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	if (!isHidden){
 		if (GetTickCount() - action_time > WEAPON_ATTACK_TIME) {
-			//SetState(WEAPON_STATE_HIDDEN);
-			//ResetAttack();
 			isHidden = true;
 			this->action_time = 0;
 		}
@@ -80,7 +78,8 @@ CWeapon* CWeapon::GetInstance()
 int CWeapon::GetAnimation() {
 	int ani;
 	if (nx > 0) {
-		switch (level)
+		DebugOut(L"level  %d\n", this->level);
+		switch (this->level)
 		{
 		case 1: {
 			ani = WEAPON_ANI_1_RIGHT;
@@ -119,7 +118,6 @@ int CWeapon::GetAnimation() {
 			break;
 		}
 	}
-	
 	return ani;
 }
 
@@ -131,22 +129,44 @@ void CWeapon::UpdatePosionWithSimon(int _x, int _y, int _nx) {
 void CWeapon::GetPositionForSimon() {
 	int ani = GetAnimation();
 	int currenFrame = animations[ani]->GetCurrentFrame();
-	if (currenFrame != frame) {
-		if (currenFrame == 0) {
-			SetFrame(frame - 1);
-			x -= 7;
-			y += 2;
-			frame = 0;
+	if (nx > 0) {
+		if (currenFrame != frame) {
+			if (currenFrame == 0) {
+				SetFrame(frame - 1);
+				x -= 7;
+				y += 2;
+				frame = 0;
+			}
+			else if (currenFrame == 1) {
+				x -= 7;
+				y -= 1;
+				frame = 1;
+			}
+			else if (currenFrame == 2) {
+				x += 32;
+				y += 2;
+				frame = 2;
+			}
 		}
-		else if (currenFrame == 1) {
-			x -= 7;
-			y -= 1;
-			frame = 1;
-		}
-		else if (currenFrame == 2) {
-			x += 32;
-			y += 2;
-			frame = 2;
+	}
+	else {
+		if (currenFrame != frame) {
+			if (currenFrame == 0) {
+				SetFrame(frame - 1);
+				x += 7;
+				y += 2;
+				frame = 0;
+			}
+			else if (currenFrame == 1) {
+				x += 7;
+				y -= 1;
+				frame = 1;
+			}
+			else if (currenFrame == 2) {
+				x -= 32;
+				y += 2;
+				frame = 2;
+			}
 		}
 	}
 	

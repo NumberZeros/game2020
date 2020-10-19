@@ -8,7 +8,7 @@
 #define MARIO_GRAVITY			0.002f
 #define MARIO_DIE_DEFLECT_SPEED	 0.5f
 
-#define MARIO_ATTACK_TIME 500
+#define MARIO_ATTACK_TIME 600
 
 #define MARIO_STATE_IDLE			0
 #define MARIO_STATE_WALKING_RIGHT	100
@@ -58,8 +58,8 @@ class CMario : public CGameObject
 	int untouchable;
 	int height = 30;
 	int width = 17;
-	bool isSit = false;
-	bool isAttack = false;
+	bool isSit;
+	bool isAttack;
 	int actionAttack = 0;	// 0 right 1 left
 	
 	DWORD untouchable_start;
@@ -79,6 +79,7 @@ public:
 	void SetState(int state);
 	void SetLevel(int l) { level = l; }
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
+	bool GetAttack() { return this->isAttack; };
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

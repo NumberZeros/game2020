@@ -1,14 +1,12 @@
 ﻿  Mario.cpp
   Weapon.cpp
-C:\Users\Administrator\Desktop\game2020\04-Collision\Weapon.cpp(127,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\Weapon.cpp(128,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\game2020\04-Collision\Weapon.cpp(125,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Administrator\Desktop\game2020\04-Collision\Weapon.cpp(126,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   main.cpp
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(29,1): warning C4005: 'ID_WEAPON_RIGHT': macro redefinition
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(28): message : see previous definition of 'ID_WEAPON_RIGHT'
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(75,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(75,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(290,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(295,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(328,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(72,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(72,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(346,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(351,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(384,21): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   04-Collision.vcxproj -> C:\Users\Administrator\Desktop\game2020\Debug\04-Collision.exe

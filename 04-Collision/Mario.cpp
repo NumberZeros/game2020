@@ -35,6 +35,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (GetTickCount() - action_time > MARIO_ATTACK_TIME) {
 			resetAttack();
 		}
+		return;
 	}
 
 	// No collision occured, proceed normally
@@ -190,6 +191,7 @@ void CMario::SetState(int state)
 		SitDown();
 		break;
 	case STATE_ATTACK:
+		vx = 0;
 		resetAttack();
 		attack();
 		break;
