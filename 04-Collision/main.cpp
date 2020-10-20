@@ -130,9 +130,9 @@ void InitSimon() {
 	sprites->Add(106, 204, 201, 220, 231, texMario);
 	sprites->Add(107, 241, 201, 263, 231, texMario);
 
-	sprites->Add(108, 120, 201, 188, 231, texMario);		//attact sit
-	sprites->Add(109, 84, 201, 100, 231, texMario);
-	sprites->Add(110, 41, 201, 63, 231, texMario);
+	sprites->Add(108, 163, 278, 188, 303, texMario);		//attact sit
+	sprites->Add(109, 211, 284, 228, 307, texMario);
+	sprites->Add(110, 249, 284, 272, 307, texMario);
 
 
 	sprites->Add(111, 124, 41, 139, 71, texMario);		// idle left
