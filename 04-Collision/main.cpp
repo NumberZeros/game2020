@@ -12,13 +12,17 @@
 #include "Brick.h"
 #include "Goomba.h"
 #include "Weapon.h"
+#include "CGhost.h"
+#include "CDog.h"
+#include "CBat.h"
+
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"04 - Collision"
+#define MAIN_WINDOW_TITLE L"Castle-Vania"
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 200)
 #define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
+#define SCREEN_HEIGHT 290
 
 #define MAX_FRAME_RATE 120
 
@@ -33,6 +37,9 @@ CGame *game;
 CMario *mario;
 CGoomba *goomba;
 CWeapon* weapon;
+CGhost *ghost;
+CDog *dog;
+CBat *bat;
 
 vector<LPGAMEOBJECT> objects;
 LPANIMATION ani;
@@ -114,6 +121,136 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+void InitBat()
+{
+	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(96, 68, 106));
+
+	//sprite for bat
+	LPDIRECT3DTEXTURE9 texBat = textures->Get(ID_TEX_ENEMY);
+	sprites->Add(701, 424, 46, 436, 60, texBat);	//idle right
+	sprites->Add(702, 398, 46, 414, 60, texBat);
+	sprites->Add(703, 371, 48, 387, 58, texBat);
+	sprites->Add(704, 345, 44, 361, 60, texBat);
+
+	sprites->Add(705, 94, 46, 106, 60, texBat);		//idle left
+	sprites->Add(706, 116, 46, 132, 60, texBat);
+	sprites->Add(707, 143, 48, 159, 58, texBat);
+	sprites->Add(708, 169, 44, 185, 60, texBat);
+
+	//ani for bat
+	ani = new CAnimation(100);	// idle right
+	ani->Add(701);
+	animations->Add(801, ani);
+
+	ani = new CAnimation(100);	// idle right
+	ani->Add(705);
+	animations->Add(802, ani);
+
+	ani = new CAnimation(100);	//right
+	ani->Add(702);
+	ani->Add(703);
+	ani->Add(704);
+	animations->Add(803, ani);
+
+	ani = new CAnimation(100);	//right
+	ani->Add(706);
+	ani->Add(707);
+	ani->Add(708);
+	animations->Add(804, ani);
+
+	bat = new CBat();
+	bat->AddAnimation(801); //idle right
+	bat->AddAnimation(802); //idle left
+
+	bat->AddAnimation(803); //right
+	bat->AddAnimation(804); //left
+
+	bat->SetPosition(200.0f,200);
+	bat->SetState(BAT_STATE_FLY);
+	objects.push_back(bat);
+}
+
+void InitDog()
+{
+	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(96, 68, 106));
+
+	//sprite for dog
+	LPDIRECT3DTEXTURE9 texDog = textures->Get(ID_TEX_ENEMY);
+	sprites->Add(301, 438, 19, 462, 34, texDog);	//idle right
+	sprites->Add(302, 404, 18, 432, 34, texDog);	//stand right
+	sprites->Add(303, 367, 18, 397, 34, texDog);	//walk right
+	sprites->Add(304, 330, 19, 362, 31, texDog);	//run right
+
+	sprites->Add(305, 68, 19, 92, 34, texDog);	//idle left
+	sprites->Add(306, 98, 18, 116, 34, texDog);	//stand left
+	sprites->Add(307, 133, 18, 163, 34, texDog);	//walk left
+	sprites->Add(308, 168, 19, 200, 31, texDog);	//run left
+
+	//ani for dog
+	ani = new CAnimation(100);	// idle right
+	ani->Add(301);
+	animations->Add(700, ani);
+
+	ani = new CAnimation(100);	//left
+	ani->Add(305);
+	animations->Add(701, ani);
+
+	ani = new CAnimation(100);	//right
+	//ani->Add(301);
+	ani->Add(302);
+	ani->Add(303);
+	ani->Add(304);
+	animations->Add(702, ani);
+
+	ani = new CAnimation(100);	//left
+	//ani->Add(305);
+	ani->Add(306);
+	ani->Add(307);
+	ani->Add(308);
+	animations->Add(703, ani);
+
+	dog = new CDog();
+	dog->AddAnimation(700); //idle right
+	dog->AddAnimation(701); //idle left
+
+	dog->AddAnimation(702); //right
+	dog->AddAnimation(703); //left
+
+	dog->SetPosition(200.0f, 100);
+	dog->SetState(DOG_STATE_JUMP);
+	objects.push_back(dog);
+}
+void InitGhost()
+{
+	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(96, 68, 106));
+
+	//sprite for ghost
+	LPDIRECT3DTEXTURE9 texGhost = textures->Get(ID_TEX_ENEMY);
+	sprites->Add(201, 502, 7, 518, 39, texGhost);		// walk right
+	sprites->Add(202, 477, 7, 493, 39, texGhost);
+
+	sprites->Add(203, 12, 7, 37, 39, texGhost);		// walk left
+	sprites->Add(204, 37, 7, 53, 39, texGhost);
+
+
+	ani = new CAnimation(100);	//right
+	ani->Add(201);
+	ani->Add(202);
+	animations->Add(500, ani);
+
+	ani = new CAnimation(100);	//left
+	ani->Add(203);
+	ani->Add(204);
+	animations->Add(501, ani);
+
+	ghost = new CGhost();
+	ghost->AddAnimation(500); //walk right
+	ghost->AddAnimation(501); //walk left
+
+	ghost->SetPosition(200.0f, 137.5);
+	ghost->SetState(GHOST_STATE_ACTIVE);
+	objects.push_back(ghost);
+}
 void InitSimon() {
 
 	textures->Add(ID_TEX_MARIO, L"textures\\simon.png", D3DCOLOR_XRGB(255, 255, 255));
@@ -335,6 +472,9 @@ void LoadResources()
 	InitSimon();
 	InitWeapon();
 	InitBrick();
+	InitGhost();
+	InitDog();
+	InitBat();
 }
 
 /*
@@ -357,7 +497,6 @@ void Update(DWORD dt)
 		objects[i]->Update(dt,&coObjects);
 	}
 
-
 	// Update camera to follow mario
 	float cx, cy;
 	mario->GetPosition(cx, cy);
@@ -367,6 +506,7 @@ void Update(DWORD dt)
 	cy -= SCREEN_HEIGHT / 2;
 
 	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+
 }
 
 /*

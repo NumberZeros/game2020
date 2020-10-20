@@ -5,3 +5,11 @@ C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(350,20): warning C
 C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(355,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(388,21): warning C4018: '<': signed/unsigned mismatch
   04-Collision.vcxproj -> C:\Users\Administrator\Desktop\game2020\Debug\04-Collision.exe
+﻿  CBat.cpp
+C:\Users\ASUS\Desktop\game2020\04-Collision\CBat.cpp(23,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+C:\Users\ASUS\Desktop\game2020\04-Collision\main.cpp(412,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ASUS\Desktop\game2020\04-Collision\main.cpp(417,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ASUS\Desktop\game2020\04-Collision\main.cpp(450,21): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  04-Collision.vcxproj -> C:\Users\ASUS\Desktop\game2020\Debug\04-Collision.exe

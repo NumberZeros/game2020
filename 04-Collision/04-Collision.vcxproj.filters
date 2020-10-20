@@ -21,6 +21,14 @@
     </Filter>
     <Filter Include="Header Files\Weapon">
       <UniqueIdentifier>{9f6e641a-7d6f-4a55-9766-6237d3717c6d}</UniqueIdentifier>
+    <Filter Include="Header Files\Ghost">
+      <UniqueIdentifier>{4d3574b0-b77b-4a34-ae42-f4d68c085b14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Dog">
+      <UniqueIdentifier>{d953f1b0-1007-41bc-a968-97dea08127af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bat">
+      <UniqueIdentifier>{a9777b6c-8cca-418f-b7a2-6d3c99d48539}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sprites.h">
@@ -50,6 +55,17 @@
     </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Header Files\Weapon</Filter>
+    <ClInclude Include="CGhost.h">
+      <Filter>Header Files\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="CDog.h">
+      <Filter>Header Files\Dog</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CBat.h">
+      <Filter>Header Files\Bat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -57,9 +73,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -82,6 +95,17 @@
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Header Files\Weapon</Filter>
+    <ClCompile Include="CGhost.cpp">
+      <Filter>Header Files\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="CDog.cpp">
+      <Filter>Header Files\Dog</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CBat.cpp">
+      <Filter>Header Files\Bat</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
