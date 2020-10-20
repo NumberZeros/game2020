@@ -53,7 +53,6 @@ CSampleKeyHander * keyHandler;
 void CSampleKeyHander::OnKeyDown(int KeyCode)
 {
 	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-	if (mario->GetAttack()) return;
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
@@ -91,13 +90,15 @@ void CSampleKeyHander::KeyState(BYTE *states)
 {
 	// disable control key when Mario die 
 	if (mario->GetState() == MARIO_STATE_DIE) return;
-	if (mario->GetAttack()) return;
-	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
-	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
-	else
-		mario->SetState(MARIO_STATE_IDLE);
+	if (!mario->GetAttack()) {
+		if (game->IsKeyDown(DIK_RIGHT))
+			mario->SetState(MARIO_STATE_WALKING_RIGHT);
+		else if (game->IsKeyDown(DIK_LEFT))
+			mario->SetState(MARIO_STATE_WALKING_LEFT);
+		else
+			mario->SetState(MARIO_STATE_IDLE);
+	}
+	
 }
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -139,7 +140,7 @@ void InitSimon() {
 	sprites->Add(113, 44, 41, 59, 71, texMario);
 	sprites->Add(114, 3, 44, 20, 67, texMario);			//sit
 
-	sprites->Add(115, 120, 201, 164, 231, texMario);		//attact left
+	sprites->Add(115, 120, 201, 144, 231, texMario);		//attact left
 	sprites->Add(116, 84, 201, 100, 231, texMario);
 	sprites->Add(117, 41, 201, 63, 231, texMario);
 
@@ -183,13 +184,13 @@ void InitSimon() {
 	ani->Add(105,200);
 	ani->Add(106);
 	ani->Add(107,200);
-	ani->Add(101, 100);
+	ani->Add(101);
 	animations->Add(408, ani);
 
 	ani = new CAnimation(100);	// attact left
-	ani->Add(115);
+	ani->Add(115,200);
 	ani->Add(116);
-	ani->Add(117);
+	ani->Add(117,200);
 	ani->Add(111);
 	animations->Add(409, ani);
 
