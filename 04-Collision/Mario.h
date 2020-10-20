@@ -8,6 +8,8 @@
 #define MARIO_GRAVITY			0.002f
 #define MARIO_DIE_DEFLECT_SPEED	 0.5f
 
+#define MARIO_ATTACK_TIME 600
+
 #define MARIO_STATE_IDLE			0
 #define MARIO_STATE_WALKING_RIGHT	100
 #define MARIO_STATE_WALKING_LEFT	200
@@ -34,11 +36,11 @@
 #define MARIO_ANI_ATTACK_SIT_RIGHT				8
 #define MARIO_ANI_ATTACK_SIT_LEFT				9
 
-#define MARIO_HEGHT				29
+#define MARIO_HEGHT				30
 #define MARIO_WIDTH				24
 
-#define MARIO_HEGHT_IS_SIT				25
-#define MARIO_HEGHT_RESET_SIT			8
+#define MARIO_HEGHT_IS_SIT				23
+#define MARIO_HEGHT_RESET_SIT			7
 
 #define MARIO_WIDTH_RESET_ATTACK		7
 
@@ -54,10 +56,10 @@ class CMario : public CGameObject
 {
 	int level;
 	int untouchable;
-	int height = 32;
+	int height = 30;
 	int width = 17;
-	bool isSit = false;
-	bool isAttack = false;
+	bool isSit;
+	bool isAttack;
 	int actionAttack = 0;	// 0 right 1 left
 	
 	DWORD untouchable_start;
@@ -77,6 +79,7 @@ public:
 	void SetState(int state);
 	void SetLevel(int l) { level = l; }
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
+	bool GetAttack() { return this->isAttack; };
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

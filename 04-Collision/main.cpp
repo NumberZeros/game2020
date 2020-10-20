@@ -11,6 +11,7 @@
 #include "Mario.h"
 #include "Brick.h"
 #include "Goomba.h"
+#include "Weapon.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
@@ -25,12 +26,13 @@
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
 #define ID_WEAPON_RIGHT 30
-#define ID_WEAPON_RIGHT 35
+#define ID_WEAPON_LEFT 35
 
 CGame *game;
 
 CMario *mario;
 CGoomba *goomba;
+CWeapon* weapon;
 
 vector<LPGAMEOBJECT> objects;
 LPANIMATION ani;
@@ -67,6 +69,14 @@ void CSampleKeyHander::OnKeyDown(int KeyCode)
 		break;
 	case DIK_X:
 		mario->SetState(STATE_ATTACK);
+		weapon->UpdatePosionWithSimon(mario->x, mario->y, mario->nx);
+		weapon->SetState(WEAPON_STATE_ATTACK);
+		break;
+	case DIK_2 :
+		weapon->SetLevel(2);
+		break;
+	case DIK_3:
+		weapon->SetLevel(3);
 		break;
 	}
 }
@@ -80,12 +90,15 @@ void CSampleKeyHander::KeyState(BYTE *states)
 {
 	// disable control key when Mario die 
 	if (mario->GetState() == MARIO_STATE_DIE) return;
-	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
-	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
-	else
-		mario->SetState(MARIO_STATE_IDLE);
+	if (!mario->GetAttack()) {
+		if (game->IsKeyDown(DIK_RIGHT))
+			mario->SetState(MARIO_STATE_WALKING_RIGHT);
+		else if (game->IsKeyDown(DIK_LEFT))
+			mario->SetState(MARIO_STATE_WALKING_LEFT);
+		else
+			mario->SetState(MARIO_STATE_IDLE);
+	}
+	
 }
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -104,31 +117,32 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void InitSimon() {
 
 	textures->Add(ID_TEX_MARIO, L"textures\\simon.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	// sprite for simmon
 	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
-	sprites->Add(101, 163, 39, 180, 71, texMario);		// idle right
-	sprites->Add(102, 205, 39, 218, 71, texMario);		// walk
-	sprites->Add(103, 244, 39, 259, 71, texMario);
-	sprites->Add(104, 283, 43, 300, 68, texMario);		//sit
+	sprites->Add(101, 163, 41, 180, 71, texMario);		// idle right
+	sprites->Add(102, 205, 41, 218, 71, texMario);		// walk
+	sprites->Add(103, 244, 41, 259, 71, texMario);
+	sprites->Add(104, 283, 44, 300, 67, texMario);		//sit
 
-	sprites->Add(105, 160, 201, 184, 231, texMario);		//attact
+	sprites->Add(105, 160, 201, 184, 231, texMario);		//attact right
 	sprites->Add(106, 204, 201, 220, 231, texMario);
 	sprites->Add(107, 241, 201, 263, 231, texMario);
 
-	sprites->Add(108, 120, 201, 188, 231, texMario);		//attact sit
-	sprites->Add(109, 84, 201, 100, 231, texMario);
-	sprites->Add(110, 41, 201, 63, 231, texMario);
+	sprites->Add(108, 163, 278, 188, 303, texMario);		//attact sit
+	sprites->Add(109, 211, 284, 228, 307, texMario);
+	sprites->Add(110, 249, 284, 272, 307, texMario);
 
 
-	sprites->Add(111, 124, 39, 139, 71, texMario);		// idle left
-	sprites->Add(112, 85, 39, 98, 71, texMario);			// walk
-	sprites->Add(113, 44, 39, 59, 71, texMario);
-	sprites->Add(114, 3, 43, 20, 68, texMario);			//sit
+	sprites->Add(111, 124, 41, 139, 71, texMario);		// idle left
+	sprites->Add(112, 85, 41, 98, 71, texMario);			// walk
+	sprites->Add(113, 44, 41, 59, 71, texMario);
+	sprites->Add(114, 3, 44, 20, 67, texMario);			//sit
 
-	sprites->Add(115, 115, 239, 148, 270, texMario);		//attact
-	sprites->Add(116, 75, 239, 108, 270, texMario);
-	sprites->Add(117, 9, 239, 54, 270, texMario);
+	sprites->Add(115, 120, 201, 144, 231, texMario);		//attact left
+	sprites->Add(116, 84, 201, 100, 231, texMario);
+	sprites->Add(117, 41, 201, 63, 231, texMario);
 
 	sprites->Add(118, 116, 280, 148, 311, texMario);		//attact sit
 	sprites->Add(119, 76, 284, 108, 307, texMario);
@@ -167,15 +181,17 @@ void InitSimon() {
 	animations->Add(407, ani);
 
 	ani = new CAnimation(100);	// attact right
-	ani->Add(105);
+	ani->Add(105,200);
 	ani->Add(106);
-	ani->Add(107);
+	ani->Add(107,200);
+	ani->Add(101);
 	animations->Add(408, ani);
 
 	ani = new CAnimation(100);	// attact left
-	ani->Add(115);
+	ani->Add(115,200);
 	ani->Add(116);
-	ani->Add(117);
+	ani->Add(117,200);
+	ani->Add(111);
 	animations->Add(409, ani);
 
 	ani = new CAnimation(100);	// attact sit right
@@ -212,7 +228,7 @@ void InitSimon() {
 	mario->AddAnimation(499);		// die
 
 
-	mario->SetPosition(50.0f, 0);
+	mario->SetPosition(0, 0);
 	objects.push_back(mario);
 
 }
@@ -238,24 +254,86 @@ void InitBrick(){
 }
 
 void InitWeapon() {
-		textures->Add(ID_WEAPON_RIGHT, L"textures\\weapon.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_WEAPON_RIGHT, L"textures\\weapon.png", D3DCOLOR_XRGB(255, 255, 255));
+	weapon = new CWeapon();
 	LPDIRECT3DTEXTURE9 texWeapon = textures->Get(ID_WEAPON_RIGHT);
-	sprites->Add(30001, 0, 2, 9, 27, texWeapon);		//level 1
-	sprites->Add(30002, 19, 0, 37, 20, texWeapon);		
-	sprites->Add(30003, 45, 1, 71, 9, texWeapon);
+	sprites->Add(701, 0, 2, 9, 27, texWeapon);		//level 1
+	sprites->Add(702, 19, 0, 37, 20, texWeapon);		
+	sprites->Add(703, 45, 1, 71, 9, texWeapon);
 
-	sprites->Add(30001, 0, 32, 9, 58, texWeapon);		//level 2
-	sprites->Add(30002, 19, 31, 37, 50, texWeapon);
-	sprites->Add(30003, 45, 34, 71, 42, texWeapon);
+	sprites->Add(704, 0, 32, 9, 58, texWeapon);		//level 2
+	sprites->Add(705, 19, 59, 57, 80, texWeapon);
+	sprites->Add(706, 45, 35, 72, 48, texWeapon);
 
-	sprites->Add(30001, 0, 2, 9, 27, texWeapon);		//level 3
-	sprites->Add(30002, 19, 0, 37, 20, texWeapon);
-	sprites->Add(30003, 45, 1, 71, 9, texWeapon);
+	sprites->Add(707, 0, 62, 9, 88, texWeapon);		//level 3
+	sprites->Add(708, 19, 0, 37, 20, texWeapon);
+	sprites->Add(709, 45, 63, 85, 72, texWeapon);
+
+	ani = new CAnimation(100);
+	ani->Add(701,200);
+	ani->Add(702);
+	ani->Add(703,200);
+	animations->Add(710, ani);
+	weapon->AddAnimation(710);
+
+	ani = new CAnimation(100);
+	ani->Add(704, 200);
+	ani->Add(705);
+	ani->Add(706, 200);
+	animations->Add(711, ani);
+	weapon->AddAnimation(711);
+
+	ani = new CAnimation(100);
+	ani->Add(707, 200);
+	ani->Add(708);
+	ani->Add(709, 200);
+	animations->Add(712, ani);
+	weapon->AddAnimation(712);
+
+
+	textures->Add(ID_WEAPON_LEFT, L"textures\\weapon2.png", D3DCOLOR_XRGB(255, 255, 255));
+
+	LPDIRECT3DTEXTURE9 texWeaponLeft = textures->Get(ID_WEAPON_LEFT);
+	sprites->Add(713, 76, 2, 87, 29, texWeaponLeft);		//level 1
+	sprites->Add(714, 49, 0, 67, 20, texWeaponLeft);
+	sprites->Add(715, 15, 1, 40, 11, texWeaponLeft);
+
+	sprites->Add(716, 77, 32, 87, 58, texWeaponLeft);		//level 2
+	sprites->Add(717, 49, 31, 67, 50, texWeaponLeft);
+	sprites->Add(718, 15, 34, 40, 42, texWeaponLeft);
+
+	sprites->Add(719, 77, 62, 87, 88, texWeaponLeft);		//level 3
+	sprites->Add(720, 49, 58, 67, 80, texWeaponLeft);
+	sprites->Add(721, 0, 64, 40, 72, texWeaponLeft);
+
+	ani = new CAnimation(100);
+	ani->Add(713, 200);
+	ani->Add(714);
+	ani->Add(715, 200);
+	animations->Add(722, ani);
+	weapon->AddAnimation(722);
+
+	ani = new CAnimation(100);
+	ani->Add(716, 200);
+	ani->Add(717);
+	ani->Add(718, 200);
+	animations->Add(723, ani);
+	weapon->AddAnimation(723);
+
+	ani = new CAnimation(100);
+	ani->Add(719, 200);
+	ani->Add(720);
+	ani->Add(721, 200);
+	animations->Add(724, ani);
+	weapon->AddAnimation(724);
+
+	objects.push_back(weapon);
 }
  
 void LoadResources()
 {
 	InitSimon();
+	InitWeapon();
 	InitBrick();
 }
 

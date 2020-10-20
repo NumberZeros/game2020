@@ -5,6 +5,7 @@
 #include "Game.h"
 
 #include "Goomba.h"
+#include "Weapon.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -19,6 +20,8 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	coEvents.clear();
 
+	DebugOut(L"simon y %f \n ", y);
+
 	// turn off collision when die 
 	if (state!=MARIO_STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
@@ -28,6 +31,13 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		untouchable_start = 0;
 		untouchable = 0;
+	}
+
+	if (isAttack) {
+		if (GetTickCount() - action_time > MARIO_ATTACK_TIME) {
+			resetAttack();
+		}
+		return;
 	}
 
 	// No collision occured, proceed normally
@@ -93,7 +103,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CMario::SitDown() {
 	isSit = true;
-	height = MARIO_HEGHT_IS_SIT;
+	height = MARIO_HEGHT - MARIO_HEGHT_RESET_SIT;
 }
 
 void CMario::ResetSitDown() {
@@ -105,19 +115,18 @@ void CMario::ResetSitDown() {
 void CMario::attack() {
 	
 	if (!isAttack) {
-		/*if (nx > 0) x += MARIO_WIDTH_RESET_ATTACK;
-		else x -= MARIO_WIDTH_RESET_ATTACK;*/
+		action_time = GetTickCount();
 		isAttack = true;
 	}
-	action_time = GetTickCount();
 }
 
 void CMario::resetAttack()
 {
-	if (GetTickCount() - action_time > 300) {
-		/*if (nx < 0) x += MARIO_WIDTH_RESET_ATTACK;
-		else x -= MARIO_WIDTH_RESET_ATTACK;*/
-		isAttack = false;
+	action_time = 0;
+	isAttack = false;
+	for (unsigned int i = 0; i < animations.size(); i++)
+	{
+		animations[i]->ResetFrame();
 	}
 }
 
@@ -136,7 +145,6 @@ void CMario::Render()
 				if (isAttack) {
 					if(isSit) ani = MARIO_ANI_ATTACK_SIT_RIGHT;
 					else ani = MARIO_ANI_ATTACK_RIGHT;
-					resetAttack();
 				}
 			} 
 			else {
@@ -145,7 +153,6 @@ void CMario::Render()
 				if (isAttack) {
 					if (isSit) ani = MARIO_ANI_ATTACK_SIT_LEFT;
 					else ani = MARIO_ANI_ATTACK_LEFT;
-					resetAttack();
 				}
 			} 
 		}
@@ -155,7 +162,7 @@ void CMario::Render()
 	}
 
 	int alpha = 255;
-	if (untouchable) alpha = 128;
+	//if (untouchable) alpha = 128;
 	animations[ani]->Render(x, y, alpha);
 
 	RenderBoundingBox();
@@ -186,6 +193,7 @@ void CMario::SetState(int state)
 		SitDown();
 		break;
 	case STATE_ATTACK:
+		resetAttack();
 		attack();
 		break;
 	case MARIO_STATE_DIE:
