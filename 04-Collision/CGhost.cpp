@@ -22,8 +22,8 @@ void CGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		x = 80; vx = -vx;
 	}
 
-	if (vx > 0 && x > 160) {
-		x = 160; vx = -vx;
+	if (vx > 0 && x > 200) {
+		x = 200; vx = -vx;
 	}
 }
 

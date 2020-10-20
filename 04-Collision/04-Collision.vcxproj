@@ -123,6 +123,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="CBat.h" />
+    <ClInclude Include="CDog.h" />
     <ClInclude Include="CGhost.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="Game.h" />
@@ -135,6 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="CBat.cpp" />
+    <ClCompile Include="CDog.cpp" />
     <ClCompile Include="CGhost.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="Game.cpp" />
