@@ -39,8 +39,8 @@
 #define MARIO_HEGHT				30
 #define MARIO_WIDTH				24
 
-#define MARIO_HEGHT_IS_SIT				25
-#define MARIO_HEGHT_RESET_SIT			8
+#define MARIO_HEGHT_IS_SIT				23
+#define MARIO_HEGHT_RESET_SIT			7
 
 #define MARIO_WIDTH_RESET_ATTACK		7
 

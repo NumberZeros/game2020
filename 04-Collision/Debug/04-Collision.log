@@ -1,12 +1,7 @@
-﻿  Mario.cpp
-  Weapon.cpp
-C:\Users\Administrator\Desktop\game2020\04-Collision\Weapon.cpp(125,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\Weapon.cpp(126,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  main.cpp
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(72,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(72,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(346,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(351,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(384,21): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  main.cpp
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(73,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(73,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(349,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(354,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\Desktop\game2020\04-Collision\main.cpp(387,21): warning C4018: '<': signed/unsigned mismatch
   04-Collision.vcxproj -> C:\Users\Administrator\Desktop\game2020\Debug\04-Collision.exe

@@ -20,6 +20,8 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	coEvents.clear();
 
+	DebugOut(L"simon y %f \n ", y);
+
 	// turn off collision when die 
 	if (state!=MARIO_STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
@@ -160,7 +162,7 @@ void CMario::Render()
 	}
 
 	int alpha = 255;
-	if (untouchable) alpha = 128;
+	//if (untouchable) alpha = 128;
 	animations[ani]->Render(x, y, alpha);
 
 	RenderBoundingBox();
@@ -191,7 +193,6 @@ void CMario::SetState(int state)
 		SitDown();
 		break;
 	case STATE_ATTACK:
-		vx = 0;
 		resetAttack();
 		attack();
 		break;

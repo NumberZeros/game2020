@@ -78,7 +78,6 @@ CWeapon* CWeapon::GetInstance()
 int CWeapon::GetAnimation() {
 	int ani;
 	if (nx > 0) {
-		DebugOut(L"level  %d\n", this->level);
 		switch (this->level)
 		{
 		case 1: {
