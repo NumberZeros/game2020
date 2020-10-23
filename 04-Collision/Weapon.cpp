@@ -1,5 +1,5 @@
 #include "Weapon.h"
-#include "Mario.h"
+#include "Simon.h"
 #include <time.h>
 #include "debug.h"
 

@@ -8,7 +8,7 @@
 #include "GameObject.h"
 #include "Textures.h"
 
-#include "Mario.h"
+#include "Simon.h"
 #include "Brick.h"
 #include "Goomba.h"
 #include "Weapon.h"
@@ -26,7 +26,7 @@
 
 #define MAX_FRAME_RATE 120
 
-#define ID_TEX_MARIO 0
+#define ID_TEX_simon 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
 #define ID_WEAPON_RIGHT 30
@@ -34,7 +34,7 @@
 
 CGame *game;
 
-CMario *mario;
+CSimon *simon;
 CGoomba *goomba;
 CWeapon* weapon;
 CGhost *ghost;
@@ -63,20 +63,20 @@ void CSampleKeyHander::OnKeyDown(int KeyCode)
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		mario->SetState(MARIO_STATE_JUMP);
+		simon->SetState(SIMON_STATE_JUMP);
 		break;
 	case DIK_A: // reset
-		mario->SetState(MARIO_STATE_IDLE);
-		mario->SetLevel(MARIO_LEVEL_BIG);
-		mario->SetPosition(50.0f,0.0f);
-		mario->SetSpeed(0, 0);
+		simon->SetState(SIMON_STATE_IDLE);
+		simon->SetLevel(SIMON_LEVEL_BIG);
+		simon->SetPosition(50.0f,0.0f);
+		simon->SetSpeed(0, 0);
 		break;
 	case DIK_DOWN:
-		mario->SetState(MARIO_STATE_SIT_DOWN);
+		simon->SetState(SIMON_STATE_SIT_DOWN);
 		break;
 	case DIK_X:
-		mario->SetState(STATE_ATTACK);
-		weapon->UpdatePosionWithSimon(mario->x, mario->y, mario->nx);
+		simon->SetState(STATE_ATTACK);
+		weapon->UpdatePosionWithSimon(simon->x, simon->y, simon->nx);
 		weapon->SetState(WEAPON_STATE_ATTACK);
 		break;
 	case DIK_2 :
@@ -95,15 +95,15 @@ void CSampleKeyHander::OnKeyUp(int KeyCode)
 
 void CSampleKeyHander::KeyState(BYTE *states)
 {
-	// disable control key when Mario die 
-	if (mario->GetState() == MARIO_STATE_DIE) return;
-	if (!mario->GetAttack()) {
+	// disable control key when simon die 
+	if (simon->GetState() == SIMON_STATE_DIE) return;
+	if (!simon->GetAttack()) {
 		if (game->IsKeyDown(DIK_RIGHT))
-			mario->SetState(MARIO_STATE_WALKING_RIGHT);
+			simon->SetState(SIMON_STATE_WALKING_RIGHT);
 		else if (game->IsKeyDown(DIK_LEFT))
-			mario->SetState(MARIO_STATE_WALKING_LEFT);
+			simon->SetState(SIMON_STATE_WALKING_LEFT);
 		else
-			mario->SetState(MARIO_STATE_IDLE);
+			simon->SetState(SIMON_STATE_IDLE);
 	}
 	
 }
@@ -253,39 +253,39 @@ void InitGhost()
 }
 void InitSimon() {
 
-	textures->Add(ID_TEX_MARIO, L"textures\\simon.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_TEX_simon, L"textures\\simon.png", D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	// sprite for simmon
-	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
-	sprites->Add(101, 163, 41, 180, 71, texMario);		// idle right
-	sprites->Add(102, 205, 41, 218, 71, texMario);		// walk
-	sprites->Add(103, 244, 41, 259, 71, texMario);
-	sprites->Add(104, 283, 44, 300, 67, texMario);		//sit
+	LPDIRECT3DTEXTURE9 texsimon = textures->Get(ID_TEX_simon);
+	sprites->Add(101, 163, 41, 180, 71, texsimon);		// idle right
+	sprites->Add(102, 205, 41, 218, 71, texsimon);		// walk
+	sprites->Add(103, 244, 41, 259, 71, texsimon);
+	sprites->Add(104, 283, 44, 300, 67, texsimon);		//sit
 
-	sprites->Add(105, 160, 201, 184, 231, texMario);		//attact right
-	sprites->Add(106, 204, 201, 220, 231, texMario);
-	sprites->Add(107, 241, 201, 263, 231, texMario);
+	sprites->Add(105, 160, 201, 184, 231, texsimon);		//attact right
+	sprites->Add(106, 204, 201, 220, 231, texsimon);
+	sprites->Add(107, 241, 201, 263, 231, texsimon);
 
-	sprites->Add(108, 163, 278, 188, 303, texMario);		//attact sit
-	sprites->Add(109, 211, 284, 228, 307, texMario);
-	sprites->Add(110, 249, 284, 272, 307, texMario);
+	sprites->Add(108, 163, 278, 188, 303, texsimon);		//attact sit
+	sprites->Add(109, 211, 284, 228, 307, texsimon);
+	sprites->Add(110, 249, 284, 272, 307, texsimon);
 
 
-	sprites->Add(111, 124, 41, 139, 71, texMario);		// idle left
-	sprites->Add(112, 85, 41, 98, 71, texMario);			// walk
-	sprites->Add(113, 44, 41, 59, 71, texMario);
-	sprites->Add(114, 3, 44, 20, 67, texMario);			//sit
+	sprites->Add(111, 124, 41, 139, 71, texsimon);		// idle left
+	sprites->Add(112, 85, 41, 98, 71, texsimon);			// walk
+	sprites->Add(113, 44, 41, 59, 71, texsimon);
+	sprites->Add(114, 3, 44, 20, 67, texsimon);			//sit
 
-	sprites->Add(115, 120, 201, 144, 231, texMario);		//attact left
-	sprites->Add(116, 84, 201, 100, 231, texMario);
-	sprites->Add(117, 41, 201, 63, 231, texMario);
+	sprites->Add(115, 120, 201, 144, 231, texsimon);		//attact left
+	sprites->Add(116, 84, 201, 100, 231, texsimon);
+	sprites->Add(117, 41, 201, 63, 231, texsimon);
 
-	sprites->Add(118, 116, 280, 148, 311, texMario);		//attact sit
-	sprites->Add(119, 76, 284, 108, 307, texMario);
-	sprites->Add(120, 10, 285, 54, 307, texMario);
+	sprites->Add(118, 116, 280, 148, 311, texsimon);		//attact sit
+	sprites->Add(119, 76, 284, 108, 307, texsimon);
+	sprites->Add(120, 10, 285, 54, 307, texsimon);
 
-	sprites->Add(121, 235, 7, 268, 23, texMario);			// die 
+	sprites->Add(121, 235, 7, 268, 23, texsimon);			// die 
 
 	// animation for simon
 
@@ -309,11 +309,11 @@ void InitSimon() {
 	ani->Add(113);
 	animations->Add(403, ani);
 
-	ani = new CAnimation(100);		// Mario sit right
+	ani = new CAnimation(100);		// simon sit right
 	ani->Add(104);
 	animations->Add(406, ani);
 
-	ani = new CAnimation(100);		// Mario sit right
+	ani = new CAnimation(100);		// simon sit right
 	ani->Add(114);
 	animations->Add(407, ani);
 
@@ -343,30 +343,30 @@ void InitSimon() {
 	ani->Add(120);
 	animations->Add(411, ani);
 
-	ani = new CAnimation(100);		// Mario die
+	ani = new CAnimation(100);		// simon die
 	ani->Add(121);
 	animations->Add(499, ani);
 
-	mario = new CMario();
-	mario->AddAnimation(400);		// idle right big
-	mario->AddAnimation(401);		// idle left big
+	simon = new CSimon();
+	simon->AddAnimation(400);		// idle right big
+	simon->AddAnimation(401);		// idle left big
 
-	mario->AddAnimation(402);		// walk right big
-	mario->AddAnimation(403);		// walk left big
+	simon->AddAnimation(402);		// walk right big
+	simon->AddAnimation(403);		// walk left big
 
-	mario->AddAnimation(406);		// sit right
-	mario->AddAnimation(407);		//	sit left
+	simon->AddAnimation(406);		// sit right
+	simon->AddAnimation(407);		//	sit left
 
-	mario->AddAnimation(408);		// attact right
-	mario->AddAnimation(409);		//	attact left
+	simon->AddAnimation(408);		// attact right
+	simon->AddAnimation(409);		//	attact left
 
-	mario->AddAnimation(410);		// attact sit right
-	mario->AddAnimation(411);		//	attact sit left
-	mario->AddAnimation(499);		// die
+	simon->AddAnimation(410);		// attact sit right
+	simon->AddAnimation(411);		//	attact sit left
+	simon->AddAnimation(499);		// die
 
 
-	mario->SetPosition(0, 0);
-	objects.push_back(mario);
+	simon->SetPosition(0, 0);
+	objects.push_back(simon);
 
 }
 
@@ -483,7 +483,7 @@ void LoadResources()
 */
 void Update(DWORD dt)
 {
-	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
+	// We know that simon is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
 	vector<LPGAMEOBJECT> coObjects;
@@ -497,9 +497,9 @@ void Update(DWORD dt)
 		objects[i]->Update(dt,&coObjects);
 	}
 
-	// Update camera to follow mario
+	// Update camera to follow simon
 	float cx, cy;
-	mario->GetPosition(cx, cy);
+	simon->GetPosition(cx, cy);
 
 	
 	cx -= SCREEN_WIDTH / 2 ;

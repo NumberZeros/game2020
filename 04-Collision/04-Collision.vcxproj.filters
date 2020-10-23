@@ -1,111 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\GameObjects">
-      <UniqueIdentifier>{b7136cf4-3768-48a4-abff-937166b9db6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Simon">
-      <UniqueIdentifier>{607d049a-574f-4af9-87ba-5442099c8dc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Weapon">
-      <UniqueIdentifier>{9f6e641a-7d6f-4a55-9766-6237d3717c6d}</UniqueIdentifier>
-    <Filter Include="Header Files\Ghost">
-      <UniqueIdentifier>{4d3574b0-b77b-4a34-ae42-f4d68c085b14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Dog">
-      <UniqueIdentifier>{d953f1b0-1007-41bc-a968-97dea08127af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Bat">
-      <UniqueIdentifier>{a9777b6c-8cca-418f-b7a2-6d3c99d48539}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprites.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mario.h">
-      <Filter>Header Files\Simon</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Header Files\Weapon</Filter>
-    <ClInclude Include="CGhost.h">
-      <Filter>Header Files\Ghost</Filter>
-    </ClInclude>
-    <ClInclude Include="CDog.h">
-      <Filter>Header Files\Dog</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="CBat.h">
-      <Filter>Header Files\Bat</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprites.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mario.cpp">
-      <Filter>Header Files\Simon</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Header Files\Weapon</Filter>
-    <ClCompile Include="CGhost.cpp">
-      <Filter>Header Files\Ghost</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CBat.cpp">
+      <Filter>Objects\Bat</Filter>
     </ClCompile>
     <ClCompile Include="CDog.cpp">
-      <Filter>Header Files\Dog</Filter>
+      <Filter>Objects\Dog</Filter>
+    </ClCompile>
+    <ClCompile Include="CGhost.cpp">
+      <Filter>Objects\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>FrameWork\Game</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>FrameWork\Game</Filter>
     </ClCompile>
-    <ClCompile Include="CBat.cpp">
-      <Filter>Header Files\Bat</Filter>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>FrameWork\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>FrameWork\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>FrameWork\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>FrameWork\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Objects\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>Objects\Goomba</Filter>
+    </ClCompile>
+    <ClCompile Include="Simon.cpp">
+      <Filter>Objects\Simon</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CBat.h">
+      <Filter>Objects\Bat</Filter>
+    </ClInclude>
+    <ClInclude Include="CDog.h">
+      <Filter>Objects\Dog</Filter>
+    </ClInclude>
+    <ClInclude Include="CGhost.h">
+      <Filter>Objects\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>FrameWork\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>FrameWork\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>FrameWork\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>FrameWork\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>FrameWork\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>FrameWork\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Objects\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>Objects\Goomba</Filter>
+    </ClInclude>
+    <ClInclude Include="Simon.h">
+      <Filter>Objects\Simon</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{06472be2-85bb-4feb-bec4-a3b21dfa1774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Simon">
+      <UniqueIdentifier>{22c6c890-254c-4086-b0c6-0e1f56844e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bat">
+      <UniqueIdentifier>{efc9d0f3-28c7-4f67-b72a-afab0c815d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Ghost">
+      <UniqueIdentifier>{1c8fad66-04b1-44d2-b401-9679c92fe14a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Dog">
+      <UniqueIdentifier>{be0b5735-2c00-43aa-827e-e01bd6b88467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{56df8639-78f8-4725-8415-859eeab5cae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Game">
+      <UniqueIdentifier>{5c981cc5-5c7f-487e-b43b-37a55203c822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Scence">
+      <UniqueIdentifier>{8baba6c8-534d-447f-a371-0ff3ca67898e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Weapon">
+      <UniqueIdentifier>{870b552e-dbae-4f11-b380-adf31d837edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Debug">
+      <UniqueIdentifier>{3468c6c4-a5b1-46d2-830a-f0ec6b6e173d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Goomba">
+      <UniqueIdentifier>{8ceea91d-0c88-47d0-a5b1-01bd6a4cbdc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
