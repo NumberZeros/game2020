@@ -38,6 +38,12 @@
     <ClCompile Include="Sprites.cpp">
       <Filter>FrameWork\Sprites</Filter>
     </ClCompile>
+    <ClCompile Include="Scence.cpp">
+      <Filter>FrameWork\Scence</Filter>
+    </ClCompile>
+    <ClCompile Include="Utlis.cpp">
+      <Filter>FrameWork\Scence</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBat.h">
@@ -75,6 +81,12 @@
     </ClInclude>
     <ClInclude Include="Sprites.h">
       <Filter>FrameWork\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Scence.h">
+      <Filter>FrameWork\Scence</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>FrameWork\Scence</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
