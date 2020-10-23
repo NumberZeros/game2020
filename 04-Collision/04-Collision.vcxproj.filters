@@ -17,17 +17,8 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>FrameWork\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Sprites.cpp">
-      <Filter>FrameWork\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures.cpp">
-      <Filter>FrameWork\Game</Filter>
-    </ClCompile>
     <ClCompile Include="debug.cpp">
       <Filter>FrameWork\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>FrameWork\Game</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Objects\Weapon</Filter>
@@ -37,6 +28,15 @@
     </ClCompile>
     <ClCompile Include="Simon.cpp">
       <Filter>Objects\Simon</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>FrameWork\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>FrameWork\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>FrameWork\Sprites</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,17 +55,8 @@
     <ClInclude Include="Game.h">
       <Filter>FrameWork\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Sprites.h">
-      <Filter>FrameWork\Game</Filter>
-    </ClInclude>
     <ClInclude Include="debug.h">
       <Filter>FrameWork\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>FrameWork\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>FrameWork\Game</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Objects\Weapon</Filter>
@@ -75,6 +66,15 @@
     </ClInclude>
     <ClInclude Include="Simon.h">
       <Filter>Objects\Simon</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>FrameWork\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>FrameWork\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>FrameWork\Sprites</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +110,15 @@
     </Filter>
     <Filter Include="Objects\Goomba">
       <UniqueIdentifier>{8ceea91d-0c88-47d0-a5b1-01bd6a4cbdc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Brick">
+      <UniqueIdentifier>{193b637f-01e8-4ba0-8845-14c4a20491cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Texture">
+      <UniqueIdentifier>{2007f280-692a-48c3-88a7-e511e784e422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Sprites">
+      <UniqueIdentifier>{80267061-5fdd-44f7-a38d-b9d5d4602179}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
