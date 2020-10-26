@@ -8,12 +8,14 @@
 #include "Goomba.h"
 #include "Koopas.h"
 
+#define RIGHT	1;
+#define LEFT	2;
 
 class CPlayScene: public CScene
 {
 protected: 
 	CSimon *simon;					// A play scene has to have player, right? 
-
+	int nx;
 	vector<LPGAMEOBJECT> objects;
 
 	void _ParseSection_TEXTURES(string line);
@@ -31,7 +33,10 @@ public:
 	virtual void Render();
 	virtual void Unload();
 
-	CSimon * GetPlayer() { return player; } 
+	int GetNX() { return nx; }
+	void SetNX(int _nx) { nx = _nx; }
+
+	CSimon * GetPlayer() { return simon; } 
 
 	//friend class CPlayScenceKeyHandler;
 };

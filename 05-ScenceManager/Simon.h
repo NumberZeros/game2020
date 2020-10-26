@@ -66,18 +66,21 @@ class CSimon : public CGameObject
 	bool isAttack;
 	int actionAttack = 0;	// 0 right 1 left
 
+	int start_x;
+	int start_y;
+
 	DWORD untouchable_start;
 	DWORD action_time;
 public:
 	CSimon() : CGameObject()
 	{
-		level = SIMON_LEVEL_BIG;
-		untouchable = 0;
 	}
 	virtual void SitDown();
 	virtual void ResetSitDown();
 	virtual void attack();
 	virtual void resetAttack();
+	virtual void Reset();
+	CSimon(float x, float y);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void Render();
 	void SetNX(int _nx) { nx = _nx; }

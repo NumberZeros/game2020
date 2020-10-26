@@ -24,7 +24,8 @@
 #include "Brick.h"
 #include "Goomba.h"
 
-#include "PlayScence.h"
+
+#include "PlayScene.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"SAMPLE 05 - SCENCE MANAGER"
@@ -36,6 +37,7 @@
 #define MAX_FRAME_RATE 120
 
 CGame *game;
+CPlayScene* scene;
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -56,7 +58,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 */
 void Update(DWORD dt)
 {
-	CGame::GetInstance()->GetCurrentScene()->Update(dt);
+	scene->Update(dt);
 }
 
 /*
@@ -75,7 +77,7 @@ void Render()
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
-		CGame::GetInstance()->GetCurrentScene()->Render();
+		scene->Render();
 
 		spriteHandler->End();
 		d3ddv->EndScene();
@@ -178,8 +180,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	game = CGame::GetInstance();
 	game->Init(hWnd);
 	game->InitKeyboard();
-
-	game->Load(L"mario-sample.txt");
+	scene = new CPlayScene();
 
 	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH*2, SCREEN_HEIGHT*2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 

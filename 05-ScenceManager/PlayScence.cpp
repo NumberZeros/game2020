@@ -71,6 +71,11 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 		return; 
 	}
 
+	DebugOut(L"ID %d\n", ID);
+	DebugOut(L"l %d\n", l);
+	DebugOut(L"t %d\n", t);
+	DebugOut(L"r %d\n", r);
+	DebugOut(L"b %d\n", b);
 	CSprites::GetInstance()->Add(ID, l, t, r, b, tex);
 }
 
@@ -142,21 +147,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	switch (object_type)
 	{
 	case OBJECT_TYPE_SIMON:
-		int nx1 = atof(tokens[3].c_str());
-		int state1 = atof(tokens[4].c_str());
-		float x2 = atof(tokens[5].c_str());
-		float y2 = atof(tokens[6].c_str());
-		int nx2 = atof(tokens[7].c_str());
-		int state2 = atof(tokens[8].c_str());
 		if (simon!=NULL) 
 		{
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
-		simon->SetNX(nx1);
 		simon->SetPosition(x, y);
-		simon->SetState(SIMON_ANI_BIG_IDLE_RIGHT);
-
+		simon->SetState(SIMON_STATE_IDLE);
+		simon->SetNX(this->GetNX());
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
@@ -232,10 +230,6 @@ void CPlayScene::Load(LPCWSTR sceneFilePath)
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
 
-void CPlayScene::Load(LPCWSTR sceneFilePath)
-{
-}
-
 void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
@@ -253,11 +247,11 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
-	if (player == NULL) return; 
+	if (simon == NULL) return; 
 
 	// Update camera to follow mario
 	float cx, cy;
-	player->GetPosition(cx, cy);
+	simon->GetPosition(cx, cy);
 
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetScreenWidth() / 2;
@@ -281,23 +275,18 @@ void CPlayScene::Unload()
 		delete objects[i];
 
 	objects.clear();
-	player = NULL;
-
-	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
+	simon = NULL;
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
+	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		mario->SetState(MARIO_STATE_JUMP);
-		break;
-	case DIK_A: 
-		mario->Reset();
+		simon->SetState(SIMON_ANI_JUMP);
 		break;
 	}
 }
@@ -305,14 +294,14 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
-	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
+	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
 
 	// disable control key when Mario die 
-	if (mario->GetState() == MARIO_STATE_DIE) return;
+	if (simon->GetState() == SIMON_ANI_DIE) return;
 	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
+		simon->SetState(SIMON_STATE_WALKING);
 	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
+		simon->SetState(SIMON_STATE_WALKING);
 	else
-		mario->SetState(MARIO_STATE_IDLE);
+		simon->SetState(SIMON_ANI_IDLE);
 }
