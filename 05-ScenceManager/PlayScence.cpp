@@ -1,24 +1,13 @@
 #include <iostream>
 #include <fstream>
 
-#include "PlayScence.h"
 #include "Utils.h"
 #include "Textures.h"
 #include "Sprites.h"
 #include "Portal.h"
+#include "PlayScene.h"
 
 using namespace std;
-
-CPlayScene::CPlayScene(int id, LPCWSTR filePath):
-	CScene(id, filePath)
-{
-	key_handler = new CPlayScenceKeyHandler(this);
-}
-
-/*
-	Load scene resources from scene file (textures, sprites, animations and objects)
-	See scene1.txt, scene2.txt for detail format specification
-*/
 
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_TEXTURES 2
@@ -27,7 +16,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define SCENE_SECTION_ANIMATION_SETS	5
 #define SCENE_SECTION_OBJECTS	6
 
-#define OBJECT_TYPE_MARIO	0
+#define OBJECT_TYPE_SIMON	0
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
@@ -36,6 +25,16 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 
 #define MAX_SCENE_LINE 1024
 
+
+CPlayScene::CPlayScene() : CScene()
+{
+	key_handler = new CPlayScenceKeyHandler(this);
+	//sceneFilePath = L"Scenes\\Castlevania.txt";
+	Load(L"Scenes\\Castlevania.txt");//load ani sprites texture
+	/*LoadBaseObject();
+	SwitchScene(current_scene);*/
+
+}
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
 {
@@ -142,14 +141,21 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	switch (object_type)
 	{
-	case OBJECT_TYPE_MARIO:
-		if (player!=NULL) 
+	case OBJECT_TYPE_SIMON:
+		int nx1 = atof(tokens[3].c_str());
+		int state1 = atof(tokens[4].c_str());
+		float x2 = atof(tokens[5].c_str());
+		float y2 = atof(tokens[6].c_str());
+		int nx2 = atof(tokens[7].c_str());
+		int state2 = atof(tokens[8].c_str());
+		if (simon!=NULL) 
 		{
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
-		obj = new CMario(x,y); 
-		player = (CMario*)obj;  
+		simon->SetNX(nx1);
+		simon->SetPosition(x, y);
+		simon->SetState(SIMON_ANI_BIG_IDLE_RIGHT);
 
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
@@ -178,7 +184,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	objects.push_back(obj);
 }
 
-void CPlayScene::Load()
+void CPlayScene::Load(LPCWSTR sceneFilePath)
 {
 	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
 
@@ -224,6 +230,10 @@ void CPlayScene::Load()
 	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
+}
+
+void CPlayScene::Load(LPCWSTR sceneFilePath)
+{
 }
 
 void CPlayScene::Update(DWORD dt)
