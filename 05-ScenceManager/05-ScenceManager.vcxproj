@@ -133,7 +133,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="Simon.cpp" />
     <ClCompile Include="PlayScence.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="Sprites.cpp" />
@@ -149,7 +149,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="KeyEventHandler.h" />
-    <ClInclude Include="Mario.h" />
+    <ClInclude Include="Simon.h" />
     <ClInclude Include="PlayScence.h" />
     <ClInclude Include="Scence.h" />
     <ClInclude Include="Sprites.h" />

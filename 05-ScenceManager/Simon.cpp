@@ -8,22 +8,23 @@
 #include "Goomba.h"
 #include "Portal.h"
 
-CSimon::CSimon(float x, float y): CGameObject()
+CSimon::CSimon(float x, float y) : CGameObject()
 {
-	SetState(SIMON_ANI_IDLE);
+	SetState(SIMON_STATE_IDLE);
+	nx = 1;
 	this->start_x = x;
 	this->start_y = y;
-	this->x = x; 
-	this->y = y; 
+	this->x = x;
+	this->y = y;
 }
 
-void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
+void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 
 	// Simple fall down
-	vy += SIMON_GRAVITY*dt;
+	vy += SIMON_GRAVITY * dt;
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -31,41 +32,41 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	coEvents.clear();
 
 	// turn off collision when die 
-	if (state!=SIMON_ANI_DIE)
+	if (state != SIMON_ANI_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
 
 	// reset untouchable timer if untouchable time has passed
-	if ( GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME) 
+	if (GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME)
 	{
 		untouchable_start = 0;
 		untouchable = 0;
 	}
 
 	// No collision occured, proceed normally
-	if (coEvents.size()==0)
+	if (coEvents.size() == 0)
 	{
-		x += dx; 
+		x += dx;
 		y += dy;
 	}
 	else
 	{
 		float min_tx, min_ty, nx = 0, ny;
-		float rdx = 0; 
+		float rdx = 0;
 		float rdy = 0;
 
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
-		// how to push back Mario if collides with a moving objects, what if Mario is pushed this way into another object?
+		// how to push back simon if collides with a moving objects, what if simon is pushed this way into another object?
 		//if (rdx != 0 && rdx!=dx)
 		//	x += nx*abs(rdx); 
-		
-		// block every object first!
-		x += min_tx*dx + nx*0.4f;
-		y += min_ty*dy + ny*0.4f;
 
-		if (nx!=0) vx = 0;
-		if (ny!=0) vy = 0;
+		// block every object first!
+		x += min_tx * dx + nx * 0.4f;
+		y += min_ty * dy + ny * 0.4f;
+
+		if (nx != 0) vx = 0;
+		if (ny != 0) vy = 0;
 
 
 		//
@@ -75,14 +76,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 
-			if (dynamic_cast<CGoomba *>(e->obj)) // if e->obj is Goomba 
+			if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
 			{
-				CGoomba *goomba = dynamic_cast<CGoomba *>(e->obj);
+				CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 
 				// jump on top >> kill Goomba and deflect a bit 
 				if (e->ny < 0)
 				{
-					if (goomba->GetState()!= GOOMBA_STATE_DIE)
+					if (goomba->GetState() != GOOMBA_STATE_DIE)
 					{
 						goomba->SetState(GOOMBA_STATE_DIE);
 						vy = -SIMON_JUMP_DEFLECT_SPEED;
@@ -90,24 +91,24 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else if (e->nx != 0)
 				{
-					if (untouchable==0)
+					if (untouchable == 0)
 					{
-						if (goomba->GetState()!=GOOMBA_STATE_DIE)
+						if (goomba->GetState() != GOOMBA_STATE_DIE)
 						{
 							if (level > SIMON_LEVEL_SMALL)
 							{
 								level = SIMON_LEVEL_SMALL;
 								StartUntouchable();
 							}
-							else 
+							else
 								SetState(SIMON_ANI_DIE);
 						}
 					}
 				}
 			} // if Goomba
-			else if (dynamic_cast<CPortal *>(e->obj))
+			else if (dynamic_cast<CPortal*>(e->obj))
 			{
-				CPortal *p = dynamic_cast<CPortal *>(e->obj);
+				CPortal* p = dynamic_cast<CPortal*>(e->obj);
 				CGame::GetInstance()->SwitchScene(p->GetSceneId());
 			}
 		}
@@ -123,15 +124,15 @@ void CSimon::Render()
 	if (state == SIMON_ANI_DIE)
 		ani = SIMON_ANI_DIE;
 	else
-	if (level == SIMON_LEVEL_BIG)
-	{
-		if (vx == 0)
+		if (level == SIMON_LEVEL_BIG)
 		{
-			ani = SIMON_ANI_IDLE;
+			if (vx == 0)
+			{
+				ani = SIMON_ANI_IDLE;
+			}
+			else if (vx > 0)
+				ani = SIMON_ANI_WALKING;
 		}
-		else if (vx > 0) 
-			ani = SIMON_ANI_WALKING;
-	}
 
 	int alpha = 255;
 	if (untouchable) alpha = 128;
@@ -151,10 +152,10 @@ void CSimon::SetState(int state)
 		nx ? vx = SIMON_WALKING_SPEED : vx = -SIMON_WALKING_SPEED;
 		break;
 	case SIMON_STATE_JUMP:
-		// TODO: need to check if Mario is *current* on a platform before allowing to jump again
+		// TODO: need to check if simon is *current* on a platform before allowing to jump again
 		vy = -SIMON_JUMP_SPEED_Y;
-		break; 
-	case SIMON_STATE_IDLE: 
+		break;
+	case SIMON_STATE_IDLE:
 		vx = 0;
 		break;
 	case SIMON_ANI_DIE:
@@ -163,10 +164,10 @@ void CSimon::SetState(int state)
 	}
 }
 
-void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom)
+void CSimon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
-	top = y; 
+	top = y;
 
 	right = x + SIMON_HEGHT;
 	bottom = y + SIMON_WIDTH;
@@ -189,7 +190,7 @@ void CSimon::resetAttack()
 }
 
 /*
-	Reset Mario status to the beginning state of a scene
+	Reset simon status to the beginning state of a scene
 */
 void CSimon::Reset()
 {
