@@ -298,8 +298,8 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 
 	// disable control key when simon die 
 	if (game->IsKeyDown(DIK_RIGHT)) {
-		simon->SetState(SIMON_STATE_WALKING);
 		simon->SetNX(1);
+		simon->SetState(SIMON_STATE_WALKING);
 	}
 		
 	else if (game->IsKeyDown(DIK_LEFT)) {

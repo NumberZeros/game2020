@@ -10,7 +10,8 @@
 
 CSimon::CSimon(float x, float y) : CGameObject()
 {
-	//SetState(SIMON_STATE_IDLE);
+	level = 1;
+	SetState(SIMON_STATE_IDLE);
 	nx = 1;
 	this->start_x = x;
 	this->start_y = y;
@@ -62,8 +63,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		//	x += nx*abs(rdx); 
 
 		// block every object first!
+		
 		x += min_tx * dx + nx * 0.4f;
 		y += min_ty * dy + ny * 0.4f;
+
+		//DebugOut(L"x %d \n", x);
+		//DebugOut(L"y %d \n", y);
+		//DebugOut(L"nx %d \n", nx);
+
 
 		if (nx != 0) vx = 0;
 		if (ny != 0) vy = 0;
@@ -145,7 +152,12 @@ void CSimon::SetState(int state)
 	switch (state)
 	{
 	case SIMON_STATE_WALKING:
-		nx ? vx = SIMON_WALKING_SPEED : vx = -SIMON_WALKING_SPEED;
+		DebugOut(L"nx %d \n", nx);
+		if (nx > 0)
+			vx = SIMON_WALKING_SPEED;
+		else
+			vx = -SIMON_WALKING_SPEED;
+		DebugOut(L"vx %f \n", vx);
 		break;
 	case SIMON_STATE_JUMP:
 		// TODO: need to check if simon is *current* on a platform before allowing to jump again
@@ -162,18 +174,23 @@ void CSimon::SetState(int state)
 
 void CSimon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	if (nx > 0) {
+		right = x + SIMON_WIDTH;
+	}
+	else {
+		right = x + SIMON_WIDTH;
+	}
 	left = x;
 	top = y;
-
-	right = x + SIMON_HEGHT;
-	bottom = y + SIMON_WIDTH;
+	bottom = y + SIMON_HEGHT;
+	
 }
 
-CSimon::CSimon()
-{
-	level = 1;
-	this->SetState(SIMON_ANI_IDLE);
-}
+//CSimon::CSimon()
+//{
+//	level = 1;
+//	this->SetState(SIMON_ANI_IDLE);
+//}
 
 void CSimon::SitDown()
 {

@@ -40,28 +40,28 @@
 #define SIMON_ANI_WHIP_LV2			14
 #define SIMON_ANI_WHIP_LV4			15
 
-#define SIMON_HEGHT				30
-#define SIMON_WIDTH				24
+#define SIMON_HEGHT					64
+#define SIMON_WIDTH					60
 
-#define SIMON_HEGHT_IS_SIT				23
-#define SIMON_HEGHT_RESET_SIT			7
+#define SIMON_HEGHT_IS_SIT			23
+#define SIMON_HEGHT_RESET_SIT		7
 
-#define SIMON_WIDTH_RESET_ATTACK		7
+#define SIMON_WIDTH_RESET_ATTACK	7
 
 #define SIMON_ANI_DIE				8
 
-#define	SIMON_LEVEL_SMALL	1
-#define	SIMON_LEVEL_BIG		2
+#define	SIMON_LEVEL_SMALL			1
+#define	SIMON_LEVEL_BIG				2
 
-#define SIMON_UNTOUCHABLE_TIME 5000
+#define SIMON_UNTOUCHABLE_TIME		5000
 
 
 class CSimon : public CGameObject
 {
 	int level;
 	int untouchable;
-	int height = 30;
-	int width = 17;
+	int height = 68;
+	int width = 60;
 	bool isSit;
 	bool isAttack;
 	int actionAttack = 0;	// 0 right 1 left

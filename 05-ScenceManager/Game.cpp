@@ -71,8 +71,8 @@ void CGame::Draw(int nx, float x, float y, LPDIRECT3DTEXTURE9 texture, int left,
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
-	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
-	D3DXMATRIX oldtrans;
+	//spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	//D3DXMATRIX oldtrans;
 	D3DXMATRIX newtrans;
 
 	D3DXVECTOR2 pheplat;
@@ -88,13 +88,13 @@ void CGame::Draw(int nx, float x, float y, LPDIRECT3DTEXTURE9 texture, int left,
 	D3DXVECTOR2 scale = D3DXVECTOR2(p.x + (right - left) / 2, p.y + (bottom - top) / 2);
 
 	D3DXMatrixTransformation2D(&newtrans, &scale, 0, &pheplat, NULL, 0, NULL);
-	spriteHandler->GetTransform(&oldtrans);
+	//spriteHandler->GetTransform(&oldtrans);
 	spriteHandler->SetTransform(&newtrans);
 
 
 	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 
-	spriteHandler->SetTransform(&oldtrans);
+	//spriteHandler->SetTransform(&oldtrans);
 }
 
 int CGame::IsKeyDown(int KeyCode)
