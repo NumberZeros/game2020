@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "Utils.h"
 
-#include "PlayScene.h"
+#include "PlayScence.h"
 
 CGame * CGame::__instance = NULL;
 
@@ -63,7 +63,7 @@ void CGame::Init(HWND hWnd)
 /*
 	Utility function to wrap LPD3DXSPRITE::Draw 
 */
-void CGame::Draw(int nx, float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
+void CGame::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	D3DXVECTOR3 p(x - cam_x, y - cam_y, 0);
 	RECT r; 
@@ -72,30 +72,6 @@ void CGame::Draw(int nx, float x, float y, LPDIRECT3DTEXTURE9 texture, int left,
 	r.right = right;
 	r.bottom = bottom;
 	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
-
-	D3DXMATRIX oldtrans;
-	D3DXMATRIX newtrans;
-
-	D3DXVECTOR2 pheplat;
-	if (nx > 0)
-	{
-		pheplat = D3DXVECTOR2(-1, 1);
-	}
-	else
-	{
-		pheplat = D3DXVECTOR2(1, 1);
-	}
-
-	D3DXVECTOR2 scale = D3DXVECTOR2(p.x + (right - left) / 2, p.y + (bottom - top) / 2);
-
-	D3DXMatrixTransformation2D(&newtrans, &scale, 0, &pheplat, NULL, 0, NULL);
-	spriteHandler->GetTransform(&oldtrans);
-	spriteHandler->SetTransform(&newtrans);
-
-
-	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_ARGB(alpha, 255, 255, 255));
-
-	spriteHandler->SetTransform(&oldtrans);
 }
 
 int CGame::IsKeyDown(int KeyCode)
@@ -362,8 +338,8 @@ void CGame::_ParseSection_SCENES(string line)
 	int id = atoi(tokens[0].c_str());
 	LPCWSTR path = ToLPCWSTR(tokens[1]);
 
-	//LPSCENE scene = new CPlayScene(id, path);
-	//scenes[id] = scene;
+	LPSCENE scene = new CPlayScene(id, path);
+	scenes[id] = scene;
 }
 
 /*
@@ -418,5 +394,5 @@ void CGame::SwitchScene(int scene_id)
 	current_scene = scene_id;
 	LPSCENE s = scenes[scene_id];
 	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
-	/*s->Load();	*/
+	s->Load();	
 }

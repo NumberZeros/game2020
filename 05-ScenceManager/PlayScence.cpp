@@ -1,13 +1,24 @@
 #include <iostream>
 #include <fstream>
 
+#include "PlayScence.h"
 #include "Utils.h"
 #include "Textures.h"
 #include "Sprites.h"
 #include "Portal.h"
-#include "PlayScene.h"
 
 using namespace std;
+
+CPlayScene::CPlayScene(int id, LPCWSTR filePath):
+	CScene(id, filePath)
+{
+	key_handler = new CPlayScenceKeyHandler(this);
+}
+
+/*
+	Load scene resources from scene file (textures, sprites, animations and objects)
+	See scene1.txt, scene2.txt for detail format specification
+*/
 
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_TEXTURES 2
@@ -16,7 +27,7 @@ using namespace std;
 #define SCENE_SECTION_ANIMATION_SETS	5
 #define SCENE_SECTION_OBJECTS	6
 
-#define OBJECT_TYPE_SIMON	0
+#define OBJECT_TYPE_MARIO	0
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
@@ -25,16 +36,6 @@ using namespace std;
 
 #define MAX_SCENE_LINE 1024
 
-
-CPlayScene::CPlayScene() : CScene()
-{
-	key_handler = new CPlayScenceKeyHandler(this);
-	//sceneFilePath = L"Scenes\\Castlevania.txt";
-	Load(L"Scenes\\Castlevania.txt");//load ani sprites texture
-	/*LoadBaseObject();
-	SwitchScene(current_scene);*/
-
-}
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
 {
@@ -71,11 +72,6 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 		return; 
 	}
 
-	DebugOut(L"ID %d\n", ID);
-	DebugOut(L"l %d\n", l);
-	DebugOut(L"t %d\n", t);
-	DebugOut(L"r %d\n", r);
-	DebugOut(L"b %d\n", b);
 	CSprites::GetInstance()->Add(ID, l, t, r, b, tex);
 }
 
@@ -146,15 +142,15 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	switch (object_type)
 	{
-	case OBJECT_TYPE_SIMON:
-		if (simon!=NULL) 
+	case OBJECT_TYPE_MARIO:
+		if (player!=NULL) 
 		{
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
-		simon->SetPosition(x, y);
-		simon->SetState(SIMON_STATE_IDLE);
-		simon->SetNX(this->GetNX());
+		obj = new CMario(x,y); 
+		player = (CMario*)obj;  
+
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
@@ -182,7 +178,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	objects.push_back(obj);
 }
 
-void CPlayScene::Load(LPCWSTR sceneFilePath)
+void CPlayScene::Load()
 {
 	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
 
@@ -247,11 +243,11 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
-	if (simon == NULL) return; 
+	if (player == NULL) return; 
 
 	// Update camera to follow mario
 	float cx, cy;
-	simon->GetPosition(cx, cy);
+	player->GetPosition(cx, cy);
 
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetScreenWidth() / 2;
@@ -275,18 +271,23 @@ void CPlayScene::Unload()
 		delete objects[i];
 
 	objects.clear();
-	simon = NULL;
+	player = NULL;
+
+	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
+	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		simon->SetState(SIMON_ANI_JUMP);
+		mario->SetState(MARIO_STATE_JUMP);
+		break;
+	case DIK_A: 
+		mario->Reset();
 		break;
 	}
 }
@@ -294,14 +295,14 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
-	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
+	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
 
 	// disable control key when Mario die 
-	if (simon->GetState() == SIMON_ANI_DIE) return;
+	if (mario->GetState() == MARIO_STATE_DIE) return;
 	if (game->IsKeyDown(DIK_RIGHT))
-		simon->SetState(SIMON_STATE_WALKING);
+		mario->SetState(MARIO_STATE_WALKING_RIGHT);
 	else if (game->IsKeyDown(DIK_LEFT))
-		simon->SetState(SIMON_STATE_WALKING);
+		mario->SetState(MARIO_STATE_WALKING_LEFT);
 	else
-		simon->SetState(SIMON_ANI_IDLE);
+		mario->SetState(MARIO_STATE_IDLE);
 }

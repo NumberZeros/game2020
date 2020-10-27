@@ -20,12 +20,11 @@
 #include "GameObject.h"
 #include "Textures.h"
 
-#include "Simon.h"
+#include "Mario.h"
 #include "Brick.h"
 #include "Goomba.h"
 
-
-#include "PlayScene.h"
+#include "PlayScence.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"SAMPLE 05 - SCENCE MANAGER"
@@ -37,7 +36,6 @@
 #define MAX_FRAME_RATE 120
 
 CGame *game;
-CPlayScene* scene;
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -58,7 +56,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 */
 void Update(DWORD dt)
 {
-	scene->Update(dt);
+	CGame::GetInstance()->GetCurrentScene()->Update(dt);
 }
 
 /*
@@ -77,7 +75,7 @@ void Render()
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
-		scene->Render();
+		CGame::GetInstance()->GetCurrentScene()->Render();
 
 		spriteHandler->End();
 		d3ddv->EndScene();
@@ -180,7 +178,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	game = CGame::GetInstance();
 	game->Init(hWnd);
 	game->InitKeyboard();
-	scene = new CPlayScene();
+
+	game->Load(L"mario-sample.txt");
 
 	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH*2, SCREEN_HEIGHT*2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 
