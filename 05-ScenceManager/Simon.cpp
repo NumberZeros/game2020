@@ -10,7 +10,7 @@
 
 CSimon::CSimon(float x, float y) : CGameObject()
 {
-	SetState(SIMON_STATE_IDLE);
+	//SetState(SIMON_STATE_IDLE);
 	nx = 1;
 	this->start_x = x;
 	this->start_y = y;
@@ -123,16 +123,12 @@ void CSimon::Render()
 	int ani = -1;
 	if (state == SIMON_ANI_DIE)
 		ani = SIMON_ANI_DIE;
-	else
-		if (level == SIMON_LEVEL_BIG)
-		{
-			if (vx == 0)
-			{
-				ani = SIMON_ANI_IDLE;
-			}
-			else if (vx > 0)
-				ani = SIMON_ANI_WALKING;
-		}
+	else {
+		if (state == SIMON_STATE_IDLE)
+			ani = SIMON_ANI_IDLE;
+		else
+			ani = SIMON_ANI_WALKING;
+	}
 
 	int alpha = 255;
 	if (untouchable) alpha = 128;
@@ -171,6 +167,12 @@ void CSimon::GetBoundingBox(float& left, float& top, float& right, float& bottom
 
 	right = x + SIMON_HEGHT;
 	bottom = y + SIMON_WIDTH;
+}
+
+CSimon::CSimon()
+{
+	level = 1;
+	this->SetState(SIMON_ANI_IDLE);
 }
 
 void CSimon::SitDown()

@@ -72,9 +72,7 @@ class CSimon : public CGameObject
 	DWORD untouchable_start;
 	DWORD action_time;
 public:
-	CSimon() : CGameObject()
-	{
-	}
+	CSimon();
 	virtual void SitDown();
 	virtual void ResetSitDown();
 	virtual void attack();

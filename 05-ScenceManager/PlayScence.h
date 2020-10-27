@@ -11,7 +11,7 @@
 
 class CPlayScene: public CScene
 {
-protected: 
+public: 
 	CSimon *player;					// A play scene has to have player, right? 
 
 	vector<LPGAMEOBJECT> objects;
@@ -30,8 +30,6 @@ public:
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
-
-	CSimon* GetPlayer() { return player; }
 
 	//friend class CPlayScenceKeyHandler;
 };

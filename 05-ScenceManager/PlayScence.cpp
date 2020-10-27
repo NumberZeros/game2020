@@ -9,12 +9,6 @@
 
 using namespace std;
 
-CPlayScene::CPlayScene(int id, LPCWSTR filePath):
-	CScene(id, filePath)
-{
-	key_handler = new CPlayScenceKeyHandler(this);
-}
-
 /*
 	Load scene resources from scene file (textures, sprites, animations and objects)
 	See scene1.txt, scene2.txt for detail format specification
@@ -27,7 +21,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define SCENE_SECTION_ANIMATION_SETS	5
 #define SCENE_SECTION_OBJECTS	6
 
-#define OBJECT_TYPE_simon	0
+#define OBJECT_TYPE_SIMON	0
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
@@ -35,6 +29,11 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define OBJECT_TYPE_PORTAL	50
 
 #define MAX_SCENE_LINE 1024
+
+CPlayScene::CPlayScene(int id, LPCWSTR filePath) :CScene(id, filePath)
+{
+	key_handler = new CPlayScenceKeyHandler(this);
+}
 
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
@@ -142,7 +141,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	switch (object_type)
 	{
-	case OBJECT_TYPE_simon:
+	case OBJECT_TYPE_SIMON:
 		if (player!=NULL) 
 		{
 			DebugOut(L"[ERROR] simon object was created before!\n");
@@ -280,7 +279,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
+	CSimon *simon = ((CPlayScene*)scence)->player;
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
@@ -295,10 +294,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
-	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
+	CSimon *simon = ((CPlayScene*)scence)->player;
 
 	// disable control key when simon die 
-	if (simon->GetState() == SIMON_STATE_DIE) return;
 	if (game->IsKeyDown(DIK_RIGHT)) {
 		simon->SetState(SIMON_STATE_WALKING);
 		simon->SetNX(1);
@@ -309,6 +307,8 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 		simon->SetState(SIMON_STATE_WALKING);
 
 	}
-	else
+	else {
 		simon->SetState(SIMON_STATE_IDLE);
+	}
+	if (simon->GetState() == SIMON_STATE_DIE) return;
 }
