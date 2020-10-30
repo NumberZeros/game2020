@@ -26,7 +26,17 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	// Simple fall down
 	vy += SIMON_GRAVITY * dt;
-
+	//x += dx;
+	//y += dy;
+	if (x <= 256 - 32)
+		this->SetState(-5);
+	else
+	{
+		//this->SetState(SIMON_STATE_WALKING);
+		//this->SetSpeed(-SIMON_WALKING_SPEED,0);
+	}
+		
+	//x += dx;
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -35,7 +45,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// turn off collision when die 
 	if (state != SIMON_ANI_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
-
+	if (state == 10)
+	{
+		vx = -SIMON_WALKING_SPEED;
+		x += -vx;
+	}
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME)
 	{
@@ -63,7 +77,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		//	x += nx*abs(rdx); 
 
 		// block every object first!
-		
+		//if (this->state == 10)
 		x += min_tx * dx + nx * 0.4f;
 		y += min_ty * dy + ny * 0.4f;
 
@@ -83,7 +97,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 
-			if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
+			/*if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
 			{
 				CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 
@@ -113,7 +127,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					}
 				}
 			} // if Goomba
-			else if (dynamic_cast<CPortal*>(e->obj))
+			else */
+			if (dynamic_cast<CPortal*>(e->obj))
 			{
 				CPortal* p = dynamic_cast<CPortal*>(e->obj);
 				CGame::GetInstance()->SwitchScene(p->GetSceneId());
@@ -134,9 +149,12 @@ void CSimon::Render()
 		if (state == SIMON_STATE_IDLE)
 			ani = SIMON_ANI_IDLE;
 		else
+		if (state == -5)
+			ani = 2;
+		else
 			ani = SIMON_ANI_WALKING;
+		
 	}
-
 	int alpha = 255;
 	if (untouchable) alpha = 128;
 
@@ -168,6 +186,9 @@ void CSimon::SetState(int state)
 		break;
 	case SIMON_ANI_DIE:
 		vy = -SIMON_DIE_DEFLECT_SPEED;
+		break;
+	case -5:
+		vx = 0;
 		break;
 	}
 }
