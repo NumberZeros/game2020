@@ -31,6 +31,7 @@ using namespace std;
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
 #define OBJECT_TYPE_MAP	4
+#define OBJECT_TYPE_WEAPON	5
 #define OBJECT_TYPE_BOARD	8
 #define OBJECT_TYPE_PORTAL	50
 
@@ -239,13 +240,16 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		if (isintro == 1) 
 		{ 
 			player->SetNX(0); 
-			//player->SetState(10);
 			player->SetState(SIMON_STATE_WALKING);
 		}
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
+	case OBJECT_TYPE_WEAPON: 
+		obj = new CWeapon(); 
+		this->weapon = (CWeapon*)obj;
+		break;
 	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
 	case OBJECT_TYPE_BOARD: obj = new CBoard(); break;
 	case OBJECT_TYPE_MAP: { obj = map; }break;
@@ -335,21 +339,39 @@ void CPlayScene::Update(DWORD dt)
 		objects[i]->Update(dt, &coObjects);
 	}
 	// skip the rest if scene was already unloaded (simon::Update might trigger PlayScene::Unload)
-	if (player == NULL) return; 
-	if (isintro == 1)
-	{
-		//player->SetState(SIMON_STATE_WALKING);
-		player->SetSpeed(-1, 0);
-	}
-	// Update camera to follow simon
+	//if (player == NULL) return; 
+	//if (isintro == 1)
+	//{
+	//	//player->SetState(SIMON_STATE_WALKING);
+	//	player->SetSpeed(-1, 0);
+	//}
+	//// Update camera to follow simon
+	//float cx, cy;
+	//player->GetPosition(cx, cy);
+
+	//CGame *game = CGame::GetInstance();
+	//cx = game->GetScreenWidth() - player->x;
+	//cy -= game->GetScreenHeight() / 2;
+
+	//CGame::GetInstance()->SetCamPos(0.0f, 0.0f /*cy*/);
+
+
+	///////
+	if (player == NULL) return;
+
+	// Update camera to follow mario
 	float cx, cy;
 	player->GetPosition(cx, cy);
 
-	CGame *game = CGame::GetInstance();
-	cx = game->GetScreenHeight() - player->x;
-	//cy -= game->GetScreenHeight() / 2;
+	CGame* game = CGame::GetInstance();
+	cx -= game->GetScreenWidth() / 2;
+	cy -= game->GetScreenHeight() / 2;
 
-	CGame::GetInstance()->SetCamPos(0.0f, 0.0f /*cy*/);
+	// fix bug camera 
+	if (cx < 0) {
+		cx = 0.0f;
+	}
+	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 }
 
 void CPlayScene::Render()
@@ -405,6 +427,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_SPACE: 
 		Jump();
 		break;
+	case DIK_X:
+		Hit();
+		break;
 	case DIK_A:
 		simon->Reset();
 		break;
@@ -424,5 +449,11 @@ void CPlayScenceKeyHandler::Jump() {
 	if (simon->isGrounded) {
 		simon->SetState(SIMON_STATE_JUMP);
 	}
-	
+}
+
+void CPlayScenceKeyHandler::Hit() {
+	CSimon* simon = ((CPlayScene*)scence)->player;
+	CWeapon* weapon = ((CPlayScene*)scence)->weapon;
+	weapon->SetState(WEAPON_STATE_ATTACK);
+	weapon->UpdatePosionWithSimon(simon->x, simon->y, simon->nx);
 }

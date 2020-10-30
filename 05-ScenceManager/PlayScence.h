@@ -3,17 +3,21 @@
 #include "Textures.h"
 #include "Scence.h"
 #include "GameObject.h"
+#include "Koopas.h"
+#include "Map.h"
+
 #include "Brick.h"
 #include "Simon.h"
 #include "Goomba.h"
-#include "Koopas.h"
-#include "Map.h"
+
+#include "Weapon.h"
 
 class CPlayScene: public CScene
 {
 public: 
 	CSimon *player;					// A play scene has to have player, right? 
 	CMap* map;
+	CWeapon* weapon;
 	vector<LPGAMEOBJECT> objects;
 	int isintro = 0;
 	void _ParseSection_TEXTURES(string line);
@@ -45,6 +49,7 @@ public:
 
 	void Run(int _nx);
 	void Jump();
+	void Hit();
 
 
 	CPlayScenceKeyHandler(CScene *s) :CScenceKeyHandler(s) {};

@@ -26,7 +26,7 @@ public:
 	virtual void Render();
 	void SetState(int state);
 
-	void ResetAttack();
+	void ResetAnimation(int ani);
 	void SetFrame(int _frame) { frame = _frame; };
 	int GetFrame() { return frame; };
 	void UpdatePosionWithSimon(int _x, int _y, int _nx);

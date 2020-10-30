@@ -1,11 +1,13 @@
 #include "Weapon.h"
 #include <time.h>
+#include "Utils.h"
 
 
 CWeapon::CWeapon() {
+	this->SetState(WEAPON_STATE_HIDDEN);
 	x = -100;
 	y = -100;
-	isHidden = true;
+	isHidden = false;
 	level = 1;
 }
 
@@ -14,7 +16,6 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	//CGameObject::Update(dt)
 	//DebugOut(L"isHidden  %d\n", this->isHidden);
 	//DebugOut(L"action_time UPDATE %d\n", this->action_time);
-	//DebugOut(L"GetTickCount  %d\n", GetTickCount());*/
 
 	if (!isHidden) {
 		if (GetTickCount() - action_time > WEAPON_ATTACK_TIME) {
@@ -29,16 +30,13 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CWeapon::Render()
 {
-	/*if (isHidden) return;
+	if (isHidden) return;
 	int ani = GetAnimation();
-	animations[ani]->Render(x, y, 255);*/
+	animation_set->at(ani)->Render(nx,x, y, 255);
 }
-void CWeapon::ResetAttack()
+void CWeapon::ResetAnimation(int ani)
 {
-	/*for (unsigned int i = 0; i < animations.size(); i++)
-	{
-		animations[i]->ResetFrame();
-	}*/
+	animation_set->at(ani)->ResetFrame();
 }
 
 void CWeapon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -49,16 +47,19 @@ void CWeapon::GetBoundingBox(float& left, float& top, float& right, float& botto
 void CWeapon::SetState(int state)
 {
 	CGameObject::SetState(state);
+	int ani;
 	switch (state)
 	{
 	case WEAPON_STATE_ATTACK:
-		ResetAttack();
+		ani = GetAnimation();
+		//ResetAnimation(ani);
 		frame = 3;
 		this->action_time = GetTickCount();
 		isHidden = false;
 		break;
 	case WEAPON_STATE_HIDDEN:
-		ResetAttack();
+		ani = GetAnimation();
+		//ResetAnimation(ani);
 		isHidden = true;
 		break;
 	default:
@@ -75,7 +76,6 @@ CWeapon* CWeapon::GetInstance()
 
 int CWeapon::GetAnimation() {
 	int ani;
-	if (nx > 0) {
 		switch (this->level)
 		{
 		case 1: {
@@ -94,27 +94,6 @@ int CWeapon::GetAnimation() {
 			ani = WEAPON_STATE_HIDDEN;
 			break;
 		}
-	}
-	else {
-		/*switch (level)
-		{
-		case 1: {
-			ani = WEAPON_ANI_1_LEFT;
-			break;
-		}
-		case 2: {
-			ani = WEAPON_ANI_2_LEFT;
-			break;
-		}
-		case 3: {
-			ani = WEAPON_ANI_3_LEFT;
-			break;
-		}
-		default:
-			ani = WEAPON_STATE_HIDDEN;
-			break;
-		}*/
-	}
 	return ani;
 }
 
@@ -125,7 +104,8 @@ void CWeapon::UpdatePosionWithSimon(int _x, int _y, int _nx) {
 }
 void CWeapon::GetPositionForSimon() {
 	int ani = GetAnimation();
-	/*int currenFrame = animations[ani]->GetCurrentFrame();
+	int currenFrame = animation_set->at(ani)->GetCurrentFrame();
+	DebugOut(L"frame %d \n", currenFrame);
 	if (nx > 0) {
 		if (currenFrame != frame) {
 			if (currenFrame == 0) {
@@ -172,6 +152,6 @@ void CWeapon::GetPositionForSimon() {
 				}
 			}
 		}
-	}*/
+	}
 
 }
