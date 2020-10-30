@@ -31,6 +31,8 @@ public:
 	virtual void Render();
 	virtual void Unload();
 
+	bool CheckInCam(LPGAMEOBJECT a);
+
 	//friend class CPlayScenceKeyHandler;
 };
 
@@ -40,6 +42,11 @@ public:
 	virtual void KeyState(BYTE *states);
 	virtual void OnKeyDown(int KeyCode);
 	virtual void OnKeyUp(int KeyCode) {};
+
+	void Run(int _nx);
+	void Jump();
+
+
 	CPlayScenceKeyHandler(CScene *s) :CScenceKeyHandler(s) {};
 };
 

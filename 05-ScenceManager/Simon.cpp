@@ -13,6 +13,7 @@ CSimon::CSimon(float x, float y) : CGameObject()
 	level = 1;
 	SetState(SIMON_STATE_IDLE);
 	nx = 1;
+	isGrounded = true;
 	this->start_x = x;
 	this->start_y = y;
 	this->x = x;
@@ -26,17 +27,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	// Simple fall down
 	vy += SIMON_GRAVITY * dt;
-	//x += dx;
-	//y += dy;
-	if (x <= 256 - 32)
-		this->SetState(-5);
-	else
-	{
-		//this->SetState(SIMON_STATE_WALKING);
-		//this->SetSpeed(-SIMON_WALKING_SPEED,0);
-	}
-		
-	//x += dx;
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -57,6 +47,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable = 0;
 	}
 
+	//jump
+	if (!isGrounded) {
+		if (GetTickCount() - action_time > SIMON_RESET_JUMP_TIME) {
+			action_time = 0;
+			isGrounded = true;
+		}
+	}
+
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -68,6 +66,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		float min_tx, min_ty, nx = 0, ny;
 		float rdx = 0;
 		float rdy = 0;
+		
 
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
@@ -81,10 +80,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		x += min_tx * dx + nx * 0.4f;
 		y += min_ty * dy + ny * 0.4f;
 
-		//DebugOut(L"x %d \n", x);
-		//DebugOut(L"y %d \n", y);
-		//DebugOut(L"nx %d \n", nx);
-
 
 		if (nx != 0) vx = 0;
 		if (ny != 0) vy = 0;
@@ -96,38 +91,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
-
-			/*if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
-			{
-				CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
-
-				// jump on top >> kill Goomba and deflect a bit 
-				if (e->ny < 0)
-				{
-					if (goomba->GetState() != GOOMBA_STATE_DIE)
-					{
-						goomba->SetState(GOOMBA_STATE_DIE);
-						vy = -SIMON_JUMP_DEFLECT_SPEED;
-					}
-				}
-				else if (e->nx != 0)
-				{
-					if (untouchable == 0)
-					{
-						if (goomba->GetState() != GOOMBA_STATE_DIE)
-						{
-							if (level > SIMON_LEVEL_SMALL)
-							{
-								level = SIMON_LEVEL_SMALL;
-								StartUntouchable();
-							}
-							else
-								SetState(SIMON_ANI_DIE);
-						}
-					}
-				}
-			} // if Goomba
-			else */
 			if (dynamic_cast<CPortal*>(e->obj))
 			{
 				CPortal* p = dynamic_cast<CPortal*>(e->obj);
@@ -178,7 +141,9 @@ void CSimon::SetState(int state)
 		DebugOut(L"vx %f \n", vx);
 		break;
 	case SIMON_STATE_JUMP:
-		// TODO: need to check if simon is *current* on a platform before allowing to jump again
+		DebugOut(L"isGrounded %d \n", isGrounded);
+		action_time = GetTickCount();
+		isGrounded = false;
 		vy = -SIMON_JUMP_SPEED_Y;
 		break;
 	case SIMON_STATE_IDLE:

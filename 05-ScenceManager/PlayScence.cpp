@@ -10,6 +10,9 @@
 #include "Board.h"
 using namespace std;
 
+
+#define SCREEN_WIDTH 512
+#define SCREEN_HEIGHT 448
 /*
 	Load scene resources from scene file (textures, sprites, animations and objects)
 	See scene1.txt, scene2.txt for detail format specification
@@ -369,20 +372,11 @@ void CPlayScene::Unload()
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }
 
-void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
+bool CPlayScene::CheckInCam(LPGAMEOBJECT a)
 {
-	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
+	CGame* game = CGame::GetInstance();
+	return (a->GetPositionX() >= game->GetCamPosX()) && (a->GetPositionX() < (game->GetCamPosX() + SCREEN_WIDTH)) && (a->GetPositionY() >= game->GetCamPosY()) && (a->GetPositionY() < game->GetCamPosY() + SCREEN_HEIGHT);
 
-	CSimon *simon = ((CPlayScene*)scence)->player;
-	switch (KeyCode)
-	{
-	case DIK_SPACE:
-		simon->SetState(SIMON_STATE_JUMP);
-		break;
-	case DIK_A: 
-		simon->Reset();
-		break;
-	}
 }
 
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
@@ -390,21 +384,45 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	CGame *game = CGame::GetInstance();
 	CSimon *simon = ((CPlayScene*)scence)->player;
 
-	// disable control key when simon die 
-	if (game->IsKeyDown(DIK_RIGHT)) {
-		simon->SetNX(1);
-		simon->SetState(SIMON_STATE_WALKING);
-	}
-		
-	else if (game->IsKeyDown(DIK_LEFT)) {
-		simon->SetNX(0);
-		simon->SetState(SIMON_STATE_WALKING);
-
-	}
-	else 
-	{
-		simon->SetState(SIMON_STATE_IDLE);
-	}
-
 	if (simon->GetState() == SIMON_STATE_DIE) return;
+	// disable control key when simon die 
+	if (game->IsKeyDown(DIK_RIGHT)) Run(1);
+	else if (game->IsKeyDown(DIK_LEFT)) Run(-1);
+	else simon->SetState(SIMON_STATE_IDLE);
+
+	
+}
+
+void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
+{
+	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
+
+	CGame* game = CGame::GetInstance();
+	CSimon* simon = ((CPlayScene*)scence)->player;
+	CPlayScene* playscene = ((CPlayScene*)scence);
+	switch (KeyCode)
+	{
+	case DIK_SPACE: 
+		Jump();
+		break;
+	case DIK_A:
+		simon->Reset();
+		break;
+	}
+}
+
+
+void CPlayScenceKeyHandler::Run(int _nx) {
+	CSimon* simon = ((CPlayScene*)scence)->player;
+	simon->SetNX(_nx);
+	simon->SetState(SIMON_STATE_WALKING);
+}
+
+void CPlayScenceKeyHandler::Jump() {
+	CSimon* simon = ((CPlayScene*)scence)->player;
+	DebugOut(L"isGrounded %d \n", simon->isGrounded);
+	if (simon->isGrounded) {
+		simon->SetState(SIMON_STATE_JUMP);
+	}
+	
 }
