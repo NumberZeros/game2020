@@ -454,6 +454,8 @@ void CPlayScenceKeyHandler::Jump() {
 void CPlayScenceKeyHandler::Hit() {
 	CSimon* simon = ((CPlayScene*)scence)->player;
 	CWeapon* weapon = ((CPlayScene*)scence)->weapon;
+	simon->SetState(SIMON_STATE_HIT);
+	weapon->UpdatePosionWithSimon(simon->GetPositionX(), simon->GetPositionY(), simon->nx);
 	weapon->SetState(WEAPON_STATE_ATTACK);
-	weapon->UpdatePosionWithSimon(simon->x, simon->y, simon->nx);
+	
 }

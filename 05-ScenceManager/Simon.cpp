@@ -133,21 +133,20 @@ void CSimon::SetState(int state)
 	switch (state)
 	{
 	case SIMON_STATE_WALKING:
-		DebugOut(L"nx %d \n", nx);
 		if (nx > 0)
 			vx = SIMON_WALKING_SPEED;
 		else
 			vx = -SIMON_WALKING_SPEED;
-		DebugOut(L"vx %f \n", vx);
 		break;
 	case SIMON_STATE_JUMP:
-		DebugOut(L"isGrounded %d \n", isGrounded);
 		action_time = GetTickCount();
 		isGrounded = false;
 		vy = -SIMON_JUMP_SPEED_Y;
 		break;
 	case SIMON_STATE_IDLE:
 		vx = 0;
+		break;
+	case SIMON_STATE_HIT:
 		break;
 	case SIMON_ANI_DIE:
 		vy = -SIMON_DIE_DEFLECT_SPEED;

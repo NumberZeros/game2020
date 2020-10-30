@@ -1,6 +1,8 @@
 #include "Weapon.h"
 #include <time.h>
 #include "Utils.h"
+#include "Textures.h"
+#include "Game.h"
 
 
 CWeapon::CWeapon() {
@@ -13,7 +15,7 @@ CWeapon::CWeapon() {
 
 void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	//CGameObject::Update(dt)
+	CGameObject::Update(dt);
 	//DebugOut(L"isHidden  %d\n", this->isHidden);
 	//DebugOut(L"action_time UPDATE %d\n", this->action_time);
 
@@ -41,7 +43,6 @@ void CWeapon::ResetAnimation(int ani)
 
 void CWeapon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-
 }
 
 void CWeapon::SetState(int state)
@@ -101,16 +102,22 @@ void CWeapon::UpdatePosionWithSimon(int _x, int _y, int _nx) {
 	this->x = _x;
 	this->y = _y;
 	this->nx = _nx;
+	DebugOut(L"x update %d \n", x);
+	DebugOut(L"y update %d \n", y);
+	DebugOut(L"nx update %d \n", nx);
 }
 void CWeapon::GetPositionForSimon() {
 	int ani = GetAnimation();
+	DebugOut(L"x %d \n", x);
+	DebugOut(L"y %d \n", y);
+	DebugOut(L"nx %d \n", nx);
 	int currenFrame = animation_set->at(ani)->GetCurrentFrame();
 	DebugOut(L"frame %d \n", currenFrame);
 	if (nx > 0) {
 		if (currenFrame != frame) {
 			if (currenFrame == 0) {
 				SetFrame(frame - 1);
-				x -= 7;
+				x -= 50;
 				y += 2;
 				frame = 0;
 			}
