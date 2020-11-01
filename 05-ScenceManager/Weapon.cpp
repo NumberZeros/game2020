@@ -20,12 +20,10 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	//DebugOut(L"action_time UPDATE %d\n", this->action_time);
 
 	if (!isHidden) {
+		GetPositionForSimon();
 		if (GetTickCount() - action_time > WEAPON_ATTACK_TIME) {
 			isHidden = true;
 			this->action_time = 0;
-		}
-		else {
-			GetPositionForSimon();
 		}
 	}
 }
@@ -36,9 +34,11 @@ void CWeapon::Render()
 	int ani = GetAnimation();
 	animation_set->at(ani)->Render(nx,x, y, 255);
 }
-void CWeapon::ResetAnimation(int ani)
+void CWeapon::ResetAnimation()
 {
-	animation_set->at(ani)->ResetFrame();
+	for (int i = 0; i < animation_set->size(); i++) {
+		animation_set->at(i)->ResetFrame();
+	}
 }
 
 void CWeapon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -52,15 +52,12 @@ void CWeapon::SetState(int state)
 	switch (state)
 	{
 	case WEAPON_STATE_ATTACK:
-		ani = GetAnimation();
-		//ResetAnimation(ani);
+		ResetAnimation();
 		frame = 3;
 		this->action_time = GetTickCount();
 		isHidden = false;
 		break;
 	case WEAPON_STATE_HIDDEN:
-		ani = GetAnimation();
-		//ResetAnimation(ani);
 		isHidden = true;
 		break;
 	default:
@@ -117,18 +114,18 @@ void CWeapon::GetPositionForSimon() {
 		if (currenFrame != frame) {
 			if (currenFrame == 0) {
 				SetFrame(frame - 1);
-				x -= 100.0f;
-				y += 2.0f;
+				x -= 10;
+				y += 11.0f;
 				frame = 0;
 			}
 			else if (currenFrame == 1) {
-				x -= 7.0f;
+				x -= 5.0f;
 				y -= 1;
 				frame = 1;
 			}
 			else if (currenFrame == 2) {
-				x += 32.0f;
-				y += 2.0f;
+				x += 50.0f;
+				y += 0.0f;
 				frame = 2;
 			}
 		}
@@ -137,13 +134,13 @@ void CWeapon::GetPositionForSimon() {
 		if (currenFrame != frame) {
 			if (currenFrame == 0) {
 				SetFrame(frame - 1);
-				x += 20;
-				y += 2;
+				x += 55;
+				y += 11;
 				frame = 0;
 			}
 			else if (currenFrame == 1) {
-				x -= 10;
-				y -= 1;
+				x -= 0;
+				y -= 2;
 				frame = 1;
 			}
 			else if (currenFrame == 2) {
@@ -153,8 +150,8 @@ void CWeapon::GetPositionForSimon() {
 					frame = 2;
 				}
 				else {
-					x -= 32;
-					y += 2;
+					x -= 95;
+					y -= 0;
 					frame = 2;
 				}
 			}

@@ -462,9 +462,6 @@ void CPlayScenceKeyHandler::Hit() {
 	CSimon* simon = ((CPlayScene*)scence)->player;
 	CWeapon* weapon = ((CPlayScene*)scence)->weapon;
 	simon->SetState(SIMON_STATE_HIT);
-	DebugOut(L"x %f \n", simon->x);
-	DebugOut(L"y %f \n", simon->y);
-	DebugOut(L"nx %d \n", simon->nx);
-	weapon->UpdatePosionWithSimon(simon->x, simon->y, simon->nx);
+	weapon->UpdatePosionWithSimon(simon->GetPositionX(), simon->GetPositionY(), simon->nx);
 	weapon->SetState(WEAPON_STATE_ATTACK);
 }

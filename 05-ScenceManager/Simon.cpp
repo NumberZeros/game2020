@@ -179,9 +179,6 @@ void CSimon::SetState(int state)
 	case SIMON_ANI_DIE:
 		vy = -SIMON_DIE_DEFLECT_SPEED;
 		break;
-	case -5:
-		vx = 0;
-		break;
 	}
 }
 
@@ -190,7 +187,6 @@ void CSimon::GetBoundingBox(float& left, float& top, float& right, float& bottom
 	
 	left = x ;
 	right = left + SIMON_WIDTH;
-	//if (isSit) top = y + SIMON_HEGHT_RESET_SIT;
 	top = y;
 	bottom = y + SIMON_HEGHT;
 	
@@ -204,20 +200,19 @@ void CSimon::SitDown()
 	}
 }
 
-void CSimon::ResetSitDown()
-{
-}
-
 void CSimon::attack()
 {
 	if (!isAttack) {
+		ResetAnimation();
 		action_time = GetTickCount();
 		isAttack = true;
 	}
 }
 
-void CSimon::resetAttack()
-{
+void CSimon::ResetAnimation() {
+	for (int i = 0; i < animation_set->size(); i++) {
+		animation_set->at(i)->ResetFrame();
+	}
 }
 
 /*

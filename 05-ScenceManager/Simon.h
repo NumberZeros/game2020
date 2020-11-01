@@ -8,7 +8,7 @@
 #define SIMON_GRAVITY			0.002f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
 
-#define SIMON_ATTACK_TIME 600
+#define SIMON_ATTACK_TIME 500
 
 #define SIMON_STATE_IDLE				0
 #define SIMON_STATE_WALKING				1001
@@ -40,8 +40,8 @@
 #define SIMON_ANI_WHIP_LV2			14
 #define SIMON_ANI_WHIP_LV4			15
 
-#define SIMON_HEGHT					62
-#define SIMON_WIDTH					60
+#define SIMON_HEGHT					61
+#define SIMON_WIDTH					34
 
 #define SIMON_HEGHT_RESET_SIT		17
 
@@ -61,8 +61,8 @@ class CSimon : public CGameObject
 public:
 	int level;
 	int untouchable;
-	int height = 64;
-	int width = 60;
+	int height = 61;
+	int width = 34;
 	bool isSit;
 	bool isAttack;
 	bool isGrounded;
@@ -77,9 +77,8 @@ public:
 public:
 	CSimon();
 	virtual void SitDown();
-	virtual void ResetSitDown();
 	virtual void attack();
-	virtual void resetAttack();
+	virtual void ResetAnimation();
 	virtual void Reset();
 	CSimon(float x, float y);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
