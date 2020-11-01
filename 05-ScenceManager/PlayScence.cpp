@@ -407,12 +407,11 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	CSimon *simon = ((CPlayScene*)scence)->player;
 
 	if (simon->GetState() == SIMON_STATE_DIE) return;
-	// disable control key when simon die 
+	// disable control key when simon die
+	if (simon->isAttack) return;
 	if (game->IsKeyDown(DIK_RIGHT)) Run(1);
 	else if (game->IsKeyDown(DIK_LEFT)) Run(-1);
 	else simon->SetState(SIMON_STATE_IDLE);
-
-	
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
@@ -426,6 +425,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	{
 	case DIK_SPACE: 
 		Jump();
+		break;
+	case DIK_DOWN:
+		SitDown();
 		break;
 	case DIK_X:
 		Hit();
@@ -451,11 +453,18 @@ void CPlayScenceKeyHandler::Jump() {
 	}
 }
 
+void CPlayScenceKeyHandler::SitDown() {
+	CSimon* simon = ((CPlayScene*)scence)->player;
+	simon->SetState(SIMON_STATE_SIT_DOWN);
+}
+
 void CPlayScenceKeyHandler::Hit() {
 	CSimon* simon = ((CPlayScene*)scence)->player;
 	CWeapon* weapon = ((CPlayScene*)scence)->weapon;
 	simon->SetState(SIMON_STATE_HIT);
-	weapon->UpdatePosionWithSimon(simon->GetPositionX(), simon->GetPositionY(), simon->nx);
+	DebugOut(L"x %f \n", simon->x);
+	DebugOut(L"y %f \n", simon->y);
+	DebugOut(L"nx %d \n", simon->nx);
+	weapon->UpdatePosionWithSimon(simon->x, simon->y, simon->nx);
 	weapon->SetState(WEAPON_STATE_ATTACK);
-	
 }

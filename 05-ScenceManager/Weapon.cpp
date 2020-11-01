@@ -98,37 +98,37 @@ int CWeapon::GetAnimation() {
 	return ani;
 }
 
-void CWeapon::UpdatePosionWithSimon(int _x, int _y, int _nx) {
-	this->x = _x;
-	this->y = _y;
-	this->nx = _nx;
-	DebugOut(L"x update %d \n", x);
-	DebugOut(L"y update %d \n", y);
-	DebugOut(L"nx update %d \n", nx);
+void CWeapon::UpdatePosionWithSimon(float _x, float _y, int _nx) {
+	//DebugOut(L"x update %f \n", _x);
+	//DebugOut(L"y update %f \n", _y);
+	//DebugOut(L"nx update %d \n", _nx);
+	x = _x;
+	y = _y;
+	nx = _nx;
 }
 void CWeapon::GetPositionForSimon() {
 	int ani = GetAnimation();
-	DebugOut(L"x %d \n", x);
-	DebugOut(L"y %d \n", y);
+	DebugOut(L"x %f \n", x);
+	DebugOut(L"y %f \n", y);
 	DebugOut(L"nx %d \n", nx);
 	int currenFrame = animation_set->at(ani)->GetCurrentFrame();
-	DebugOut(L"frame %d \n", currenFrame);
+	//DebugOut(L"frame %d \n", currenFrame);
 	if (nx > 0) {
 		if (currenFrame != frame) {
 			if (currenFrame == 0) {
 				SetFrame(frame - 1);
-				x -= 50;
-				y += 2;
+				x -= 100.0f;
+				y += 2.0f;
 				frame = 0;
 			}
 			else if (currenFrame == 1) {
-				x -= 7;
+				x -= 7.0f;
 				y -= 1;
 				frame = 1;
 			}
 			else if (currenFrame == 2) {
-				x += 32;
-				y += 2;
+				x += 32.0f;
+				y += 2.0f;
 				frame = 2;
 			}
 		}

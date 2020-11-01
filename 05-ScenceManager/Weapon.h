@@ -29,7 +29,7 @@ public:
 	void ResetAnimation(int ani);
 	void SetFrame(int _frame) { frame = _frame; };
 	int GetFrame() { return frame; };
-	void UpdatePosionWithSimon(int _x, int _y, int _nx);
+	void UpdatePosionWithSimon(float _x, float _y, int _nx);
 	static CWeapon* GetInstance();
 	CWeapon();
 

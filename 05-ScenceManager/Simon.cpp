@@ -35,11 +35,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// turn off collision when die 
 	if (state != SIMON_ANI_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
-	if (state == 10)
-	{
-		vx = -SIMON_WALKING_SPEED;
-		x += -vx;
-	}
+	
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME)
 	{
@@ -52,6 +48,21 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (GetTickCount() - action_time > SIMON_RESET_JUMP_TIME) {
 			action_time = 0;
 			isGrounded = true;
+		}
+	}
+
+	//attact
+	if (isAttack) {
+		if (GetTickCount() - action_time > SIMON_ATTACK_TIME) {
+			isAttack = false;
+			action_time = 0;
+		}
+	}
+
+	//sit
+	if (isSit) {
+		if (vx != 0) {
+			isSit = false;
 		}
 	}
 
@@ -109,13 +120,25 @@ void CSimon::Render()
 	if (state == SIMON_ANI_DIE)
 		ani = SIMON_ANI_DIE;
 	else {
-		if (state == SIMON_STATE_IDLE)
-			ani = SIMON_ANI_IDLE;
-		else
-		if (state == -5)
-			ani = 2;
+		/// di chuyen 
+		if (state == SIMON_STATE_IDLE) {
+			if (isSit && vx == 0)
+				ani = SIMON_ANI_SIT_DOWN;
+			else
+				ani = SIMON_ANI_IDLE;
+		}
+			
 		else
 			ani = SIMON_ANI_WALKING;
+
+		///tan cong
+		if (isAttack) {
+			if (isSit && vx == 0)
+				ani = SIMON_ANI_SIT_HIT;
+			else
+				ani = SIMON_ANI_STAND_HIT;
+		}
+			
 		
 	}
 	int alpha = 255;
@@ -147,6 +170,11 @@ void CSimon::SetState(int state)
 		vx = 0;
 		break;
 	case SIMON_STATE_HIT:
+		vx = 0;
+		attack();
+		break;
+	case SIMON_STATE_SIT_DOWN:
+		SitDown();
 		break;
 	case SIMON_ANI_DIE:
 		vy = -SIMON_DIE_DEFLECT_SPEED;
@@ -159,26 +187,21 @@ void CSimon::SetState(int state)
 
 void CSimon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (nx > 0) {
-		right = x + SIMON_WIDTH;
-	}
-	else {
-		right = x + SIMON_WIDTH;
-	}
-	left = x;
+	
+	left = x ;
+	right = left + SIMON_WIDTH;
+	//if (isSit) top = y + SIMON_HEGHT_RESET_SIT;
 	top = y;
 	bottom = y + SIMON_HEGHT;
 	
 }
 
-//CSimon::CSimon()
-//{
-//	level = 1;
-//	this->SetState(SIMON_ANI_IDLE);
-//}
-
 void CSimon::SitDown()
 {
+	if (!isSit) {
+		vx = 0;
+		isSit = true;
+	}
 }
 
 void CSimon::ResetSitDown()
@@ -187,6 +210,10 @@ void CSimon::ResetSitDown()
 
 void CSimon::attack()
 {
+	if (!isAttack) {
+		action_time = GetTickCount();
+		isAttack = true;
+	}
 }
 
 void CSimon::resetAttack()
