@@ -71,7 +71,6 @@ public:
 	int start_x;
 	int start_y;
 
-
 	DWORD untouchable_start;
 	DWORD action_time;
 public:

@@ -202,11 +202,9 @@ void CSimon::SitDown()
 
 void CSimon::attack()
 {
-	if (!isAttack) {
-		ResetAnimation();
+		animation_set->at(SIMON_ANI_STAND_HIT)->ResetFrame();
 		action_time = GetTickCount();
 		isAttack = true;
-	}
 }
 
 void CSimon::ResetAnimation() {
@@ -214,10 +212,6 @@ void CSimon::ResetAnimation() {
 		animation_set->at(i)->ResetFrame();
 	}
 }
-
-/*
-	Reset simon status to the beginning state of a scene
-*/
 void CSimon::Reset()
 {
 	SetState(SIMON_STATE_IDLE);

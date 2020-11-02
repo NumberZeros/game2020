@@ -338,27 +338,13 @@ void CPlayScene::Update(DWORD dt)
 	{
 		objects[i]->Update(dt, &coObjects);
 	}
-	// skip the rest if scene was already unloaded (simon::Update might trigger PlayScene::Unload)
-	//if (player == NULL) return; 
-	//if (isintro == 1)
-	//{
-	//	//player->SetState(SIMON_STATE_WALKING);
-	//	player->SetSpeed(-1, 0);
-	//}
-	//// Update camera to follow simon
-	//float cx, cy;
-	//player->GetPosition(cx, cy);
 
-	//CGame *game = CGame::GetInstance();
-	//cx = game->GetScreenWidth() - player->x;
-	//cy -= game->GetScreenHeight() / 2;
-
-	//CGame::GetInstance()->SetCamPos(0.0f, 0.0f /*cy*/);
-
-
-	///////
+	
 	if (player == NULL) return;
 
+	//update position for simon
+	weapon->UpdatePosionWithSimon(player->GetPositionX(), player->GetPositionY(), player->nx);
+	weapon->GetPositionForSimon();
 	// Update camera to follow mario
 	float cx, cy;
 	player->GetPosition(cx, cy);
@@ -461,7 +447,6 @@ void CPlayScenceKeyHandler::SitDown() {
 void CPlayScenceKeyHandler::Hit() {
 	CSimon* simon = ((CPlayScene*)scence)->player;
 	CWeapon* weapon = ((CPlayScene*)scence)->weapon;
-	simon->SetState(SIMON_STATE_HIT);
-	weapon->UpdatePosionWithSimon(simon->GetPositionX(), simon->GetPositionY(), simon->nx);
 	weapon->SetState(WEAPON_STATE_ATTACK);
+	simon->SetState(SIMON_STATE_HIT);
 }
