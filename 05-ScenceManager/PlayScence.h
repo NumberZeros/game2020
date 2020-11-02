@@ -15,6 +15,9 @@
 =======
 #include "Axe.h"
 #include "Board.h"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 #include "Item.h"
 
@@ -57,6 +60,11 @@ public:
 	void Run(int _nx);
 	void Jump();
 	void Hit();
+<<<<<<< Updated upstream
+=======
+	void ThrowSubWeapon();
+	void ChangeItem();
+>>>>>>> Stashed changes
 	void SitDown();
 	void ChangeItem(int idItem);
 	CPlayScenceKeyHandler(CScene *s) :CScenceKeyHandler(s) {};

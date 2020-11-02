@@ -135,6 +135,9 @@
 =======
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="Item.cpp" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -163,6 +166,9 @@
 =======
     <ClInclude Include="Candle.h" />
     <ClInclude Include="Item.h" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Map.h" />

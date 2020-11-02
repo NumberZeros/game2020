@@ -63,6 +63,13 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += LARGE_HEART_GRAVITY * dt;
 	CheckSize();
 
+<<<<<<< Updated upstream
+=======
+	coEvents.clear();
+
+	CalcPotentialCollisions(coObjects, coEvents);
+
+>>>>>>> Stashed changes
 	if (coEvents.size() == 0)
 	{
 		x += dx;
@@ -90,8 +97,41 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 		if (nx != 0) vx = 0;
 		if (ny != 0) vy = 0;
+<<<<<<< Updated upstream
 	}
 }
+=======
+
+		for (UINT i = 0; i < coObjects->size(); i++)
+		{
+			LPGAMEOBJECT obj = coObjects->at(i);
+			if (dynamic_cast<CItem*>(obj))
+			{
+				CItem* e = dynamic_cast<CItem*>(obj);
+
+				float left, top, right, bottom;
+				e->GetBoundingBox(left, top, right, bottom);
+
+				if (CheckColli(left, top, right, bottom))
+				{
+					e->SetState(100.0f);
+				}
+
+			}
+		}
+	}
+}
+
+bool CItem::CheckColli(float left_a, float top_a, float right_a, float bottom_a) {
+	float l, t, r, b;
+	CItem::GetBoundingBox(l, t, r, b);
+
+	if (CGameObject::AABBCheck(l, t, r, b, left_a, top_a, right_a, bottom_a))
+		return true;
+	else
+		return false;
+}
+>>>>>>> Stashed changes
 void CItem::CheckSize()
 {
 	switch (this->id)

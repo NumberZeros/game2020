@@ -14,6 +14,9 @@
 #include "Candle.h"
 #include"BlackLeopard.h"
 #include"Zombie.h"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 #include "Item.h"
 using namespace std;
@@ -51,6 +54,9 @@ using namespace std;
 #define OBJECT_TYPE_BLACK_LEOPARD 11
 #define OBJECT_TYPE_ZOMBIE 10
 #define OBJECT_TYPE_ITEM 12
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 #define MAX_SCENE_LINE 1024
@@ -280,15 +286,21 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		}
 		break;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	case OBJECT_TYPE_ITEM: 
 		obj = new CItem();
 		this->item = (CItem*)obj;
 		item->SetID(1); 
 =======
+=======
+>>>>>>> Stashed changes
 	case OBJECT_TYPE_ITEM:
 		obj = new CItem();
 		item = (CItem*)obj;
 		item->SetID(0);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 		break;
 	default:
@@ -479,6 +491,10 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	}
 }
 
+void CPlayScenceKeyHandler::ChangeItem()
+{
+	CItem* item = ((CPlayScene*)scence)->item;
+}
 
 void CPlayScenceKeyHandler::Run(int _nx) {
 	CSimon* simon = ((CPlayScene*)scence)->player;
