@@ -11,15 +11,17 @@
 #include "Goomba.h"
 
 #include "Weapon.h"
-#include "Item.h"
+#include "Axe.h"
+#include "Board.h"
 
 class CPlayScene: public CScene
 {
 public: 
-	CItem* item;
 	CSimon *player;					// A play scene has to have player, right? 
 	CMap* map;
 	CWeapon* weapon;
+	CAxe* axe;
+	CBoard* board;
 	vector<LPGAMEOBJECT> objects;
 	int isintro = 0;
 	void _ParseSection_TEXTURES(string line);
@@ -52,8 +54,9 @@ public:
 	void Run(int _nx);
 	void Jump();
 	void Hit();
+	void ThrowSubWeapon();
+
 	void SitDown();
-	void ChangeItem(int idItem);
 	CPlayScenceKeyHandler(CScene *s) :CScenceKeyHandler(s) {};
 };
 
