@@ -8,6 +8,7 @@
 #include "Portal.h"
 #include "Map.h"
 #include "Board.h"
+#include "Item.h"
 using namespace std;
 
 
@@ -30,9 +31,10 @@ using namespace std;
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
-#define OBJECT_TYPE_MAP	4
+#define OBJECT_TYPE_MAP		4
 #define OBJECT_TYPE_WEAPON	5
 #define OBJECT_TYPE_BOARD	8
+#define OBJECT_TYPE_ITEM	9
 #define OBJECT_TYPE_PORTAL	50
 
 #define MAX_SCENE_LINE 1024
@@ -261,6 +263,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			obj = new CPortal(x, y, r, b, scene_id);
 		}
 		break;
+	case OBJECT_TYPE_ITEM: 
+		obj = new CItem();
+		this->item = (CItem*)obj;
+		item->SetID(1); 
+		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -338,8 +345,25 @@ void CPlayScene::Update(DWORD dt)
 	{
 		objects[i]->Update(dt, &coObjects);
 	}
+	// skip the rest if scene was already unloaded (simon::Update might trigger PlayScene::Unload)
+	//if (player == NULL) return; 
+	//if (isintro == 1)
+	//{
+	//	//player->SetState(SIMON_STATE_WALKING);
+	//	player->SetSpeed(-1, 0);
+	//}
+	//// Update camera to follow simon
+	//float cx, cy;
+	//player->GetPosition(cx, cy);
 
-	
+	//CGame *game = CGame::GetInstance();
+	//cx = game->GetScreenWidth() - player->x;
+	//cy -= game->GetScreenHeight() / 2;
+
+	//CGame::GetInstance()->SetCamPos(0.0f, 0.0f /*cy*/);
+
+
+	///////
 	if (player == NULL) return;
 
 	//update position for simon
@@ -420,6 +444,15 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_A:
 		simon->Reset();
 		break;
+	case DIK_1:
+		ChangeItem(0);
+		break;
+	case DIK_2:
+		ChangeItem(1);
+		break;
+	//case DIK_3:
+	//	ChangeItem(2);
+	//	break;
 	}
 }
 
@@ -443,9 +476,16 @@ void CPlayScenceKeyHandler::SitDown() {
 	simon->SetState(SIMON_STATE_SIT_DOWN);
 }
 
+void CPlayScenceKeyHandler::ChangeItem(int idItem)
+{
+	CItem* item = ((CPlayScene*)scence)->item;
+	item->SetID(idItem);
+}
+
 void CPlayScenceKeyHandler::Hit() {
 	CSimon* simon = ((CPlayScene*)scence)->player;
 	CWeapon* weapon = ((CPlayScene*)scence)->weapon;
-	weapon->SetState(WEAPON_STATE_ATTACK);
 	simon->SetState(SIMON_STATE_HIT);
+	weapon->UpdatePosionWithSimon(simon->GetPositionX(), simon->GetPositionY(), simon->nx);
+	weapon->SetState(WEAPON_STATE_ATTACK);
 }

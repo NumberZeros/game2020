@@ -59,6 +59,7 @@ public:
 	int state;
 
 	bool isHidden;
+	bool isOnGround;
 
 	DWORD dt; 
 
