@@ -1,5 +1,5 @@
 #pragma once
-#include "CItem.h"
+#include "Item.h"
 #include "d3dx9.h"
 
 #define LARGE_HEART_GRAVITY			0.0004f

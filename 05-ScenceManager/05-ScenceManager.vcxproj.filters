@@ -134,13 +134,13 @@
     <ClInclude Include="CLargeHeart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CMoneyBag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CHolyWater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

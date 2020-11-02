@@ -1,5 +1,5 @@
 #pragma once
-#include "CItem.h"
+#include "Item.h"
 
 #define HOLY_WATER_ITEM_GRAVITY				0.0005f
 #define HOLY_WATER_ITEM_BBOX_WIDTH			15

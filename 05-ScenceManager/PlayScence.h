@@ -11,10 +11,12 @@
 #include "Goomba.h"
 
 #include "Weapon.h"
+#include "Item.h"
 
 class CPlayScene: public CScene
 {
 public: 
+	CItem* item;
 	CSimon *player;					// A play scene has to have player, right? 
 	CMap* map;
 	CWeapon* weapon;
@@ -51,6 +53,7 @@ public:
 	void Jump();
 	void Hit();
 	void SitDown();
+	void ChangeItem(int idItem);
 	CPlayScenceKeyHandler(CScene *s) :CScenceKeyHandler(s) {};
 };
 
