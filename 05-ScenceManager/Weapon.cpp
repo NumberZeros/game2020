@@ -115,7 +115,7 @@ void CWeapon::UpdatePosionWithSimon(float _x, float _y, int _nx) {
 			}
 			else if (currenFrame == 1) {
 				x = _x - 10.0f;
-				y = _y - 5;
+				y = _y + 2;
 				frame = 1;
 			}
 			else if(currenFrame == 2) {
@@ -135,14 +135,14 @@ void CWeapon::UpdatePosionWithSimon(float _x, float _y, int _nx) {
 				frame = 0;
 			}
 			else if (currenFrame == 1) {
-				x = _x -2;
-				y = _y -2;
+				x = _x ;
+				y = _y + 2;
 				frame = 1;
 			}
 			else if (currenFrame == 2) {
 				DebugOut(L"b %d \n", currenFrame);
-				x = _x - 55;
-				y = _y - 0;
+				x = _x - 45;
+				y = _y + 10;
 				frame = 2;
 			}
 		}

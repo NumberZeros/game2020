@@ -250,7 +250,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
 	case OBJECT_TYPE_WEAPON: 
 		obj = new CWeapon(); 
-		this->weapon = (CWeapon*)obj;
+		weapon = (CWeapon*)obj;
 		break;
 	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
 	case OBJECT_TYPE_BOARD: obj = new CBoard(); break;
@@ -366,6 +366,8 @@ void CPlayScene::Update(DWORD dt)
 	///////
 	if (player == NULL) return;
 
+	//update position for simon
+	weapon->UpdatePosionWithSimon(player->GetPositionX(), player->GetPositionY(), player->nx);
 	// Update camera to follow mario
 	float cx, cy;
 	player->GetPosition(cx, cy);
