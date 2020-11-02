@@ -8,6 +8,13 @@
 #include "Portal.h"
 #include "Map.h"
 #include "Board.h"
+<<<<<<< Updated upstream
+=======
+#include "Torch.h"
+#include "Candle.h"
+#include"BlackLeopard.h"
+#include"Zombie.h"
+>>>>>>> Stashed changes
 #include "Item.h"
 using namespace std;
 
@@ -36,6 +43,15 @@ using namespace std;
 #define OBJECT_TYPE_BOARD	8
 #define OBJECT_TYPE_ITEM	9
 #define OBJECT_TYPE_PORTAL	50
+<<<<<<< Updated upstream
+=======
+#define OBJECT_TYPE_AXE 9
+#define OBJECT_TYPE_TORCH 6
+#define OBJECT_TYPE_CANDLE 7
+#define OBJECT_TYPE_BLACK_LEOPARD 11
+#define OBJECT_TYPE_ZOMBIE 10
+#define OBJECT_TYPE_ITEM 12
+>>>>>>> Stashed changes
 
 #define MAX_SCENE_LINE 1024
 
@@ -263,10 +279,17 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			obj = new CPortal(x, y, r, b, scene_id);
 		}
 		break;
+<<<<<<< Updated upstream
 	case OBJECT_TYPE_ITEM: 
 		obj = new CItem();
 		this->item = (CItem*)obj;
 		item->SetID(1); 
+=======
+	case OBJECT_TYPE_ITEM:
+		obj = new CItem();
+		item = (CItem*)obj;
+		item->SetID(0);
+>>>>>>> Stashed changes
 		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);

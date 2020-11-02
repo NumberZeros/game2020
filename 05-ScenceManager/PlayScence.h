@@ -11,6 +11,11 @@
 #include "Goomba.h"
 
 #include "Weapon.h"
+<<<<<<< Updated upstream
+=======
+#include "Axe.h"
+#include "Board.h"
+>>>>>>> Stashed changes
 #include "Item.h"
 
 class CPlayScene: public CScene

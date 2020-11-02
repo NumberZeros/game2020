@@ -127,10 +127,15 @@
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Brick.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="CHolyWater.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CLargeHeart.cpp" />
     <ClCompile Include="CMoneyBag.cpp" />
+=======
+    <ClCompile Include="Candle.cpp" />
+    <ClCompile Include="Item.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Portal.cpp" />
@@ -150,10 +155,15 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Brick.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="CHolyWater.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="CLargeHeart.h" />
     <ClInclude Include="CMoneyBag.h" />
+=======
+    <ClInclude Include="Candle.h" />
+    <ClInclude Include="Item.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Portal.h" />
