@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "PlayScence.h"
 
-#include "Goomba.h"
+#include "Torch.h"
 #include "Portal.h"
 
 CSimon::CSimon(float x, float y) : CGameObject()
@@ -23,112 +23,129 @@ CSimon::CSimon(float x, float y) : CGameObject()
 
 void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	// Calculate dx, dy 
-	CGameObject::Update(dt);
-
-	// Simple fall down
-	vy += SIMON_GRAVITY * dt;
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
-
-	coEvents.clear();
-
-	// turn off collision when die 
-	if (state != SIMON_ANI_DIE)
-		CalcPotentialCollisions(coObjects, coEvents);
-	
-	// reset untouchable timer if untouchable time has passed
-	if (GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME)
+	if (state == SIMON_STATE_AUTO_GO || state == SIMON_STATE_BEHIND)
 	{
-		untouchable_start = 0;
-		untouchable = 0;
-	}
-
-	//jump
-	if (!isGrounded) {
-		if (GetTickCount() - action_time > SIMON_RESET_JUMP_TIME) {
-			action_time = 0;
-			isGrounded = true;
-		}
-	}
-
-	//attact
-	if (isAttack) {
-		if (GetTickCount() - action_time > SIMON_ATTACK_TIME) {
-			isAttack = false;
-			action_time = 0;
-		}
-	}
-
-	//sit
-	if (isSit) {
-		if (vx != 0) {
-			isSit = false;
-		}
-	}
-
-	// No collision occured, proceed normally
-	if (coEvents.size() == 0)
-	{
-		x += dx;
-		y += dy;
+		x += vx*dt;
 	}
 	else
 	{
-		float min_tx, min_ty, nx = 0, ny;
-		float rdx = 0;
-		float rdy = 0;
-		
+		// Calculate dx, dy 
+		CGameObject::Update(dt);
+		// Simple fall down
+		vy += SIMON_GRAVITY * dt;
+		vector<LPCOLLISIONEVENT> coEvents;
+		vector<LPCOLLISIONEVENT> coEventsResult;
 
-		// TODO: This is a very ugly designed function!!!!
-		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
+		coEvents.clear();
 
-		// how to push back simon if collides with a moving objects, what if simon is pushed this way into another object?
-		//if (rdx != 0 && rdx!=dx)
-		//	x += nx*abs(rdx); 
+		// turn off collision when die 
+		if (state != SIMON_ANI_DIE)
+			CalcPotentialCollisions(coObjects, coEvents);
 
-		// block every object first!
-		//if (this->state == 10)
-		x += min_tx * dx + nx * 0.4f;
-		y += min_ty * dy + ny * 0.4f;
-
-
-		if (nx != 0) vx = 0;
-		if (ny != 0) vy = 0;
-
-
-		//
-		// Collision logic with other objects
-		//
-		for (UINT i = 0; i < coEventsResult.size(); i++)
+		// reset untouchable timer if untouchable time has passed
+		if (GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME)
 		{
-			LPCOLLISIONEVENT e = coEventsResult[i];
-			if (dynamic_cast<CPortal*>(e->obj))
+			untouchable_start = 0;
+			untouchable = 0;
+		}
+
+		//jump
+		if (!isGrounded) {
+			if (GetTickCount() - action_time > SIMON_RESET_JUMP_TIME) {
+				action_time = 0;
+				isGrounded = true;
+			}
+		}
+
+		//attact
+		if (isAttack) {
+			if (GetTickCount() - action_time > SIMON_ATTACK_TIME) {
+				isAttack = false;
+				action_time = 0;
+			}
+		}
+
+		//sit
+		if (isSit) {
+			if (vx != 0) {
+				isSit = false;
+			}
+		}
+
+		// No collision occured, proceed normally
+		if (coEvents.size() == 0)
+		{
+			x += dx;
+			y += dy;
+		}
+		else
+		{
+			float min_tx, min_ty, nx = 0, ny;
+			float rdx = 0;
+			float rdy = 0;
+
+
+			// TODO: This is a very ugly designed function!!!!
+			FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
+
+			// how to push back simon if collides with a moving objects, what if simon is pushed this way into another object?
+			//if (rdx != 0 && rdx!=dx)
+			//	x += nx*abs(rdx); 
+
+			// block every object first!
+			x += min_tx * dx + nx * 0.4f;
+			y += min_ty * dy + ny * 0.4f;
+
+
+			if (nx != 0) vx = 0;
+			if (ny != 0) vy = 0;
+
+
+			//
+			// Collision logic with other objects
+			//
+			for (UINT i = 0; i < coEventsResult.size(); i++)
 			{
-				CPortal* p = dynamic_cast<CPortal*>(e->obj);
-				CGame::GetInstance()->SwitchScene(p->GetSceneId());
+				LPCOLLISIONEVENT e = coEventsResult[i];
+				if (dynamic_cast<CPortal*>(e->obj))
+				{
+					CPortal* p = dynamic_cast<CPortal*>(e->obj);
+					CGame::GetInstance()->SwitchScene(p->GetSceneId());
+				}
+				else
+					if (dynamic_cast<CTorch*>(e->obj))
+					{
+						x += dx;
+						//CPortal* p = dynamic_cast<CPortal*>(e->obj);
+						//CGame::GetInstance()->SwitchScene(p->GetSceneId());
+					}
+					else
+						if (dynamic_cast<CWeapon*>(e->obj))
+						{
+							x += dx;
+							CWeapon* w = dynamic_cast<CWeapon*>(e->obj);
+							float left, top, right, bottom;
+							w->GetBoundingBox(left, top, right, bottom);
+							float newRight = right + 100;
+							if (this->CheckColli(left, top, newRight, bottom)) {
+								//delete e;
+								//CalcPotentialCollisions(coObjects, coEvents);
+								//x += dx;
+							}
+
+						}
 			}
 		}
+
+		//for (UINT i = 0; i < coObjects->size(); i++)
+		//{
+		//	LPGAMEOBJECT obj = coObjects->at(i);
+
+		//}
+
+		// clean up collision events
+		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	}
-
-	for (UINT i = 0; i < coObjects->size(); i++)
-	{
-		LPGAMEOBJECT obj = coObjects->at(i);
-		if (dynamic_cast<CWeapon*>(obj))
-		{
-			CWeapon* e = dynamic_cast<CWeapon*>(obj);
-			float left, top, right, bottom;
-			e->GetBoundingBox(left, top, right, bottom);
-			float newRight = right + 100;
-			if (this->CheckColli(left, top, newRight, bottom)) {
-				//delete e;
-			}
-
-		}
-	}
-
-	// clean up collision events
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
 
 bool CSimon::CheckColli(float left_a, float top_a, float right_a, float bottom_a) {
@@ -148,16 +165,22 @@ void CSimon::Render()
 		ani = SIMON_ANI_DIE;
 	else {
 		/// di chuyen 
-		if (state == SIMON_STATE_IDLE) {
-			if (isSit && vx == 0)
-				ani = SIMON_ANI_SIT_DOWN;
-			else
-				ani = SIMON_ANI_IDLE;
+		if (state == SIMON_STATE_BEHIND)
+		{
+			ani = SIMON_ANI_JUMP;
 		}
-			
 		else
-			ani = SIMON_ANI_WALKING;
-
+		{
+			if (state == SIMON_STATE_IDLE)
+			{
+				if (isSit && vx == 0)
+					ani = SIMON_ANI_SIT_DOWN;
+				else
+					ani = SIMON_ANI_IDLE;
+			}
+			else
+				ani = SIMON_ANI_WALKING;
+		}
 		///tan cong
 		if (isAttack) {
 			if (isSit && vx == 0)
@@ -182,6 +205,9 @@ void CSimon::SetState(int state)
 
 	switch (state)
 	{
+	case SIMON_STATE_AUTO_GO:
+		vx = -SIMON_WALKING_SPEED;
+		break;
 	case SIMON_STATE_WALKING:
 		if (nx > 0)
 			vx = SIMON_WALKING_SPEED;
@@ -206,16 +232,35 @@ void CSimon::SetState(int state)
 	case SIMON_ANI_DIE:
 		vy = -SIMON_DIE_DEFLECT_SPEED;
 		break;
+	case SIMON_STATE_BEHIND:
+		vx = 0;
+		break;
 	}
 }
 
 void CSimon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	
+	if (isSit == true)
+	{
+		left = x + 15;
+		top = y - 1;
+		right = x + SIMON_WIDTH - 15;
+		bottom = y + 45;
+	}
+	else
+	{
+		left = x + 15;
+		top = y - 1;
+		right = x + SIMON_WIDTH - 15;
+		bottom = y + SIMON_HEIGHT;
+
+		if (isJump)
+			bottom = y + 45;
+	}
 	left = x ;
 	right = left + SIMON_WIDTH;
 	top = y;
-	bottom = y + SIMON_HEGHT;
+	bottom = y + SIMON_HEIGHT;
 	
 }
 

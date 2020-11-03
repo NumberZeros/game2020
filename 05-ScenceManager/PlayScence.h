@@ -23,6 +23,7 @@ public:
 	CAxe* axe;
 	CBoard* board;
 	vector<LPGAMEOBJECT> objects;
+	int timewait = 0;
 	int isintro = 0;
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);

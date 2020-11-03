@@ -1,7 +1,6 @@
 [SETTINGS]
-start	2
+start	1
 #scene list
 [SCENES]
 1	intro.txt
 2	stage1.txt
-3	scene-test.txt

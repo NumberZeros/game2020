@@ -26,12 +26,11 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
-
+	coEvents.clear();
 	if (!isHidden) {
 		if (GetTickCount() - action_time > WEAPON_ATTACK_TIME) {
 			isHidden = true;
 			this->action_time = 0;
-			
 		}
 	}
 }

@@ -48,6 +48,7 @@ using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath) :CScene(id, filePath)
 {
+	//if(sence)
 	key_handler = new CPlayScenceKeyHandler(this);
 }
 
@@ -63,24 +64,6 @@ void CPlayScene::_ParseSection_LOADMAP(string line)
 	{
 		//load intro map sate = 0
 		isintro = 1;
-		int texID = atoi(tokens[3].c_str());
-		LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(texID);
-		if (tex == NULL)
-		{
-			DebugOut(L"[ERROR] Texture ID %d not found!\n", texID);
-			return;
-		}
-		CSprites::GetInstance()->Add(400, 0, 0, 448, 512, tex);
-		LPANIMATION ani = new CAnimation(100);	// idle big right
-		//add ani;
-		ani->Add(id);
-		CAnimations::GetInstance()->Add( id, ani);
-		///set ani to obj
-		LPANIMATION_SET s = new CAnimationSet();
-		CAnimations * animations = CAnimations::GetInstance();
-		s->push_back(animations->Get(0));
-		CAnimationSets::GetInstance()->Add(400, s);
-		map->SetState(0);
 	}
 	else
 	{
@@ -249,7 +232,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		if (isintro == 1) 
 		{ 
 			player->SetNX(0); 
-			player->SetState(SIMON_STATE_WALKING);
+			player->SetState(SIMON_STATE_AUTO_GO);
 		}
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
@@ -350,37 +333,65 @@ void CPlayScene::Update(DWORD dt)
 {
 	// We know that simon is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
-	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 1; i < objects.size(); i++)
+	if (isintro == 1)
 	{
-		coObjects.push_back(objects[i]);
+		//player->SetNX(0);
+		//player->SetState(SIMON_STATE_WALKING);
+		//player->SetState(SIMON_STATE_AUTO_GO);
+		//player->SetSpeed(-0.5f,0.0f);
+		timewait++;
+		if (player->x<=225)
+		{
+			player->SetState(SIMON_STATE_BEHIND);
+			if(timewait>150)
+			CGame::GetInstance()->SwitchScene(2);
+		}
 	}
-
-	for (size_t i = 0; i < objects.size(); i++)
+	else
 	{
-		objects[i]->Update(dt, &coObjects);
+		weapon->UpdatePosionWithSimon(player->GetPositionX(), player->GetPositionY(), player->nx);
+		// Update camera to follow mario
+		CGame* game = CGame::GetInstance();
+		float cx, cy;
+		player->GetPosition(cx, cy);
+		cx -= game->GetScreenWidth() / 2;
+		//if (game->GetScreenWidth() / 2 - player->x > 1000)
+			//cx = 1000;
+		// fix bug camera 
+		if (cx < 0) {
+			cx = 0.0f;
+			if(player->x<0)
+			player->SetPosition(0, cy);
+		}
+		if (cx > 1000)
+		{
+			cx = 1000;
+			if (player->x > 1468)
+				player->SetPosition(1468, cy);
+			//player->SetPosition(1514, cy);
+		}
+		//if(player)
+		board->SetPosition(cx, 0);
+		CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 	}
+		vector<LPGAMEOBJECT> coObjects;
+		for (size_t i = 1; i < objects.size(); i++)
+		{
+			coObjects.push_back(objects[i]);
+		}
 
-	
-	if (player == NULL) return;
+		for (size_t i = 0; i < objects.size(); i++)
+		{
+			objects[i]->Update(dt, &coObjects);
+		}
 
-	//update position for simon
-	weapon->UpdatePosionWithSimon(player->GetPositionX(), player->GetPositionY(), player->nx);
-	// Update camera to follow mario
-	CGame* game = CGame::GetInstance();
-	float cx, cy;
-	player->GetPosition(cx, cy);
+
+		if (player == NULL) return;
+
+		//update position for simon
+		
+	//}
 	
-	
-	cx -= game->GetScreenWidth() / 2;
-	cy -= game->GetScreenHeight() / 2;
-	
-	// fix bug camera 
-	if (cx < 0) {
-		cx = 0.0f;
-	}
-	board->SetPosition(cx - (game->GetScreenWidth() / 2), 0);
-	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 }
 
 void CPlayScene::Render()
@@ -414,7 +425,7 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
 	CSimon *simon = ((CPlayScene*)scence)->player;
-
+	if (simon->GetState() == SIMON_STATE_AUTO_GO) return;
 	if (simon->GetState() == SIMON_STATE_DIE) return;
 	// disable control key when simon die
 	if (simon->isAttack) return;

@@ -22,6 +22,8 @@
 #define SIMON_STATE_STAIR_DOWN_HIT		1009
 #define SIMON_STATE_STAIR_HURT			1010
 #define SIMON_STATE_DIE					1011
+#define SIMON_STATE_AUTO_GO				1012
+#define SIMON_STATE_BEHIND				1013
 
 #define SIMON_ANI_IDLE				0
 #define SIMON_ANI_WALKING			1
@@ -40,7 +42,7 @@
 #define SIMON_ANI_WHIP_LV2			14
 #define SIMON_ANI_WHIP_LV4			15
 
-#define SIMON_HEGHT					60
+#define SIMON_HEIGHT					60
 #define SIMON_WIDTH					34
 
 #define SIMON_HEGHT_RESET_SIT		17
@@ -66,6 +68,7 @@ public:
 	bool isSit;
 	bool isAttack;
 	bool isGrounded;
+	bool isJump;
 	int actionAttack = 0;	// 0 right 1 left
 
 	int start_x;
@@ -74,6 +77,7 @@ public:
 	DWORD untouchable_start;
 	DWORD action_time;
 public:
+
 	CSimon();
 	virtual void SitDown();
 	virtual void attack();
@@ -88,6 +92,5 @@ public:
 	void SetLevel(int l) { level = l; }
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	bool GetAttack() { return this->isAttack; };
-
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 };
